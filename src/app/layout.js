@@ -1,5 +1,6 @@
 import './globals.css'
 import { Providers } from './providers'
+import Menu from './menu'
 
 export const metadata = {
   title: 'UI Research',
@@ -12,7 +13,10 @@ export default function RootLayout({ children }) {
     <html lang='ko'>
       <body>
         <Providers>
-          {children}
+          <div className='container'>
+            <Menu/>
+            {children}
+          </div>
         </Providers>
       </body>
     </html>

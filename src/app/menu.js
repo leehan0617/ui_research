@@ -1,23 +1,21 @@
 "use client"
 
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link } from "@nextui-org/react";
+import { Logo } from "./menu_logo.jsx";
 
 export default function Menu() {
     return (
-        <Navbar position="static">
-            <NavbarBrand>
-                <p className="font-bold text-inherit">Title</p>    
-            </NavbarBrand>
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarItem>
-                    <Link color="foreground" href="#">
-                        공사비 계산
-                    </Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Link>참고자료</Link>
-                </NavbarItem>
-            </NavbarContent>
-        </Navbar>
+        <div className="mt-3 grid grid-row-3 grid-cols-4 gap-4">
+            <div className="row-span-3">
+                <Logo/>
+                <span className="font-bold text-inherit">배전간선(지중) 개략공사비 자동산출</span>
+            </div>
+            <div></div>
+            <div></div>
+            <div>
+                <div>공사비 계산</div>
+                <div>참고자료</div>
+            </div>
+        </div>
     )
 }

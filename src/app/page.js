@@ -1,8 +1,11 @@
 "use client"
 
-import { Card, CardBody, Divider, Input, Tab, Tabs } from "@nextui-org/react"
+import { useState } from "react"
+import { Card, CardBody, Divider, Input, Tab, Tabs, RadioGroup, Radio } from "@nextui-org/react"
 
 export default function Home() {
+  const [option, setOption] = useState("resident");
+  
   return (
     <main>
       <Divider className="my-4"/>
@@ -14,9 +17,41 @@ export default function Home() {
       </Card>
       <Tabs>
         <Tab key="input_tab" title="입력창">
-          <Input type="text" className="mb-2" label="1. 단지유형" labelPlacement="outside-left"></Input>
-          <Input type="text" className="mb-2" label="2. 수요전력" labelPlacement="outside-left"></Input>
-          <Input type="text" className="mb-2" label="3. 대지면적" labelPlacement="outside-left"></Input>
+          <RadioGroup
+            label="1. 단지유형"
+            orientation="horizontal"
+            className="mb-2"
+            value={option}
+            onValueChange={setOption}
+          >
+            <Radio value="resident">주택단지</Radio>
+            <Radio value="industry">산업단지</Radio>
+          </RadioGroup>
+          <Input
+            type="number"
+            className="mb-2"
+            label="2. 수요전력"
+            labelPlacement="outside-left"
+            endContent={
+              <div className="pointer-events-none flex items-center">
+                <span className="text-default-400 text-small">kW</span>
+              </div>
+            }
+          />
+          <Input
+            type="number"
+            className="mb-2"
+            label="3. 대지면적"
+            labelPlacement="outside-left"
+            endContent={
+              <div className="pointer-events-none flex items-center">
+                <span className="text-default-400 text-small">㎡ </span>
+              </div>
+            }
+          />
+          <label>4. 부하밀도: {option}</label>
+          <label>5. 규모선정1: ㅇㅇ</label>
+          <label>6. 규모선정2: ㅇㅇ</label>
         </Tab>
         <Tab key="result_tab1" title="설계용역비">
           2222

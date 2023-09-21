@@ -1,5 +1,5 @@
-'use client'
-import {NextUIProvider} from '@nextui-org/react'
+"use client"
+import {NextUIProvider} from "@nextui-org/react"
 
 export function Providers({children}) {
   return (

@@ -27,6 +27,9 @@ export default function Home() {
         <Tab key="result_tab3" title="계략공사비 총괄표">
           4444
         </Tab>
+        <Tab key="result_tab4" title="참고자료">
+          5555
+        </Tab>
       </Tabs>
       {/* <div className="grid grid-cols-4 gap-4">
         <div>01</div>

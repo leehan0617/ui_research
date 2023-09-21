@@ -5,6 +5,8 @@ import { Card, CardBody, Divider, Input, Tab, Tabs, RadioGroup, Radio } from "@n
 
 export default function Home() {
   const [option, setOption] = useState("resident");
+  const [power, setPower] = useState(0);
+  const [area, setArea] = useState(0);
   
   return (
     <main>
@@ -32,6 +34,8 @@ export default function Home() {
             className="mb-2"
             label="2. 수요전력"
             labelPlacement="outside-left"
+            value={power}
+            onValueChange={setPower}
             endContent={
               <div className="pointer-events-none flex items-center">
                 <span className="text-default-400 text-small">kW</span>
@@ -43,6 +47,8 @@ export default function Home() {
             className="mb-2"
             label="3. 대지면적"
             labelPlacement="outside-left"
+            value={area}
+            onValueChange={setArea}
             endContent={
               <div className="pointer-events-none flex items-center">
                 <span className="text-default-400 text-small">㎡ </span>
@@ -50,8 +56,8 @@ export default function Home() {
             }
           />
           <label>4. 부하밀도: {option}</label>
-          <label>5. 규모선정1: ㅇㅇ</label>
-          <label>6. 규모선정2: ㅇㅇ</label>
+          <label>5. 규모선정1: {power}</label>
+          <label>6. 규모선정2: {area}</label>
         </Tab>
         <Tab key="result_tab1" title="설계용역비">
           2222

@@ -1,12 +1,16 @@
 "use client"
 
-import { useState } from "react"
-import { Card, CardBody, Divider, Input, Tab, Tabs, RadioGroup, Radio } from "@nextui-org/react"
+import { useMemo, useState } from "react"
+import { Card, CardBody, Divider, Input, Tab, Tabs, Textarea, RadioGroup, Radio } from "@nextui-org/react"
 
 export default function Home() {
   const [option, setOption] = useState("resident");
   const [power, setPower] = useState(0);
   const [area, setArea] = useState(0);
+  const description = useMemo(() => {
+    const density = power / area
+    return `부하밀도: ${density} kw/㎡\n규모선정1: ${power} (부하밀도)\n규모선정2: ${area} (대지면적)`
+  }, [power, area])
   
   return (
     <main>
@@ -55,9 +59,15 @@ export default function Home() {
               </div>
             }
           />
-          <label>4. 부하밀도: {option}</label>
-          <label>5. 규모선정1: {power}</label>
-          <label>6. 규모선정2: {area}</label>
+          <Textarea
+             isReadOnly
+             label="4. 단지 규모 정보"
+             variant="bordered"
+             labelPlacement="outside"
+             placeholder="규모 계산 중..."
+             value={description}
+             className="max-w-ws"
+          />
         </Tab>
         <Tab key="result_tab1" title="설계용역비">
           2222

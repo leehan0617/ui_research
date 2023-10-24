@@ -12,7 +12,7 @@ export default function MaterialLogicTab() {
                 </CardHeader>
                 <Divider />
                 <CardBody>
-                    <p>규모별 주자재 단위 수량</p>
+                    <p className="mb-2">규모별 주자재 단위 수량</p>
                     <ScaleGuide />
                 </CardBody>
             </Card>

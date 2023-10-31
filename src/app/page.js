@@ -1,13 +1,13 @@
 "use client"
 
 import { Tab, Tabs } from "@nextui-org/react"
-import CostTableTab from "@/components/tabs/cost_table_tab";
 import CostResultTab from "@/components/tabs/cost_result_tab";
 import GuideBoard from "@/components/guide_board";
 import MaterialLogicTab from "@/components/tabs/material_logic_tab";
 import InputTab from "@/components/tabs/input_tab";
 import InvoiceTab from "@/components/tabs/invoice_tab";
 import ReferenceTab from "@/components/tabs/reference_tab";
+import ReportTab from "@/components/tabs/report_tab";
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
           <CostResultTab />
         </Tab>
         <Tab key="cost_table_tab" title="개략공사비 총괄표">
-          <CostTableTab />
+          <ReportTab />
         </Tab>
         <Tab key="reference_tab" title="참고자료">
           <ReferenceTab />

@@ -2,6 +2,13 @@
 
 import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react"
 import HighCable from "./cost/high_cable"
+import LowCable from "./cost/low_cable"
+import Switch from "./cost/switch"
+import TransFormer from "./cost/transformer"
+import HighPipeline from "./cost/high_pipeline"
+import LowPipeline from "./cost/low_pipeline"
+import HighStructure from "./cost/high_structure"
+import LowStructure from "./cost/low_structure"
 
 export default function CostResultTab() {
     return (
@@ -40,6 +47,27 @@ export default function CostResultTab() {
                         </thead>
                         <tbody>
                             <HighCable />
+                            <LowCable />
+                            <Switch />
+                            <TransFormer />
+                            <HighPipeline />
+                            <LowPipeline />
+                            <HighStructure />
+                            <LowStructure />
+                            <tr>
+                                <td className="p-1 border-collapse border border-slate-400" colSpan={5}>합계</td>
+                                <td className="p-1 border-collapse border border-slate-400" colSpan={4}></td>
+                                <td className="p-1 border-collapse border border-slate-400" colSpan={2}></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </CardBody>

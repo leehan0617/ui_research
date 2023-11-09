@@ -64,9 +64,9 @@ export default function CostResultTab() {
                                 <td className="p-1 border-collapse border border-slate-400"></td>
                                 <td className="p-1 border-collapse border border-slate-400"></td>
                                 <td className="p-1 border-collapse border border-slate-400"></td>
-                                <td className="p-1 border-collapse border border-slate-400"></td>
-                                <td className="p-1 border-collapse border border-slate-400"></td>
-                                <td className="p-1 border-collapse border border-slate-400"></td>
+                                <td className="p-1 border-collapse border border-slate-400">2,509,449</td>
+                                <td className="p-1 border-collapse border border-slate-400">2,185,886</td>
+                                <td className="p-1 border-collapse border border-slate-400">4,695,334</td>
                             </tr>
                         </tbody>
                     </table>

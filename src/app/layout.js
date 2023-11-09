@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <body>
         <Providers>
-          <div className="container">
+          <div>
             <Header/>
             {children}
           </div>

@@ -4,7 +4,7 @@
 export default function DetailMaterialSubTable() {
     return (
         <>
-            <table className="mb-3 text-sm text-center border-collapse border border-slate-400">
+            <table className="mb-3 text-sm text-center">
                 <thead className="text-slate-500">
                     <tr className="bg-violet-100">
                         <th className="p-1 border-collapse border border-slate-400">구분</th>

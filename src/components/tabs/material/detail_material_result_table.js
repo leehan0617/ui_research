@@ -68,7 +68,7 @@ export default function DetailMaterialResultTable({ material }) {
                         </tbody>
                     </table>
                 </div>
-                <div>
+                <div className="col-span-1">
                     <table className="text-sm text-center border-collapse" style={{ width: "100%" }}>
                         <thead>
                             <tr className="bg-orange-200">

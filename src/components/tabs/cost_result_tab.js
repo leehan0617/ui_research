@@ -54,7 +54,9 @@ export default function CostResultTab() {
                             <LowPipeline />
                             <HighStructure />
                             <LowStructure />
-                            <tr>
+                        </tbody>
+                        <tfoot>
+                            <tr className="bg-orange-200 font-bold">
                                 <td className="p-1 border-collapse border border-slate-400" colSpan={5}>합계</td>
                                 <td className="p-1 border-collapse border border-slate-400" colSpan={4}></td>
                                 <td className="p-1 border-collapse border border-slate-400" colSpan={2}></td>
@@ -68,7 +70,7 @@ export default function CostResultTab() {
                                 <td className="p-1 border-collapse border border-slate-400">2,185,886</td>
                                 <td className="p-1 border-collapse border border-slate-400">4,695,334</td>
                             </tr>
-                        </tbody>
+                        </tfoot>
                     </table>
                 </CardBody>
             </Card>

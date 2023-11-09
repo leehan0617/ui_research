@@ -5,10 +5,10 @@ export default function DetailMaterialTable({ material, use_total = true }) {
     const { name, unit, unit_text, unit_values, data } = material
     return (
         <>
-            <table className="mb-3 text-sm text-center border-collapse border border-slate-400">
-                <thead className="text-slate-500">
+            <table className="w-full text-sm text-center border-collapse">
+                <thead>
                     <tr className="bg-violet-100">
-                        <th className="rounded-l-lg p-1 border-collapse border border-slate-400" colSpan={2} rowSpan={2}>{ name }</th>
+                        <th className="p-1 border-collapse border border-slate-400" colSpan={2} rowSpan={2}>{ name }</th>
                         <th colSpan={3} className="p-1 border-collapse border border-slate-400">주택단지</th>
                         <th className="rounded-tr-lg p-1 border-collapse border border-slate-400">산업단지</th>
                     </tr>
@@ -32,7 +32,7 @@ export default function DetailMaterialTable({ material, use_total = true }) {
                             if (index == 0) {
                                 return (
                                     <tr key={index}>
-                                        <td  className="p-1" rowSpan={data.length}>비중</td>
+                                        <td className="p-1 border border-collapse, border-slate-400" rowSpan={data.length}>비중</td>
                                         {td_list}
                                     </tr>
                                 )
@@ -44,11 +44,11 @@ export default function DetailMaterialTable({ material, use_total = true }) {
                     {
                         use_total &&
                         <tr className="bg-slate-100">
-                            <td colSpan={2} className="p-1 rounded-l-lg border border-collapse border-slate-400">계</td>
+                            <td colSpan={2} className="p-1 border border-collapse border-slate-400">계</td>
                             <td className="p-1 border border-collapse border-slate-400">100%</td>
                             <td className="p-1 border border-collapse border-slate-400">100%</td>
                             <td className="p-1 border border-collapse border-slate-400">100%</td>
-                            <td className="rounded-r-lg">100%</td>
+                            <td className="p-1 border border-collapse border-slate-400">100%</td>
                         </tr>
                     }
                 </tbody>

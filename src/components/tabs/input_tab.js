@@ -52,10 +52,10 @@ export default function InputTab() {
             <Card className="border-none">
                 <CardBody>
                     <div className="grid grid-cols-8 gap-2">
-                        <div className="lg:col-span-5 col-span-8 bg-violet-100 rounded-md text-fuchsia-500 font-bold">
+                        <div className="col-span-8 bg-sky-100 rounded-md text-sky-600 font-bold">
                             <p className="p-4">배전간선(지중) 개략공사비 자동산출 입력창</p>
                         </div>
-                        <div className="lg:col-span-5 col-span-8">
+                        <div className="col-span-8 mt-3">
                             <table className="w-full text-sm text-center">
                                 <thead>
                                     <tr className="bg-sky-50">
@@ -128,7 +128,7 @@ export default function InputTab() {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="lg:col-span-5 col-span-8 col-start-1">
+                        <div className="col-span-8 col-start-1 mt-3">
                             <p className="p-4 font-bold text-rose-600 bg-lime-100 border border-slate-200">
                                 (조건) 개발단지내에 전체 신설의 경우에 한함(기설설비 활용시 적용불가)
                             </p>

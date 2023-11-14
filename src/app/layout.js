@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <body>
         <Providers>
-          <div className="mr-2 ml-2">
+          <div className="container mx-auto">
             <Header/>
             {children}
           </div>

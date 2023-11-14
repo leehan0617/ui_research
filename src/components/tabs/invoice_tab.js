@@ -11,66 +11,91 @@ export default function InvoiceTab() {
                 </CardHeader>
                 <Divider />
                 <CardBody>
-                    <p>1. 배전공사 총공사비(VAT제외): 4695334000</p>
+                    <div className="grid grid-cols-8 gap-2 mb-2">
+                        <div className="col-span-5">
+                            <p>1. 배전공사 총공사비(VAT제외): 4695334000</p>        
+                        </div>
+                        <div className="col-span-3">
+                            <span className="p-1 border border-slate-800 bg-amber-200 text-blue-400 mr-1">용역대상 선택</span>
+                            <select className="p-1 border border-slate-800 bg-yellow-100 text-red-500">
+                                <option>기본+실시 설계용역</option>
+                                <option>기본 설계용역</option>
+                                <option>실시 설계용역</option>
+                            </select>
+                        </div>
+                    </div>
                     <p className="mb-2">2. 적용요율 [직선보간법에 의한 요율산정]</p>
-                    <Table removeWrapper aria-label="result_table1">
-                        <TableHeader>
-                            <TableColumn>구분</TableColumn>
-                            <TableColumn>기본설계</TableColumn>
-                            <TableColumn>실시설계</TableColumn>
-                        </TableHeader>
-                        <TableBody>
-                            <TableRow key="1">
-                                <TableCell>당해금액(총공사비)</TableCell>
-                                <TableCell>4695334000</TableCell>
-                                <TableCell>4695334000</TableCell>
-                            </TableRow>
-                            <TableRow key="2">
-                                <TableCell>요율표상 큰금액</TableCell>
-                                <TableCell>50000000</TableCell>
-                                <TableCell>50000000</TableCell>
-                            </TableRow>
-                            <TableRow key="3">
-                                <TableCell>요율표상 작은금액</TableCell>
-                                <TableCell>30000000</TableCell>
-                                <TableCell>30000000</TableCell>
-                            </TableRow>
-                            <TableRow key="4">
-                                <TableCell>작은금액 요율(%)</TableCell>
-                                <TableCell>1.04</TableCell>
-                                <TableCell>3.11</TableCell>
-                            </TableRow>
-                            <TableRow key="5">
-                                <TableCell>큰금액 요율(%)</TableCell>
-                                <TableCell>1.02</TableCell>
-                                <TableCell>3.06</TableCell>
-                            </TableRow>
-                            <TableRow key="6">
-                                <TableCell>적용요율(%)</TableCell>
-                                <TableCell>1.02</TableCell>
-                                <TableCell>3.07</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                    <Table removeWrapper aria-label="invoice2">
-                        <TableHeader>
-                            <TableColumn>기본설계요율</TableColumn>
-                            <TableColumn>실시설계요율</TableColumn>
-                            <TableColumn>요율</TableColumn>
-                        </TableHeader>
-                        <TableBody>
-                            <TableRow key="1">
-                                <TableCell>1.04</TableCell>
-                                <TableCell>3.11</TableCell>
-                                <TableCell>작은 요율</TableCell>
-                            </TableRow>
-                            <TableRow key="2">
-                                <TableCell>1.02</TableCell>
-                                <TableCell>3.06</TableCell>
-                                <TableCell>큰 요율</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
+                    <div className="grid grid-cols-8 gap-2 mb-2">
+                        <div className="col-span-5">
+                            <table className="w-full text-sm text-center">
+                                <thead>
+                                    <tr>
+                                        <th className="bg-lime-50 p-1 border border-slate-400">구분</th>
+                                        <th className="bg-lime-400 p-1 border border-slate-400">기본설계</th>
+                                        <th className="bg-sky-200 p-1 border border-slate-400">실시설계</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">당해금액(총공사비)</td>
+                                        <td className="p-1 border border-slate-400">4695334000</td>
+                                        <td className="p-1 border border-slate-400">4695334000</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">요율표상 큰 금액</td>
+                                        <td className="p-1 border border-slate-400">5000000000</td>
+                                        <td className="p-1 border border-slate-400">5000000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">요율표상 작은금액</td>
+                                        <td className="p-1 border border-slate-400">3000000000</td>
+                                        <td className="p-1 border border-slate-400">3000000000</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">작은금액 요율(%)</td>
+                                        <td className="p-1 border border-slate-400">1.04</td>
+                                        <td className="p-1 border border-slate-400">3.11</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">큰금액 요율(%)</td>
+                                        <td className="p-1 border border-slate-400">1.02</td>
+                                        <td className="p-1 border border-slate-400">3.06</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">적용요율(%)</td>
+                                        <td className="p-1 border border-slate-400">1.02</td>
+                                        <td className="p-1 border border-slate-400">3.07</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="col-span-3">
+                            <table className="w-full text-sm text-center">
+                                <tbody>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">총공사비(억원)</td>
+                                        <td className="p-1 border border-slate-400">46.95</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">작은금액 인덱스</td>
+                                        <td className="p-1 border border-slate-400">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">큰 금액 인덱스</td>
+                                        <td className="p-1 border border-slate-400">11</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">작은 금액</td>
+                                        <td className="p-1 border border-slate-400">30.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-1 border border-slate-400">큰 금액</td>
+                                        <td className="p-1 border border-slate-400">50.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <p>3. 복제 절감률: 73.35%</p>
                     <p>4. 기본/실시설계 발주시 적용 계수: 1.3 (기본+실시 통합설계 발주)</p>
                     <p>5. 설계 용역비: 49939643원</p>

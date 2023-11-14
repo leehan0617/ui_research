@@ -1,8 +1,7 @@
 "use client"
 
-import { Tab, Tabs } from "@nextui-org/react"
+import { Card, CardBody, Tab, Tabs } from "@nextui-org/react"
 import CostResultTab from "@/components/tabs/cost_result_tab";
-import GuideBoard from "@/components/guide_board";
 import MaterialLogicTab from "@/components/tabs/material_logic_tab";
 import InputTab from "@/components/tabs/input_tab";
 import InvoiceTab from "@/components/tabs/invoice_tab";
@@ -12,8 +11,7 @@ import ReportTab from "@/components/tabs/report_tab";
 export default function Home() {
   return (
     <main>
-      <GuideBoard />
-      <Tabs>
+      <Tabs className="mt-3">
         <Tab key="input_tab" title="입력창">
           <InputTab />
         </Tab>
@@ -33,25 +31,6 @@ export default function Home() {
           <ReferenceTab />
         </Tab>
       </Tabs>
-      {/* <div className="grid grid-cols-4 gap-4">
-        <div>01</div>
-        <div>02</div>
-        <div>03</div>
-        <div>04</div>
-        <div>05</div>
-        <div>06</div>
-        <div>07</div>
-        <div>08</div>
-        <div>09</div>
-      </div>
-      <div className='grid grid-cols-5'>
-        <div>01</div>
-        <div>01</div>
-        <div>01</div>
-        <div>01</div>
-        <div>01</div>
-        <div>01</div>
-      </div> */}
     </main>
   )
 }

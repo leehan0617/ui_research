@@ -140,6 +140,19 @@ export default function ScaleGuide() {
                 <div className="col-span-4">
                     <DetailMaterialTable material={pipeline} />
                 </div>
+            </div>
+            <div className="grid grid-cols-9 gap-2 mt-2">
+                <div className="col-span-3">
+                    <DetailMaterialTable material={tube} use_total={false} />
+                </div>
+                <div className="col-span-3">
+                    <DetailMaterialTable material={tube_150} use_total={false} />
+                </div>
+                <div className="col-span-3">
+                    <DetailMaterialTable material={tube_100} use_total={false} />
+                </div>
+            </div>
+            <div className="grid grid-cols-8 mt-2">
                 <div className="col-span-8">
                     <table className="w-full text-sm text-center">
                         <thead>
@@ -339,17 +352,6 @@ export default function ScaleGuide() {
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <div className="grid grid-cols-9 gap-2 mt-2">
-                <div className="col-span-3">
-                    <DetailMaterialTable material={tube} use_total={false} />
-                </div>
-                <div className="col-span-3">
-                    <DetailMaterialTable material={tube_150} use_total={false} />
-                </div>
-                <div className="col-span-3">
-                    <DetailMaterialTable material={tube_100} use_total={false} />
                 </div>
             </div>
             <p>세부 자재별 수량 산출</p>

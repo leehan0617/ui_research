@@ -52,9 +52,6 @@ export default function InputTab() {
             <Card className="border-none">
                 <CardBody>
                     <div className="grid grid-cols-8 gap-2">
-                        <div className="col-span-8 bg-sky-100 rounded-md text-sky-600 font-bold">
-                            <p className="p-4">배전간선(지중) 개략공사비 자동산출 입력창</p>
-                        </div>
                         <div className="col-span-8 mt-3">
                             <table className="w-full text-sm text-center">
                                 <thead>

@@ -8,9 +8,6 @@ export default function InvoiceTab() {
             <Card className="border-none">
                 <CardBody>
                     <div className="grid grid-cols-8 gap-2">
-                        <div className="col-span-8 bg-green-200 rounded-md text-lime-700 font-bold mb-2">
-                            <p className="p-4">배전공사 설계용역비 산출 내역서</p>
-                        </div>
                         <div className="col-span-5">
                             <span>1. 배전공사 총공사비(VAT제외): 4695334000</span>
                         </div>

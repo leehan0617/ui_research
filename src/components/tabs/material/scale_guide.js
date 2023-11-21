@@ -348,8 +348,6 @@ export default function ScaleGuide() {
                     </table>
                 </div>
             </div>
-            <p>세부 자재별 수량 산출</p>
-            <DetailMaterialResultTable material={high_cable} />
         </>
     )
 }

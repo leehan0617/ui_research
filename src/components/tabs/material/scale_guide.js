@@ -114,14 +114,8 @@ export default function ScaleGuide() {
                     </table>
                 </div>
             </div>
-            <p>세부 자재별 비중</p>
+            <p className="p-4 text-center font-bold">세부 자재별 비중</p>
             <div className="grid grid-cols-8 gap-2">
-                <div className="col-span-4">
-                    <DetailMaterialTable material={high_cable} />
-                </div>
-                <div className="col-span-4">
-                    <DetailMaterialTable material={low_cable} />
-                </div>
                 <div className="col-span-4">
                     <DetailMaterialTable material={high_cable} />
                 </div>

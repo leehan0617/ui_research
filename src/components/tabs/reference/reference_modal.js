@@ -11,7 +11,7 @@ export default function ReferenceModal({button_icon, button_text, button_class, 
             >
                 {button_text}
             </Button>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal size="2xl" isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {
                         (onClose) => (

@@ -4,9 +4,9 @@
 const high_cable_unit_counts = [0.023, 0.018, 0.013, 0.025]
 
 // density = 0, 1, 2 (상, 중, 하)
-const get_unit_count = (building_type, density) => {
+const get_unit_count = (building_type, density_number) => {
     if (building_type === "industry") return high_cable_unit_counts[3]
-    return high_cable_unit_counts[density]
+    return high_cable_unit_counts[density_number]
 }
 
 // parameter: 대지면적(입력), 단지유형, 부하밀도(상,중,하)

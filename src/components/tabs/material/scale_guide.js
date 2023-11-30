@@ -1,10 +1,7 @@
 "use client"
 
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
 import DetailMaterialTable from "./detail_material_table"
 import { high_cable, low_cable, ground_machine, transformer, structure, pipeline, tube, tube_150, tube_100 } from "@/constants/material"
-import DetailMaterialSubTable from "./detail_material_sub_table"
-import DetailMaterialResultTable from "./detail_material_result_table"
 
 // 규모별 주자재 단위 수량
 export default function ScaleGuide() {

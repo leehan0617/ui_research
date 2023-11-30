@@ -1,9 +1,10 @@
 "use client"
 
+import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Card, CardBody } from "@nextui-org/react";
 import { powerState, areaState, buildingTypeState } from "@/states/atom";
-import { densityState, scale1State, scale2State } from "@/states/selector";
+import { densityState, scale1State, scale2State } from "@/states/input_selector";
 
 export default function InputTab() {
     const [power, setPower] = useRecoilState(powerState);
@@ -12,18 +13,44 @@ export default function InputTab() {
     const density = useRecoilValue(densityState);
     const scale1 = useRecoilValue(scale1State);
     const scale2 = useRecoilValue(scale2State);
+    const [scale1Letter, setScale1Letter] = useState("");
+    const [scale2Letter, setScale2Letter] = useState("");
 
     const changePower = (event) => {
         setPower(event.target.value);
-    }
+    };
 
     const changeArea = (event) => {
         setArea(event.target.value);
-    }
+    };
 
     const changeBuildingType = (event) => {
         setBuildingType(event.target.value)
-    }
+    };
+
+    useEffect(() => {
+        if (scale1 === 0) {
+            setScale1Letter("상");
+        } else if (scale1 === 1) {
+            setScale1Letter("중");
+        } else if (scale1 === 2) {
+            setScale1Letter("하");
+        } else {
+            setScale1Letter("");
+        }
+    }, [scale1]);
+
+    useEffect(() => {
+        if (scale2 === 0) {
+            setScale2Letter("대규모");
+        } else if (scale2 === 1) {
+            setScale2Letter("중규모");
+        } else if (scale2 === 2) {
+            setScale2Letter("소규모");
+        } else {
+            setScale2Letter("");
+        }
+    }, [scale2])
     
     return (
         <>
@@ -91,13 +118,13 @@ export default function InputTab() {
                                     <tr>
                                         <td className="p-4 border border-slate-400">5</td>
                                         <td className="p-4 border border-slate-400">규모선정1</td>
-                                        <td className="p-4 border border-slate-400">{scale1}</td>
+                                        <td className="p-4 border border-slate-400">{scale1Letter}</td>
                                         <td className="p-4 border border-slate-400">부하밀도</td>
                                     </tr>
                                     <tr>
                                         <td className="p-4 border border-slate-400">6</td>
                                         <td className="p-4 border border-slate-400">규모선정2</td>
-                                        <td className="p-4 border border-slate-400">{scale2}</td>
+                                        <td className="p-4 border border-slate-400">{scale2Letter}</td>
                                         <td className="p-4 border border-slate-400">대지면적</td>
                                     </tr>
                                 </tbody>

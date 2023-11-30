@@ -1,6 +1,5 @@
-import { high_cable } from "@/constants/material"
 import { Card, CardBody } from "@nextui-org/react"
-import DetailMaterialResultTable from "./material/detail_material_result_table"
+import DetailResultHighCable from "./detail_material_result/high_cable"
 
 export default function MaterialResultTab() {
     return (
@@ -12,7 +11,7 @@ export default function MaterialResultTab() {
                             <p className="p-4 text-center font-bold">세부 자재별 수량 산출</p>
                         </div>
                     </div>
-                    <DetailMaterialResultTable material={high_cable} />
+                    <DetailResultHighCable />
                 </CardBody>
             </Card>
         </>

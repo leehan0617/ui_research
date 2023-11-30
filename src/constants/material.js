@@ -1,3 +1,4 @@
+// DEPRECATED
 // 자재산출로직 탭에서 사용하는 세부 자재 
 export const high_cable = {
     name: "고압케이블",

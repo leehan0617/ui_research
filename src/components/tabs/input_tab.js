@@ -1,52 +1,30 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
-import { Card, CardBody } from "@nextui-org/react"
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Card, CardBody } from "@nextui-org/react";
+import { powerState, areaState, buildingTypeState } from "@/states/atom";
+import { densityState, scale1State, scale2State } from "@/states/selector";
 
 export default function InputTab() {
-    const [inputs, setInputs] = useState({
-        building_type: "resident",
-        power: 0,
-        area: 0
-    });
+    const [power, setPower] = useRecoilState(powerState);
+    const [area, setArea] = useRecoilState(areaState);
+    const [buildingType, setBuildingType] = useRecoilState(buildingTypeState);
+    const density = useRecoilValue(densityState);
+    const scale1 = useRecoilValue(scale1State);
+    const scale2 = useRecoilValue(scale2State);
 
-    const changeInput = (e) => {
-        const { value, name } = e.target;
-        setInputs({
-            ...inputs,
-            [name]: value
-        });
+    const changePower = (event) => {
+        setPower(event.target.value);
     }
 
-    const { power, area } = inputs
-    const density = area > 0 ? power / area : 0
-    const [scale1, setScale1] = useState("")
-    const [scale2, setScale2] = useState("")
+    const changeArea = (event) => {
+        setArea(event.target.value);
+    }
 
-    useEffect(() => {
-        if (density != 0) {
-            if (density < 0.023) {
-                setScale1("하")
-            } else if (density < 0.044) {
-                setScale1("중")
-            } else {
-                setScale1("상")
-            }
-        }
-    }, [density])
-
-    useEffect(() => {
-        if (area != 0) {
-            if (area < 500000) {
-                setScale2("소규모")
-            } else if (area < 1000000) {
-                setScale2("중규모")
-            } else {
-                setScale2("대규모")
-            }
-        }
-    }, [area])
-
+    const changeBuildingType = (event) => {
+        setBuildingType(event.target.value)
+    }
+    
     return (
         <>
             <Card className="border-none">
@@ -67,9 +45,9 @@ export default function InputTab() {
                                         <td className="p-4 border border-slate-400">1</td>
                                         <td className="p-4 border border-slate-400">단지유형</td>
                                         <td className="p-4 border border-slate-400 bg-yellow-200">
-                                            <input type="radio" name="building_type" value="resident" onChange={changeInput} defaultChecked/>
+                                            <input type="radio" name="building_type" value="resident" checked={buildingType === "resident"} onChange={changeBuildingType} />
                                             <span className="mr-2 ml-2">주택단지</span>
-                                            <input type="radio" name="building_type" value="industry" onChange={changeInput} />
+                                            <input type="radio" name="building_type" value="industry" checked={buildingType === "industry"} onChange={changeBuildingType} />
                                             <span className="mr-2 ml-2">산업단지</span>
                                         </td>
                                         <td className="p-4 border border-slate-400"></td>
@@ -82,7 +60,7 @@ export default function InputTab() {
                                                 type="number"
                                                 name="power"
                                                 value={power}
-                                                onChange={changeInput}
+                                                onChange={changePower}
                                                 placeholder="수요전력을 입력해 주세요."
                                                 className="text-right rounded-md border border-slate-600"
                                             />
@@ -97,7 +75,7 @@ export default function InputTab() {
                                                 type="number"
                                                 name="area"
                                                 value={area}
-                                                onChange={changeInput}
+                                                onChange={changeArea}
                                                 placeholder="대지면적을 입력해 주세요."
                                                 className="text-right rounded-md border border-slate-600"
                                             />

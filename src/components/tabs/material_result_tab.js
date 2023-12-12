@@ -1,5 +1,7 @@
-import { Card, CardBody } from "@nextui-org/react"
-import DetailResultHighCable from "./detail_material_result/high_cable"
+import { Card, CardBody } from "@nextui-org/react";
+import DetailResultHighCable from "./detail_material_result/high_cable";
+import DetailResultLowCable from "./detail_material_result/low_cable";
+import DetailResultGroundMachine from "./detail_material_result/ground_machine";
 
 export default function MaterialResultTab() {
     return (
@@ -12,6 +14,8 @@ export default function MaterialResultTab() {
                         </div>
                     </div>
                     <DetailResultHighCable />
+                    <DetailResultLowCable />
+                    <DetailResultGroundMachine />
                 </CardBody>
             </Card>
         </>

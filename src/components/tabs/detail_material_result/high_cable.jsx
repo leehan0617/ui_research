@@ -10,7 +10,7 @@ export default function DetailResultHighCable() {
 
     return (
         <>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4 gap-4 mb-4">
                 <div className="col-span-3">
                     <table className="text-sm text-center border-collapse" style={{ width: "100%" }}>
                         <thead>

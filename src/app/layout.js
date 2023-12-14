@@ -1,6 +1,6 @@
 import "./globals.css"
 import { Providers } from "./providers"
-import App from "./app"
+import Header from "./header"
 
 export const metadata = {
   title: "설계용역비 산출",
@@ -12,7 +12,10 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <body>
         <Providers>
-          <App children={children} />
+          <div className="container mx-auto">
+            <Header/>
+            {children}
+          </div>
         </Providers>
       </body>
     </html>

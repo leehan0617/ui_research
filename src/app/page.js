@@ -3,6 +3,7 @@
 import { RecoilRoot } from "recoil";
 import { Tab, Tabs } from "@nextui-org/react"
 import CostResultTab from "@/components/tabs/cost_result_tab";
+import CostTab from "@/components/tabs/cost_tab";
 import MaterialInfoTab from "@/components/tabs/material_info_tab";
 import MaterialResultTab from "@/components/tabs/material_result_tab"; 
 import InputTab from "@/components/tabs/input_tab";
@@ -28,6 +29,9 @@ export default function Home() {
             <MaterialResultTab />
           </Tab>
           <Tab key="cost_result_tab" title="개략공사비 산출 결과">
+            <CostTab />
+          </Tab>
+          <Tab key="temp_tab" title="개략공사비 이전버전">
             <CostResultTab />
           </Tab>
           <Tab key="cost_table_tab" title="개략공사비 보고서">

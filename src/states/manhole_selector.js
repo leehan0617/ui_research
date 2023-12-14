@@ -1,9 +1,7 @@
 import { selector } from "recoil";
 import { structureState } from "./structure_selector";
 import { buildingTypeState } from "./atom";
-
-const weights = [0.194, 0.278, 0.37];
-const weight_sum = weights.reduce((prev, curr) => (prev + curr), 0);
+import { RESIDENT } from "@/constants/constant";
 
 export const manholeState = selector({
     key: "manholeState",
@@ -16,9 +14,9 @@ export const manholeState = selector({
         let me6 = [];
         let total = [];
 
-        unitCounts.forEach((value, index) => {
+        unitCounts.forEach((value) => {
             if (!isNaN(value)) {
-                const weights = buildingType === "resident" ? [0.194, 0.278, 0.37] : [0.417, 0.297, 0.192];
+                const weights = buildingType === RESIDENT ? [0.194, 0.278, 0.37] : [0.417, 0.297, 0.192];
                 const weight_sum = weights.reduce((prev, curr) => (prev + curr), 0);
                 const ma4_value = value * weights[0] / weight_sum;
                 const ma6_value = value * weights[1] / weight_sum;

@@ -139,7 +139,7 @@ export default function ReportTab() {
                                     <th className="w-2/12 p-1 border-collapse border border-slate-400"></th>
                                     <th className="w-2/12 p-1 border-collapse border border-slate-400"></th>
                                     <th className="w-2/12 p-1 border-collapse border border-slate-400"></th>
-                                    <th className="w-3/12 p-1 border-collapse border border-slate-400">VAT별도asdf</th>
+                                    <th className="w-3/12 p-1 border-collapse border border-slate-400">VAT별도</th>
                                 </tr>
                             </tfoot>
                         </table>

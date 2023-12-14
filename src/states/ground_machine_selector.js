@@ -50,7 +50,7 @@ export const totalState = selector({
 
         return {
             "scale": scale,
-            "sum": transformer.result + groundSwitch.result
+            "sum": (transformer.result + groundSwitch.result).toFixed(2)
         }
     }
 });

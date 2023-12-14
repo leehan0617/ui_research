@@ -2,6 +2,10 @@ import { Card, CardBody } from "@nextui-org/react";
 import DetailResultHighCable from "./detail_material_result/high_cable";
 import DetailResultLowCable from "./detail_material_result/low_cable";
 import DetailResultGroundMachine from "./detail_material_result/ground_machine";
+import DetailResultTransformer from "./detail_material_result/transformer";
+import DetailResultStructure from "./detail_material_result/structure";
+import DetailResultManhole from "./detail_material_result/manhole";
+import DetailResultPipeline from "./detail_material_result/pipeline";
 
 export default function MaterialResultTab() {
     return (
@@ -16,6 +20,10 @@ export default function MaterialResultTab() {
                     <DetailResultHighCable />
                     <DetailResultLowCable />
                     <DetailResultGroundMachine />
+                    <DetailResultTransformer />
+                    <DetailResultStructure />
+                    <DetailResultManhole />
+                    <DetailResultPipeline />
                 </CardBody>
             </Card>
         </>

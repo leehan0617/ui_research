@@ -11,7 +11,7 @@ export default function DetailResultHighCable() {
     return (
         <>
             <div className="grid grid-cols-4 gap-4 mb-4">
-                <div className="col-span-3">
+                <div className="col-span-8">
                     <table className="text-sm text-center border-collapse" style={{ width: "100%" }}>
                         <thead>
                             <tr className="bg-orange-200">
@@ -65,34 +65,6 @@ export default function DetailResultHighCable() {
                                 <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 1 ? totalState.sum : "-" }</td>
                                 <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 2 ? totalState.sum : "-" }</td>
                                 <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 3 ? totalState.sum : "-" }</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className="col-span-1">
-                    <table className="text-sm text-center border-collapse" style={{ width: "100%" }}>
-                        <thead>
-                            <tr className="bg-orange-200">
-                                <th className="p-1 border-collapse border border-slate-400">구분</th>
-                                <th className="p-1 border-collapse border border-slate-400">입력값</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="p-1 border-collapse border border-slate-400">CU325</td>
-                                <td className="p-1 border-collapse border border-slate-400">{cu325.result}</td>
-                            </tr>
-                            <tr>
-                                <td className="p-1 border-collapse border border-slate-400">AL400</td>
-                                <td className="p-1 border-collapse border border-slate-400">{al400.result}</td>
-                            </tr>
-                            <tr>
-                                <td className="p-1 border-collapse border border-slate-400">AL 95</td>
-                                <td className="p-1 border-collapse border border-slate-400">{al95.result}</td>
-                            </tr>
-                            <tr className="bg-slate-100">
-                                <td className="p-1 border-collapse border border-slate-400">계</td>
-                                <td className="p-1 border-collapse border border-slate-400">{totalState.sum}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -10,7 +10,7 @@ export default function DetailResultLowCable() {
     return (
         <>
             <div className="grid grid-cols-4 gap-4 mb-4">
-                <div className="col-span-3">
+                <div className="col-span-8">
                     <table className="text-sm text-center border-collapse" style={{ width: "100%" }}>
                         <thead>
                             <tr className="bg-orange-200">
@@ -53,36 +53,12 @@ export default function DetailResultLowCable() {
                                 <td className="p-1 border border-slate-400">{ cv120.scale === 2 ? cv120.result : "-" }</td>
                                 <td className="p-1 border border-slate-400">{ cv120.scale === 3 ? cv120.result : "-" }</td>
                             </tr>
-                            <tr>
+                            <tr className="bg-slate-100">
                                 <td className="p-1 border border-slate-400">계</td>
                                 <td className="p-1 border border-slate-400">{ total.scale === 0 ? total.sum : "-" }</td>
                                 <td className="p-1 border border-slate-400">{ total.scale === 1 ? total.sum : "-" }</td>
                                 <td className="p-1 border border-slate-400">{ total.scale === 2 ? total.sum : "-" }</td>
                                 <td className="p-1 border border-slate-400">{ total.scale === 3 ? total.sum : "-" }</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className="col-span-1">
-                    <table className="text-sm text-center border-collapse" style={{ width: "100%" }}>
-                        <thead>
-                            <tr className="bg-orange-200">
-                                <th className="p-1 border-collapse border border-slate-400">구분</th>
-                                <th className="p-1 border-collapse border border-slate-400">입력값</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td className="p-1 border-collapse border border-slate-400">CV 240mm x 3, <br/>120mm x 1</td>
-                                <td className="p-1 border-collapse border border-slate-400">{cv240.result}</td>
-                            </tr>
-                            <tr>
-                                <td className="p-1 border-collapse border border-slate-400">CV 120mm x 3 ,<br/>70mm x 1</td>
-                                <td className="p-1 border-collapse border border-slate-400">{cv120.result}</td>
-                            </tr>
-                            <tr className="bg-slate-100">
-                                <td className="p-1 border-collapse border border-slate-400">계</td>
-                                <td className="p-1 border-collapse border border-slate-400">{total.sum}</td>
                             </tr>
                         </tbody>
                     </table>

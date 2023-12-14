@@ -8,7 +8,7 @@ export default function DetailResultGroundMachine() {
     const total = useRecoilValue(totalState);
     return (
         <>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4 gap-4 mb-4">
                 <div className="col-span-8">
                     <table className="text-sm text-center" style={{ width: "100%" }}>
                         <thead>

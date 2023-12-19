@@ -10,13 +10,17 @@ export const cv240State = selector({
         const unitCount = LOWCABLEUNITCOUNTS[scale];
         // 저압케이블은 weight가 모두 동일하다.
         const weight = 0.5;
-        const materialCalculation = (unitCount * weight).toFixed(2);
-
+        const materialCalculation = (unitCount * weight);
+        const result = isNaN(materialCalculation) ? 0 : Number(materialCalculation).toFixed(2) 
         return {
-            "result": isNaN(materialCalculation) ? 0 : Number(materialCalculation),
+            "result": result,
             "scale": scale,
-            "companyCost": 97088,
-            "contractCost": 42740
+            "companyBeforeCost": 97088,
+            "companyCost": 139828,
+            "companyResult": 97088 * materialCalculation,
+            "contractCost": 42740,
+            "contractResult": 42740 * materialCalculation,
+            "totalResult": materialCalculation * 139828
         }
     }
 });
@@ -28,13 +32,17 @@ export const cv120State = selector({
         const power = get(powerState);
         const scale = get(scale1State);
         const unitCount = LOWCABLEUNITCOUNTS[scale]
-        const materialCalculation = power < 400000 && scale == 2 ? 0 : (unitCount * weight).toFixed(2);
-
+        const materialCalculation = power < 400000 && scale == 2 ? 0 : (unitCount * weight);
+        const result = isNaN(materialCalculation) ? 0 : Number(materialCalculation).toFixed(2) 
         return {
-            "result": isNaN(materialCalculation) ? 0 : Number(materialCalculation),
+            "result": result,
             "scale": scale,
-            "companyCost": 50781,
-            "contractCost": 27799
+            "companyBeforeCost": 50781,
+            "companyCost": 78580,
+            "companyResult": 50781 * materialCalculation,
+            "contractCost": 27799,
+            "contractResult": 27799 * materialCalculation,
+            "totalResult": materialCalculation * 78580
         }
     }
 });

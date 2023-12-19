@@ -11,13 +11,49 @@ export const groundSwitchState = selector({
         const unitCount = GROUNDMACHINEUNITCOUNTS[scale];
         const weights = [0.638, 0.518, 0.471, 0.68];
         const weight = weights[scale];
-        const materialCalculation = (unitCount * area / 1000 * weight).toFixed(2);
+        const materialCalculation = unitCount * area / 1000 * weight;
+        const result = isNaN(materialCalculation) ? 0 : Number(materialCalculation).toFixed(2);
 
         return {
-            "result": isNaN(materialCalculation) ? 0 : Number(materialCalculation),
-            "scale": scale,
-            "companyCost": 23479 + 360,
-            "contractCost": 1230 + 1082
+            "result": result,
+            "materialCalculation": materialCalculation,
+            "scale": scale
+        }
+    }
+});
+
+export const ground4w4sState = selector({
+    key: "4w4s",
+    get: ({ get }) => {
+        const groundSwitch = get(groundSwitchState);
+        const materialCalculation = groundSwitch.materialCalculation;
+        const result = isNaN(materialCalculation) ? 0 : Number(materialCalculation).toFixed(2);
+
+        return {
+            "result": result,
+            "companyBeforeCost": 23479,
+            "companyCost": 24709,
+            "companyResult": 23479 * materialCalculation,
+            "contractCost": 1230,
+            "contractResult": 1230 * materialCalculation,
+            "totalResult": materialCalculation * 24709
+        }
+    }
+});
+
+export const groundsw4State = selector({
+    key: "sw4",
+    get: ({ get }) => {
+        const { materialCalculation, result } = get(groundSwitchState);
+        
+        return {
+            "result": result,
+            "companyBeforeCost": 360,
+            "companyCost": 1442,
+            "companyResult": 360 * materialCalculation,
+            "contractCost": 1082,
+            "contractResult": 1082 * materialCalculation,
+            "totalResult": materialCalculation * 1442
         }
     }
 });

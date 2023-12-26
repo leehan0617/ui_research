@@ -86,7 +86,7 @@ export const totalState = selector({
 
         return {
             "scale": scale,
-            "sum": (transformer.result + groundSwitch.result).toFixed(2)
+            "sum": (Number(transformer.result) + Number(groundSwitch.result)).toFixed(2)
         }
     }
 });

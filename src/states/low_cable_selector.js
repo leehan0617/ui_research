@@ -56,7 +56,7 @@ export const totalState = selector({
 
         return {
             "scale": scale,
-            "sum": cv240.result + cv120.result
+            "sum": Number(cv240.result) + Number(cv120.result)
         }
     }
 });

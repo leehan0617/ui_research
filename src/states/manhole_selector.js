@@ -42,3 +42,7 @@ export const manholeState = selector({
         }
     }
 });
+
+export const ma4CostState = "";
+export const ma6CostState = "";
+export const me6CostState = "";

@@ -51,3 +51,41 @@ export const structureState = selector({
         }
     }
 });
+
+export const hb2State = selector({
+    key: "hb2State",
+    get: ({ get }) => {
+        const { handhole } = get(structureState);
+        const scale = get(scale2State);
+        const materialCalculation = handhole[scale];
+        const result = isNaN(materialCalculation) ? 0 : materialCalculation;
+        return {
+            "result": result,
+            "companyBeforeCost": 3062,
+            "companyCost": 5510,
+            "companyResult": 3062 * result,
+            "contractCost": 2448,
+            "contractResult": 2448 * result,
+            "totalResult": 5510 * result
+        }
+    }
+});
+
+export const jblState = selector({
+    key: "jblState",
+    get: ({ get }) => {
+        const { connecthole } = get(structureState);
+        const scale = get(scale2State);
+        const materialCalculation = connecthole[scale];
+        const result = isNaN(materialCalculation) ? 0 : materialCalculation;
+        return {
+            "result": result,
+            "companyBeforeCost": 337,
+            "companyCost": 1054,
+            "companyResult": 337 * result,
+            "contractCost": 717,
+            "contractResult": 717 * result,
+            "totalResult": result * 1054
+        }
+    }
+});

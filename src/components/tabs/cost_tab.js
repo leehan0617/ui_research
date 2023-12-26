@@ -3,6 +3,8 @@ import { useRecoilValue } from "recoil";
 import { cu325State, al400State, al95State } from "@/states/high_cable_selector";
 import { cv240State, cv120State } from "@/states/low_cable_selector";
 import { ground4w4sState, groundsw4State } from "@/states/ground_machine_selector";
+import { hb2State, jblState } from "@/states/structure_selector";
+import { kva75State, kva150State, kva300State, kvaTotalState } from "@/states/transformer_selector";
 
 export default function CostTab() {
     const cu325 = useRecoilValue(cu325State);
@@ -12,6 +14,12 @@ export default function CostTab() {
     const cv120 = useRecoilValue(cv120State);
     const ground4w4s = useRecoilValue(ground4w4sState);
     const groundsw4 = useRecoilValue(groundsw4State);
+    const hb2 = useRecoilValue(hb2State);
+    const jbl = useRecoilValue(jblState);
+    const kva75 = useRecoilValue(kva75State);
+    const kva150 = useRecoilValue(kva150State);
+    const kva300 = useRecoilValue(kva300State);
+    const kvaTotal = useRecoilValue(kvaTotalState);
 
     return (
         <>
@@ -205,13 +213,13 @@ export default function CostTab() {
                                 <td className="border border-slate-400">8,742</td>
                                 <td className="border border-slate-400">7,571</td>
                                 <td className="border border-slate-400">2</td>
-                                <td className="border border-slate-400">7,573</td>
-                                <td className="border border-slate-400">1,169</td>
-                                <td className="border border-slate-400">8,742</td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
+                                <td className="border border-slate-400">{ kva75.companyBeforeCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva75.contractCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva75.companyCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva75.result.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva75.companyResult).toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva75.contractResult).toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva75.totalResult).toLocaleString() }</td>
                             </tr>
                             <tr className="bg-yellow-200">
                                 <td className="border border-slate-400">150kVA</td>
@@ -224,13 +232,13 @@ export default function CostTab() {
                                 <td className="border border-slate-400">10,091</td>
                                 <td className="border border-slate-400">8,752</td>
                                 <td className="border border-slate-400">3</td>
-                                <td className="border border-slate-400">8,755</td>
-                                <td className="border border-slate-400">1,336</td>
-                                <td className="border border-slate-400">10,091</td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
+                                <td className="border border-slate-400">{ kva150.companyBeforeCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva150.contractCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva150.companyCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva150.result.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva150.companyResult).toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva150.contractResult).toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva150.totalResult).toLocaleString() }</td>
                             </tr>
                             <tr className="bg-yellow-200">
                                 <td className="border border-slate-400">300kVA</td>
@@ -243,13 +251,13 @@ export default function CostTab() {
                                 <td className="border border-slate-400">11,995</td>
                                 <td className="border border-slate-400">10,632</td>
                                 <td className="border border-slate-400">3</td>
-                                <td className="border border-slate-400">10,635</td>
-                                <td className="border border-slate-400">1,360</td>
-                                <td className="border border-slate-400">11,995</td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
+                                <td className="border border-slate-400">{ kva300.companyBeforeCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva300.contractCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva300.companyCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kva300.result.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva300.companyResult).toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva300.contractResult).toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kva300.totalResult).toLocaleString() }</td>
                             </tr>
                             <tr className="bg-yellow-200">
                                 <td className="border border-slate-400">변압기기초대</td>
@@ -263,13 +271,13 @@ export default function CostTab() {
                                 <td className="border border-slate-400">1,535</td>
                                 <td className="border border-slate-400">437</td>
                                 <td className="border border-slate-400">2</td>
-                                <td className="border border-slate-400">439</td>
-                                <td className="border border-slate-400">1,096</td>
-                                <td className="border border-slate-400">1,535</td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
+                                <td className="border border-slate-400">{ kvaTotal.companyBeforeCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kvaTotal.contractCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kvaTotal.companyCost.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ kvaTotal.result.toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kvaTotal.companyResult).toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kvaTotal.contractResult).toLocaleString() }</td>
+                                <td className="border border-slate-400">{ Math.round(kvaTotal.totalResult).toLocaleString() }</td>
                             </tr>
                             <tr>
                                 <td rowSpan={3} className="border border-slate-400">고압관로공사</td>
@@ -426,13 +434,13 @@ export default function CostTab() {
                                 <td className="border border-slate-400">5,510</td>
                                 <td className="border border-slate-400">3,057</td>
                                 <td className="border border-slate-400">5</td>
-                                <td className="border border-slate-400">3,062</td>
-                                <td className="border border-slate-400">2,448</td>
-                                <td className="border border-slate-400">5,510</td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
+                                <td className="border border-slate-400">{hb2.companyBeforeCost.toLocaleString()}</td>
+                                <td className="border border-slate-400">{hb2.contractCost.toLocaleString()}</td>
+                                <td className="border border-slate-400">{hb2.companyCost.toLocaleString()}</td>
+                                <td className="border border-slate-400">{hb2.result.toLocaleString()}</td>
+                                <td className="border border-slate-400">{Math.round(hb2.companyResult).toLocaleString()}</td>
+                                <td className="border border-slate-400">{Math.round(hb2.contractResult).toLocaleString()}</td>
+                                <td className="border border-slate-400">{Math.round(hb2.totalResult).toLocaleString()}</td>
                             </tr>
                             <tr className="bg-yellow-200">
                                 <td className="border border-slate-400">저압구조물</td>
@@ -448,13 +456,13 @@ export default function CostTab() {
                                 <td className="border border-slate-400">1,054</td>
                                 <td className="border border-slate-400">336</td>
                                 <td className="border border-slate-400">1</td>
-                                <td className="border border-slate-400">337</td>
-                                <td className="border border-slate-400">717</td>
-                                <td className="border border-slate-400">1,054</td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
-                                <td className="border border-slate-400"></td>
+                                <td className="border border-slate-400">{jbl.companyBeforeCost.toLocaleString()}</td>
+                                <td className="border border-slate-400">{jbl.contractCost.toLocaleString()}</td>
+                                <td className="border border-slate-400">{jbl.companyCost.toLocaleString()}</td>
+                                <td className="border border-slate-400">{jbl.result.toLocaleString()}</td>
+                                <td className="border border-slate-400">{Math.round(jbl.companyResult).toLocaleString()}</td>
+                                <td className="border border-slate-400">{Math.round(jbl.contractResult).toLocaleString()}</td>
+                                <td className="border border-slate-400">{Math.round(jbl.totalResult).toLocaleString()}</td>
                             </tr>
                         </tbody>
                         <tfoot>

@@ -43,6 +43,56 @@ export const manholeState = selector({
     }
 });
 
-export const ma4CostState = "";
-export const ma6CostState = "";
-export const me6CostState = "";
+export const ma4State = selector({
+    key: "ma4State",
+    get: ({ get }) => {
+        const manhole = get(manholeState);
+        const { ma4 } = manhole;
+        const result = ma4.find(e => !isNaN(e)) || 0;
+        return {
+            result,
+            "companyBeforeCost": 5701,
+            "companyCost": 9486,
+            "companyResult": 5701 * result,
+            "contractCost": 3785,
+            "contractResult": 3785 * result,
+            "totalResult": 9486 * result
+        }
+    }
+});
+
+export const ma6State = selector({
+    key: "ma6State",
+    get: ({ get }) => {
+        const manhole = get(manholeState);
+        const { ma6 } = manhole;
+        const result = ma6.find(e => !isNaN(e)) || 0;
+        return {
+            result,
+            "companyBeforeCost": 6072,
+            "companyCost": 10050,
+            "companyResult": 6072 * result,
+            "contractCost": 3978,
+            "contractResult": 3978 * result,
+            "totalResult": 10050 * result
+        }
+    }
+});
+
+export const me6State = selector({
+    key: "me6State",
+    get: ({ get }) => {
+        const manhole = get(manholeState);
+        const { me6 } = manhole;
+        const result = me6.find(e => !isNaN(e)) || 0;
+        return {
+            result,
+            "companyBeforeCost": 11187,
+            "companyCost": 17444,
+            "companyResult": 11187 * result,
+            "contractCost": 6257,
+            "contractResult": 6257 * result,
+            "totalResult": 17444 * result
+        }
+    }
+});

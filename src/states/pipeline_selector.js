@@ -67,3 +67,79 @@ export const pipelineState = selector({
         }
     }
 });
+
+export const pipeline2x1State = selector({
+    key: "pipeline2x1State",
+    get: ({ get }) => {
+        const pipeline = get(pipelineState);
+        const { sub2x1 } = pipeline;
+        const result = sub2x1[sub2x1.length - 1] || 0;
+
+        return {
+            result,
+            "companyBeforeCost": 6698,
+            "companyCost": 40607,
+            "companyResult": 6698 * result,
+            "contractCost": 33910,
+            "contractResult": 33910 * result,
+            "totalResult": 40607 * result
+        }
+    }
+});
+
+export const pipeline2x2State = selector({
+    key: "pipeline2x2State",
+    get: ({ get }) => {
+        const pipeline = get(pipelineState);
+        const { sub2x2 } = pipeline;
+        const result = sub2x2[sub2x2.length - 1] || 0;
+
+        return {
+            result,
+            "companyBeforeCost": 32754,
+            "companyCost": 138213,
+            "companyResult": 32754 * result,
+            "contractCost": 105458,
+            "contractResult": 105458 * result,
+            "totalResult": 138213 * result
+        }
+    }
+});
+
+export const pipeline3x2State = selector({
+    key: "pipeline3x2State",
+    get: ({ get }) => {
+        const pipeline = get(pipelineState);
+        const { sub3x2 } = pipeline;
+        const result = sub3x2[sub3x2.length - 1] || 0;
+
+        return {
+            result,
+            "companyBeforeCost": 50295,
+            "companyCost": 186948,
+            "companyResult": 50295 * result,
+            "contractCost": 136653,
+            "contractResult": 136653 * result,
+            "totalResult": 186948 * result
+        }
+    }
+});
+
+export const pipeline3x3State = selector({
+    key: "pipeline3x3State",
+    get: ({ get }) => {
+        const pipeline = get(pipelineState);
+        const { sub3x3 } = pipeline;
+        const result = sub3x3[sub3x3.length - 1] || 0;
+
+        return {
+            result,
+            "companyBeforeCost": 79276,
+            "companyCost": 270711,
+            "companyResult": 79276 * result,
+            "contractCost": 191435,
+            "contractResult": 191435 * result,
+            "totalResult": 270711 * result
+        }
+    }
+});

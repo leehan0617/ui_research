@@ -31,9 +31,9 @@ export default function Home() {
           <Tab key="cost_result_tab" title="개략공사비 산출 결과">
             <CostTab />
           </Tab>
-          <Tab key="temp_tab" title="개략공사비 이전버전">
+          {/* <Tab key="temp_tab" title="개략공사비 이전버전">
             <CostResultTab />
-          </Tab>
+          </Tab> */}
           <Tab key="cost_table_tab" title="개략공사비 보고서">
             <ReportTab />
           </Tab>

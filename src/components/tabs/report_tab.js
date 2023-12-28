@@ -1,8 +1,35 @@
-"use client"
-
+import { INDUSTRY } from "@/constants/constant";
+import { areaState, buildingTypeState, powerState } from "@/states/atom"
+import { groundTotalState } from "@/states/ground_machine_selector";
+import { highCableTotalState } from "@/states/high_cable_selector";
+import { totalState } from "@/states/low_cable_selector";
+import { highPipelineTotalState, lowPipelineTotalState } from "@/states/pipeline_selector";
+import { highStructureTotalState, lowStructureTotalState } from "@/states/structure_selector";
+import { transformerTotalState } from "@/states/transformer_selector";
 import { Card, CardBody } from "@nextui-org/react"
+import { useRecoilValue } from "recoil"
 
 export default function ReportTab() {
+    const power = useRecoilValue(powerState);
+    const area = useRecoilValue(areaState);
+    const buildingType = useRecoilValue(buildingTypeState);
+    // 케이블(고압)
+    const highCable = useRecoilValue(highCableTotalState);
+    // 케이블(저압)
+    const lowCable = useRecoilValue(totalState);
+    // 지상 개폐기
+    const groundMachine = useRecoilValue(groundTotalState);
+    // 지상 변압기
+    const transformer = useRecoilValue(transformerTotalState);
+    // 고압 관로
+    const highPipeline = useRecoilValue(highPipelineTotalState);
+    // 저압 관로
+    const lowPipeline = useRecoilValue(lowPipelineTotalState);
+    // 고압 구조물
+    const highStructure = useRecoilValue(highStructureTotalState);
+    // 저압 구조물
+    const lowStructure = useRecoilValue(lowStructureTotalState);
+
     return (
         <>
             <Card className="border-none">
@@ -38,15 +65,21 @@ export default function ReportTab() {
                                 <tr className="h-16">
                                     <td className="bg-blue-100 p-1 border-collapse border border-slate-400 text-center" rowSpan={3}>입  력  값</td>
                                     <td className="bg-blue-100 p-1 border-collapse border border-slate-400 text-center">단  지  유  형</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">
+                                        <span className="ml-2">{ buildingType === INDUSTRY ? "산업단지" : "주택단지" }</span>
+                                    </td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="bg-blue-100 p-1 border-collapse border border-slate-400 text-center">수  요  전  력<br/>(비동시부하)</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">
+                                        <span className="ml-2">{ Number(power).toLocaleString() }</span>
+                                    </td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="bg-blue-100 p-1 border-collapse border border-slate-400 text-center">대  지  면  적</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">
+                                        <span className="ml-2">{ Number(area).toLocaleString() }</span>
+                                    </td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="bg-blue-100 p-1 border-collapse border border-slate-400 text-center" colSpan={2}>설  계  자</td>
@@ -71,58 +104,58 @@ export default function ReportTab() {
                                 <tr className="h-16">
                                     <td className="p-1 border-collapse border border-slate-400" rowSpan={9}>배전 공사<br/>(지중)</td>
                                     <td className="p-1 border-collapse border border-slate-400">케이블(고압)</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highCable.companySum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highCable.contractSum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highCable.totalSum).toLocaleString() }</td>
                                     <td className="p-1 border-collapse border border-slate-400"></td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="p-1 border-collapse border border-slate-400">케이블(저압)</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowCable.companySum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowCable.contractSum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowCable.totalSum).toLocaleString() }</td>
                                     <td className="p-1 border-collapse border border-slate-400"></td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="p-1 border-collapse border border-slate-400">지상개폐기</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(groundMachine.companySum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(groundMachine.contractSum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(groundMachine.totalSum).toLocaleString() }</td>
                                     <td className="p-1 border-collapse border border-slate-400"></td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="p-1 border-collapse border border-slate-400">지상변압기</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(transformer.companySum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(transformer.contractSum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(transformer.totalSum).toLocaleString() }</td>
                                     <td className="p-1 border-collapse border border-slate-400"></td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="p-1 border-collapse border border-slate-400">관로(고압)</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highPipeline.companySum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highPipeline.contractSum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highPipeline.totalSum).toLocaleString() }</td>
                                     <td className="p-1 border-collapse border border-slate-400"></td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="p-1 border-collapse border border-slate-400">관로(저압)</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowPipeline.companySum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowPipeline.contractSum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowPipeline.totalSum).toLocaleString() }</td>
                                     <td className="p-1 border-collapse border border-slate-400"></td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="p-1 border-collapse border border-slate-400">구조물(고압)</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highStructure.companySum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highStructure.contractSum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(highStructure.totalSum).toLocaleString() }</td>
                                     <td className="p-1 border-collapse border border-slate-400"></td>
                                 </tr>
                                 <tr className="h-16">
                                     <td className="p-1 border-collapse border border-slate-400">구조물(저압)</td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
-                                    <td className="p-1 border-collapse border border-slate-400"></td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowStructure.companySum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowStructure.contractSum).toLocaleString() }</td>
+                                    <td className="p-1 border-collapse border border-slate-400">{ Math.round(lowStructure.totalSum).toLocaleString() }</td>
                                     <td className="p-1 border-collapse border border-slate-400"></td>
                                 </tr>
                                 <tr className="h-16">
@@ -136,9 +169,24 @@ export default function ReportTab() {
                             <tfoot>
                             <tr className="h-16 bg-cyan-100">
                                     <th colSpan={2} className="w-3/12 p-1 border-collapse border border-slate-400">합      계</th>
-                                    <th className="w-2/12 p-1 border-collapse border border-slate-400"></th>
-                                    <th className="w-2/12 p-1 border-collapse border border-slate-400"></th>
-                                    <th className="w-2/12 p-1 border-collapse border border-slate-400"></th>
+                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">
+                                        {
+                                            Math.round(highCable.companySum + lowCable.companySum + groundMachine.companySum + transformer.companySum +
+                                            highPipeline.companySum + lowPipeline.companySum + highStructure.companySum + lowStructure.companySum).toLocaleString()
+                                        }
+                                    </th>
+                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">
+                                        {
+                                            Math.round(highCable.contractSum + lowCable.contractSum + groundMachine.contractSum + transformer.contractSum +
+                                            highPipeline.contractSum + lowPipeline.contractSum + highStructure.contractSum + lowStructure.contractSum).toLocaleString()
+                                        }
+                                    </th>
+                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">
+                                        {
+                                            Math.round(highCable.totalSum + lowCable.totalSum + groundMachine.totalSum + transformer.totalSum +
+                                            highPipeline.totalSum + lowPipeline.totalSum + highStructure.totalSum + lowStructure.totalSum).toLocaleString()
+                                        }
+                                    </th>
                                     <th className="w-3/12 p-1 border-collapse border border-slate-400">VAT별도</th>
                                 </tr>
                             </tfoot>

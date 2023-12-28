@@ -56,7 +56,10 @@ export const totalState = selector({
 
         return {
             "scale": scale,
-            "sum": Number(cv240.result) + Number(cv120.result)
+            "sum": Number(cv240.result) + Number(cv120.result),
+            "companySum": Number(cv240.companyResult) + Number(cv120.companyResult),
+            "contractSum": Number(cv240.contractResult) + Number(cv120.contractResult),
+            "totalSum": Number(cv240.totalResult) + Number(cv120.totalResult),
         }
     }
 });

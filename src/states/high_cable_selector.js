@@ -89,6 +89,9 @@ export const highCableTotalState = selector({
         return {
             "scale": scale,
             "sum": Number(cu325.result) + Number(al400.result) + Number(al95.result),
+            "companySum": Number(cu325.companyResult) + Number(al400.companyResult) + Number(al95.companyResult),
+            "contractSum": Number(cu325.contractResult) + Number(al400.contractResult) + Number(al95.contractResult),
+            "totalSum": Number(cu325.totalResult) + Number(al400.totalResult) + Number(al95.totalResult),
         }
     }
 });

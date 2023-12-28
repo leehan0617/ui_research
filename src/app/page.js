@@ -22,9 +22,9 @@ export default function Home() {
           <Tab key="invoice_tab" title="설계용역비 산출 내역">
             <InvoiceTab />
           </Tab>
-          <Tab key="material_info_tab" title="자재 단위 수량&비중">
+          {/* <Tab key="material_info_tab" title="자재 단위 수량&비중">
             <MaterialInfoTab />
-          </Tab>
+          </Tab> */}
           <Tab key="material_result_tab" title="자재 산출 내역">
             <MaterialResultTab />
           </Tab>

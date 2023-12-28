@@ -40,7 +40,7 @@ export const kva75State = selector({
         const { scale, kva75 } = transformer;
         const result = kva75[scale] || 0;
         return {
-            "result": result,
+            result,
             "companyBeforeCost": 7573,
             "companyCost": 8742,
             "companyResult": 7573 * result,
@@ -58,7 +58,7 @@ export const kva150State = selector({
         const { scale, kva150 } = transformer;
         const result = kva150[scale] || 0;
         return {
-            "result": result,
+            result,
             "companyBeforeCost": 8755,
             "companyCost": 10091,
             "companyResult": 8755 * result,
@@ -76,7 +76,7 @@ export const kva300State = selector({
         const { scale, kva300 } = transformer;
         const result = kva300[scale] || 0;
         return {
-            "result": result,
+            result,
             "companyBeforeCost": 10635,
             "companyCost": 11995,
             "companyResult": 10635 * result,
@@ -98,13 +98,29 @@ export const kvaTotalState = selector({
         const { result: kva300Result } = kva300;
         const result = Number(kva75Result) + Number(kva150Result) + Number(kva300Result);
         return {
-            result: result,
+            result,
             "companyBeforeCost": 439,
             "companyCost": 1535,
             "companyResult": 439 * result,
             "contractCost": 1096,
             "contractResult": 1096 * result,
             "totalResult": 1535 * result
+        }
+    }
+});
+
+export const transformerTotalState = selector({
+    key: "transformerTotalState",
+    get: ({ get }) => {
+        const kva75 = get(kva75State);
+        const kva150 = get(kva150State);
+        const kva300 = get(kva300State);
+        const tcl = get(kvaTotalState);
+
+        return {
+            "companySum": Number(kva75.companyResult) + Number(kva150.companyResult) + Number(kva300.companyResult) + Number(tcl.companyResult),
+            "contractSum": Number(kva75.contractResult) + Number(kva150.contractResult) + Number(kva300.contractResult) + Number(tcl.contractResult),
+            "totalSum": Number(kva75.totalResult) + Number(kva150.totalResult) + Number(kva300.totalResult) + Number(tcl.totalResult),
         }
     }
 });

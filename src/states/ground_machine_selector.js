@@ -58,6 +58,20 @@ export const groundsw4State = selector({
     }
 });
 
+export const groundTotalState = selector({
+    key: "groundTotalState",
+    get: ({ get }) => {
+        const ground4w4s = get(ground4w4sState);
+        const groundsw4 = get(groundsw4State);
+
+        return {
+            "companySum": Number(ground4w4s.companyResult) + Number(groundsw4.companyResult),
+            "contractSum": Number(ground4w4s.contractResult) + Number(groundsw4.contractResult),
+            "totalSum": Number(ground4w4s.totalResult) + Number(groundsw4.totalResult)
+        }
+    }
+});
+
 export const groundTransformerState = selector({
     key: "groundTransFormerState",
     get: ({ get }) => {
@@ -71,8 +85,6 @@ export const groundTransformerState = selector({
         return {
             "result": isNaN(materialCalculation) ? 0 : Number(materialCalculation),
             "scale": scale,
-            "companyCost": 0,
-            "contractCost": 0
         }
     }
 });

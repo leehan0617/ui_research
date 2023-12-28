@@ -143,3 +143,31 @@ export const pipeline3x3State = selector({
         }
     }
 });
+
+export const highPipelineTotalState = selector({
+    key: "highPipelineTotalState",
+    get: ({ get }) => {
+        const pipeline2x2 = get(pipeline2x2State);
+        const pipeline3x2 = get(pipeline3x2State);
+        const pipeline3x3 = get(pipeline3x3State);
+
+        return {
+            "companySum": Number(pipeline2x2.companyResult) + Number(pipeline3x2.companyResult) + Number(pipeline3x3.companyResult),
+            "contractSum": Number(pipeline2x2.contractResult) + Number(pipeline3x2.contractResult) + Number(pipeline3x3.contractResult),
+            "totalSum": Number(pipeline2x2.totalResult) + Number(pipeline3x2.totalResult) + Number(pipeline3x3.totalResult),
+        }
+    }
+});
+
+export const lowPipelineTotalState = selector({
+    key: "lowPipelineTotalState",
+    get: ({ get }) => {
+        const pipeline2x1 = get(pipeline2x1State);
+
+        return {
+            "companySum": Number(pipeline2x1.companyResult),
+            "contractSum": Number(pipeline2x1.contractResult),
+            "totalSum": Number(pipeline2x1.totalResult)
+        }
+    }
+});

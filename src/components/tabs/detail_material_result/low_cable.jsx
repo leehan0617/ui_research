@@ -1,12 +1,13 @@
-import { LOWCABLEUNITCOUNTS } from "@/constants/constant";
 import { useRecoilValue } from "recoil";
 import { cv240State, cv120State, totalState } from "@/states/low_cable_selector";
+import { pipelineState } from "@/states/pipeline_selector";
 
 export default function DetailResultLowCable() {
     const cv240 = useRecoilValue(cv240State);
     const cv120 = useRecoilValue(cv120State);
     const total = useRecoilValue(totalState);
-
+    const pipeline = useRecoilValue(pipelineState);
+    const { sub2x1 } = pipeline;
     return (
         <>
             <div className="grid grid-cols-4 gap-4 mb-4">
@@ -34,9 +35,10 @@ export default function DetailResultLowCable() {
                         <tbody>
                             <tr>
                                 <td colSpan={2} className="p-1 border border-slate-400">단위수량</td>
-                                {
-                                    LOWCABLEUNITCOUNTS.map((value, index) => (<td key={index} className="p-1 border border-slate-400">{value}</td>))
-                                }
+                                <td className="p-1 border border-slate-400">{ sub2x1[3] }</td>
+                                <td className="p-1 border border-slate-400">{ sub2x1[3] }</td>
+                                <td className="p-1 border border-slate-400">{ sub2x1[3] }</td>
+                                <td className="p-1 border border-slate-400">{ sub2x1[3] }</td>
                             </tr>
                             <tr>
                                 <td rowSpan={3} className="p-1 border border-slate-400">비중</td>

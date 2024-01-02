@@ -1,13 +1,15 @@
 import { selector } from "recoil";
 import { powerState } from "./atom";
 import { scale1State } from "./input_selector";
-import { LOWCABLEUNITCOUNTS } from "@/constants/constant";
+import { pipelineState } from "./pipeline_selector";
 
 export const cv240State = selector({
     key: "cv240State",
     get: ({ get }) => {
         const scale = get(scale1State);
-        const unitCount = LOWCABLEUNITCOUNTS[scale];
+        const pipeline = get(pipelineState);
+        const { sub2x1 } = pipeline;
+        const unitCount = Number(sub2x1[3]);
         // 저압케이블은 weight가 모두 동일하다.
         const weight = 0.5;
         const materialCalculation = (unitCount * weight);
@@ -31,7 +33,9 @@ export const cv120State = selector({
         const weight = 0.5;
         const power = get(powerState);
         const scale = get(scale1State);
-        const unitCount = LOWCABLEUNITCOUNTS[scale]
+        const pipeline = get(pipelineState);
+        const { sub2x1 } = pipeline;
+        const unitCount = Number(sub2x1[3]);
         const materialCalculation = power < 400000 && scale == 2 ? 0 : (unitCount * weight);
         const result = isNaN(materialCalculation) ? 0 : Number(materialCalculation).toFixed(2) 
         return {

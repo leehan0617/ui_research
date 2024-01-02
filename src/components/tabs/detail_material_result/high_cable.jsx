@@ -61,10 +61,10 @@ export default function DetailResultHighCable() {
                             </tr>
                             <tr className="bg-slate-100">
                                 <td className="p-1 border-collapse border border-slate-400">계</td>
-                                <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 0 ? totalState.sum : "-" }</td>
-                                <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 1 ? totalState.sum : "-" }</td>
-                                <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 2 ? totalState.sum : "-" }</td>
-                                <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 3 ? totalState.sum : "-" }</td>
+                                <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 0 ? totalState.sum.toFixed(2) : "-" }</td>
+                                <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 1 ? totalState.sum.toFixed(2) : "-" }</td>
+                                <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 2 ? totalState.sum.toFixed(2) : "-" }</td>
+                                <td className="p-1 border-collapse border border-slate-400">{ totalState.scale === 3 ? totalState.sum.toFixed(2) : "-" }</td>
                             </tr>
                         </tbody>
                     </table>

@@ -16,7 +16,7 @@ export const manholeState = selector({
 
         unitCounts.forEach((value) => {
             if (!isNaN(value)) {
-                const weights = buildingType === RESIDENT ? [0.194, 0.278, 0.37] : [0.417, 0.297, 0.192];
+                const weights = buildingType === RESIDENT ? [0.194, 0.278, 0.37] : [0.192, 0.297, 0.417];
                 const weight_sum = weights.reduce((prev, curr) => (prev + curr), 0);
                 const ma4_value = value * weights[0] / weight_sum;
                 const ma6_value = value * weights[1] / weight_sum;

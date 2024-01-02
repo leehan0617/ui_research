@@ -1,12 +1,12 @@
 import { selector } from "recoil";
 import { areaState } from "./atom";
-import { scale2State } from "./input_selector";
+import { scale1State } from "./input_selector";
 import { ma4State, ma6State, me6State } from "./manhole_selector";
 
 export const structureState = selector({
     key: "structureState",
     get: ({ get }) => {
-        const scale = get(scale2State);
+        const scale = get(scale1State);
         const area = get(areaState);
         const unitCounts = [0.092, 0.146, 0.154, 0.158];
         const manholeWeights = [0.464, 0.364, 0.285, 0.562];
@@ -57,7 +57,7 @@ export const hb2State = selector({
     key: "hb2State",
     get: ({ get }) => {
         const { handhole } = get(structureState);
-        const scale = get(scale2State);
+        const scale = get(scale1State);
         const materialCalculation = handhole[scale];
         const result = isNaN(materialCalculation) ? 0 : materialCalculation;
         return {
@@ -76,7 +76,7 @@ export const jblState = selector({
     key: "jblState",
     get: ({ get }) => {
         const { connecthole } = get(structureState);
-        const scale = get(scale2State);
+        const scale = get(scale1State);
         const materialCalculation = connecthole[scale];
         const result = isNaN(materialCalculation) ? 0 : materialCalculation;
         return {

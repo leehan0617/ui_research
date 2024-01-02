@@ -37,9 +37,9 @@ export default function Home() {
           <Tab key="cost_table_tab" title="개략공사비 보고서">
             <ReportTab />
           </Tab>
-          <Tab key="reference_tab" title="참고자료">
+          {/* <Tab key="reference_tab" title="참고자료">
             <ReferenceTab />
-          </Tab>
+          </Tab> */}
         </Tabs>
       </main>
     </RecoilRoot>

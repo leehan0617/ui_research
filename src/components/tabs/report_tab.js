@@ -5,6 +5,7 @@ import { highCableTotalState } from "@/states/high_cable_selector";
 import { totalState } from "@/states/low_cable_selector";
 import { highPipelineTotalState, lowPipelineTotalState } from "@/states/pipeline_selector";
 import { highStructureTotalState, lowStructureTotalState } from "@/states/structure_selector";
+import { reportSummaryState } from "@/states/summary_selector";
 import { transformerTotalState } from "@/states/transformer_selector";
 import { Card, CardBody } from "@nextui-org/react"
 import { useRecoilValue } from "recoil"
@@ -29,6 +30,8 @@ export default function ReportTab() {
     const highStructure = useRecoilValue(highStructureTotalState);
     // 저압 구조물
     const lowStructure = useRecoilValue(lowStructureTotalState);
+    // summary
+    const summary = useRecoilValue(reportSummaryState);
 
     return (
         <>
@@ -169,24 +172,9 @@ export default function ReportTab() {
                             <tfoot>
                             <tr className="h-16 bg-cyan-100">
                                     <th colSpan={2} className="w-3/12 p-1 border-collapse border border-slate-400">합      계</th>
-                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">
-                                        {
-                                            Math.round(highCable.companySum + lowCable.companySum + groundMachine.companySum + transformer.companySum +
-                                            highPipeline.companySum + lowPipeline.companySum + highStructure.companySum + lowStructure.companySum).toLocaleString()
-                                        }
-                                    </th>
-                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">
-                                        {
-                                            Math.round(highCable.contractSum + lowCable.contractSum + groundMachine.contractSum + transformer.contractSum +
-                                            highPipeline.contractSum + lowPipeline.contractSum + highStructure.contractSum + lowStructure.contractSum).toLocaleString()
-                                        }
-                                    </th>
-                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">
-                                        {
-                                            Math.round(highCable.totalSum + lowCable.totalSum + groundMachine.totalSum + transformer.totalSum +
-                                            highPipeline.totalSum + lowPipeline.totalSum + highStructure.totalSum + lowStructure.totalSum).toLocaleString()
-                                        }
-                                    </th>
+                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">{ Math.round(summary.companySum).toLocaleString() }</th>
+                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">{ Math.round(summary.contractSum).toLocaleString() }</th>
+                                    <th className="w-2/12 p-1 border-collapse border border-slate-400">{ Math.round(summary.totalSum).toLocaleString() }</th>
                                     <th className="w-3/12 p-1 border-collapse border border-slate-400">VAT별도</th>
                                 </tr>
                             </tfoot>

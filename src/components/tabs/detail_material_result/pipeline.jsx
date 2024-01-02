@@ -81,31 +81,31 @@ export default function DetailResultPipeline() {
                                 <td rowSpan={5} className="p-1 border border-slate-400 font-bold">{pipeline.scale}</td>
                                 <td className="p-1 border border-slate-400 text-red-400">1. 3단3열(9공)</td>
                                 {
-                                    pipeline.sub3x3.map(value => (<td className="p-1 border border-slate-400">{value}</td>))
+                                    pipeline.sub3x3.map((value, index) => (<td key={index} className="p-1 border border-slate-400">{value}</td>))
                                 }
                             </tr>
                             <tr>
                                 <td className="p-1 border border-slate-400 text-red-400">2. 3단2열(6공)</td>
                                 {
-                                    pipeline.sub3x2.map(value => (<td className="p-1 border border-slate-400">{value}</td>))
+                                    pipeline.sub3x2.map((value, index) => (<td key={index} className="p-1 border border-slate-400">{value}</td>))
                                 }
                             </tr>
                             <tr>
                                 <td className="p-1 border border-slate-400 text-red-400">3. 2단2열(4공)</td>
                                 {
-                                    pipeline.sub2x2.map(value => (<td className="p-1 border border-slate-400">{value}</td>))
+                                    pipeline.sub2x2.map((value, index) => (<td key={index} className="p-1 border border-slate-400">{value}</td>))
                                 }
                             </tr>
                             <tr>
                                 <td className="p-1 border border-slate-400 text-blue-400">4. 2단1열(2공)</td>
                                 {
-                                    pipeline.sub2x1.map(value => (<td className="p-1 border border-slate-400">{value}</td>))
+                                    pipeline.sub2x1.map((value, index) => (<td key={index} className="p-1 border border-slate-400">{value}</td>))
                                 }
                             </tr>
                             <tr className="bg-slate-100">
                                 <td className="p-1 border border-slate-400">계</td>
                                 {
-                                    pipeline.subTotal.map(value => (<td className="p-1 border border-slate-400">{value}</td>))
+                                    pipeline.subTotal.map((value, index) => (<td key={index} className="p-1 border border-slate-400">{value}</td>))
                                 }
                             </tr>
                         </tbody>

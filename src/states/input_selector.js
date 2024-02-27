@@ -1,6 +1,7 @@
 import { selector } from "recoil";
 import { powerState, areaState, buildingTypeState } from "./atom";
 import { INDUSTRY } from "@/constants/constant";
+import { scaleConstant } from "@/constants/scale";
 
 export const densityState = selector({
     key: "densityState",
@@ -11,41 +12,66 @@ export const densityState = selector({
     }
 });
 
-// 부하밀도 상(0) 중(1) 하(2)
-export const scale1State = selector({
-    key: "scale1State",
+export const buildingKr = selector({
+    key: "buildingKr",
     get: ({ get }) => {
-        const density = get(densityState);
         const buildingType = get(buildingTypeState);
-        if (density != 0) {
-            if (buildingType === INDUSTRY) {
-                return 3; // 산업
-            } else if (density < 0.023) {
-                return 2; // 하
-            } else if (density < 0.044) {
-                return 1; // 중
-            } else {
-                return 0; // 상
-            }
-        }
-        return "";
+        return buildingType === INDUSTRY ? "산업단지" : "주택단지";
     }
 });
 
-// 규모선정2 대규모(0) 중규모(1) 소규모(2)
-export const scale2State = selector({
-    key: "scale2State",
+export const scaleState = selector({
+    key: "scaleState",
     get: ({ get }) => {
         const area = get(areaState);
-        if (area != 0) {
-            if (area < 500000) {
-                return 2; // 대규모
-            } else if (area < 1000000) {
-                return 1; // 중규모
+        const density = get(densityState);
+        const buildingType = get(buildingTypeState);
+        let scale = 0;
+        if (buildingType === INDUSTRY) {
+            if (density > 0.085) {
+                scale = area <= 750000 ? 5 : 4;
+            } else if (density <= 0.049) {
+                scale = area <= 750000 ? 1 : 2;
             } else {
-                return 0; // 소규모
+                scale = area <= 750000 ? 3 : 4;
+            }
+        } else {
+            if (density > 0.081) {
+                if (area <= 500000) {
+                    scale = 7;
+                } else if (area > 1000000) {
+                    scale = 6;
+                } else {
+                    scale = 8;
+                }
+            } else if (density <= 0.035) {
+                if (area <= 500000) {
+                    scale = 1;
+                } else if (area > 1000000) {
+                    scale = 3;
+                } else {
+                    scale = 2;
+                }
+            } else {
+                if (area <= 500000) {
+                    scale = 4;
+                } else if (area > 1000000) {
+                    scale = 6;
+                } else {
+                    scale = 5;
+                }
             }
         }
-        return "";
+        return scale;
+    }
+});
+
+export const scaleConstantState = selector({
+    key: "scaleConstantState",
+    get: ({ get }) => {
+        const scale = get(scaleState);
+        const buildingType = get(buildingTypeState);
+        const currentScale = scaleConstant[`scale${scale}`][buildingType];
+        return currentScale;
     }
 });

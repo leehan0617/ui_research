@@ -2,14 +2,11 @@
 
 import { RecoilRoot } from "recoil";
 import { Tab, Tabs } from "@nextui-org/react"
-import CostResultTab from "@/components/tabs/cost_result_tab";
-import CostTab from "@/components/tabs/cost_tab";
-import MaterialInfoTab from "@/components/tabs/material_info_tab";
-import MaterialResultTab from "@/components/tabs/material_result_tab"; 
-import InputTab from "@/components/tabs/input_tab";
-import InvoiceTab from "@/components/tabs/invoice_tab";
-import ReferenceTab from "@/components/tabs/reference_tab";
-import ReportTab from "@/components/tabs/report_tab";
+import InputTab from "@/components/v2/input/input_tab";
+import ResultTab from "@/components/v2/result/result_tab";
+import MainMaterialTab from "@/components/v2/main_material/main_material_tab";
+import DetailMaterialTab from "@/components/v2/detail_material/detail_material_tab";
+import ReferenceTab from "@/components/v2/reference/reference_tab";
 
 export default function Home() {
   return (
@@ -19,24 +16,36 @@ export default function Home() {
           <Tab key="input_tab" title="자동산출 입력창">
             <InputTab />
           </Tab>
-          <Tab key="invoice_tab" title="설계용역비 산출 내역">
-            <InvoiceTab />
+          <Tab key="result_tab" title="개략공사비 산출">
+            <ResultTab />
           </Tab>
+          <Tab key="material_tab" title="주자재 단위수량">
+            <MainMaterialTab />
+          </Tab>
+          <Tab key="detail_material_tab" title="세부자재 단위수량">
+            <DetailMaterialTab />
+          </Tab>
+          <Tab key="reference_tab" title="기준단가">
+            <ReferenceTab />
+          </Tab>
+          {/* <Tab key="invoice_tab" title="설계용역비 산출 내역">
+            <InvoiceTab />
+          </Tab> */}
           {/* <Tab key="material_info_tab" title="자재 단위 수량&비중">
             <MaterialInfoTab />
           </Tab> */}
-          <Tab key="material_result_tab" title="자재 산출 내역">
+          {/* <Tab key="material_result_tab" title="자재 산출 내역">
             <MaterialResultTab />
           </Tab>
           <Tab key="cost_result_tab" title="개략공사비 산출 결과">
             <CostTab />
-          </Tab>
+          </Tab> */}
           {/* <Tab key="temp_tab" title="개략공사비 이전버전">
             <CostResultTab />
           </Tab> */}
-          <Tab key="cost_table_tab" title="개략공사비 보고서">
+          {/* <Tab key="cost_table_tab" title="개략공사비 보고서">
             <ReportTab />
-          </Tab>
+          </Tab> */}
           {/* <Tab key="reference_tab" title="참고자료">
             <ReferenceTab />
           </Tab> */}

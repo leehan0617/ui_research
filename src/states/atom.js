@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 export const powerState = atom({
-    key: "powerState ",
+    key: "powerState",
     default: 0
 });
 

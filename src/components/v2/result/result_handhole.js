@@ -1,15 +1,10 @@
-import { hb4hb2Price, hscPrice } from "@/constants/price";
+import { useRecoilValue } from "recoil";
+import { hb4hb2State, hscState, handholeSumState } from "@/states/handhole_selector";
 
-export default function ResultHandhole({ props }) {
-    const { handhole, area } = props;
-    const unitCount = handhole?.unitCount;
-    const hb4hb2 = handhole?.hb4hb2;
-    const hsc = handhole?.hsc;
-    const hb4hb2Scale = Math.round(unitCount * hb4hb2 * 1000) / 1000;
-    const hscScale = Math.round(unitCount * hsc * 1000) / 1000;
-    const hb4hb2Count = Math.round(hb4hb2Scale * area / 1000);
-    const hscCount = Math.round(hscScale * area / 1000);
-
+export default function ResultHandhole() {
+    const hb4hb2 = useRecoilValue(hb4hb2State);
+    const hsc = useRecoilValue(hscState);
+    const total = useRecoilValue(handholeSumState);
     return <>
         <div className="col-span-6 mt-3">
             <table className="w-full text-sm text-center">
@@ -28,25 +23,25 @@ export default function ResultHandhole({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">HB4 + HB2</td>
-                        <td className="border border-slate-600">{hb4hb2Scale}</td>
-                        <td className="border border-slate-600">{hb4hb2Count.toLocaleString()}</td>
-                        <td className="border border-slate-600">{(hb4hb2Price?.company).toLocaleString()}</td>
-                        <td className="border border-slate-600">{(hb4hb2Price?.customer).toLocaleString()}</td>
+                        <td className="border border-slate-600">{hb4hb2?.scale}</td>
+                        <td className="border border-slate-600">{hb4hb2?.count?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{hb4hb2?.companyUnitPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{hb4hb2?.customerUnitPrice?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">HSC</td>
-                        <td className="border border-slate-600">{hscScale}</td>
-                        <td className="border border-slate-600">{hscCount.toLocaleString()}</td>
-                        <td className="border border-slate-600">{(hscPrice?.company).toLocaleString()}</td>
-                        <td className="border border-slate-600">{(hscPrice.customer).toLocaleString()}</td>
+                        <td className="border border-slate-600">{hsc?.scale}</td>
+                        <td className="border border-slate-600">{hsc?.count?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{hsc?.companyUnitPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{hsc?.customerUnitPrice?.toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
                         <td className="border border-slate-600">
-                            {Math.round((hb4hb2Scale + hscScale) * 1000) / 1000}
+                            {total?.scale}
                         </td>
                         <td className="border border-slate-600">
-                            {(hb4hb2Count + hscCount).toLocaleString()}
+                            {total?.count?.toLocaleString()}
                         </td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
@@ -71,40 +66,37 @@ export default function ResultHandhole({ props }) {
                     <tr>
                         <td className="border border-slate-600">HB4 + HB2</td>
                         <td className="border border-slate-600">
-                            {(hb4hb2Count * hb4hb2Price?.company).toLocaleString()}
+                            {hb4hb2?.companyPrice?.toLocaleString()}
                         </td>
                         <td className="border border-slate-600">
-                            {(hb4hb2Count * hb4hb2Price?.customer).toLocaleString()}
+                            {hb4hb2?.customerPrice?.toLocaleString()}
                         </td>
                         <td className="border border-slate-600">
-                            {(hb4hb2Count * (hb4hb2Price.company + hb4hb2Price.customer)).toLocaleString()}
+                            {hb4hb2?.price?.toLocaleString()}
                         </td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">HSC</td>
                         <td className="border border-slate-600">
-                            {(hscCount * hscPrice?.company).toLocaleString()}
+                            {hsc?.companyPrice?.toLocaleString()}
                         </td>
                         <td className="border border-slate-600">
-                            {(hscCount * hscPrice?.customer).toLocaleString()}
+                            {hsc?.customerPrice?.toLocaleString()}
                         </td>
                         <td className="border border-slate-600">
-                            {(hscCount * (hscPrice.company + hscPrice.customer)).toLocaleString()}
+                            {hsc?.price?.toLocaleString()}
                         </td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
                         <td className="border border-slate-600">
-                            {(hb4hb2Count * hb4hb2Price?.company + hscCount * hscPrice?.company).toLocaleString()}
+                            {total?.companyPrice?.toLocaleString()}
                         </td>
                         <td className="border border-slate-600">
-                            {(hb4hb2Count * hb4hb2Price?.customer + hscCount * hscPrice?.customer).toLocaleString()}
+                            {total?.customerPrice?.toLocaleString()}
                         </td>
                         <td className="border border-slate-600">
-                            {(
-                                hb4hb2Count * (hb4hb2Price?.company + hb4hb2Price?.customer) +
-                                hscCount * (hscPrice?.company + hscPrice?.customer)
-                            ).toLocaleString()}
+                            {total?.price?.toLocaleString()}
                         </td>
                     </tr>
                 </tbody>

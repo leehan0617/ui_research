@@ -22,7 +22,7 @@ export default function ResultTab() {
     const density = useRecoilValue(densityState);
     const scale = useRecoilValue(scaleState);
     const currentScaleValue = useRecoilValue(scaleConstantState);
-    const { manhole, handhole, pipeline, highCable, lowCable, lowConnector, groundSwitch, transformer } = currentScaleValue;
+    const { handhole, pipeline, highCable, lowCable, lowConnector, groundSwitch, transformer } = currentScaleValue;
 
     return <>
         <Card className="border-none">
@@ -31,7 +31,7 @@ export default function ResultTab() {
                     <div className="col-span-12 mt-3">
                         <InputViewer props={{ power, area, buildingType, density, scale }} />
                     </div>
-                    <ResultManhole props={{manhole, area}}/>
+                    <ResultManhole />
                     <ResultHandhole props={{ handhole, area }}/>
                     <ResultPipeline props={{ pipeline, area }}/>
                     <ResultHighCable props={{ highCable, area }}/>

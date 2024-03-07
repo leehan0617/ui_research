@@ -1,45 +1,19 @@
 import { selector } from "recoil";
-import { structureState } from "./structure_selector";
-import { buildingTypeState } from "./atom";
-import { RESIDENT } from "@/constants/constant";
+import { areaState } from "./atom";
+import { scaleConstantState } from "./input_selector";
+import { ma4Price, me6Price, ma6Price } from "@/constants/price";
 
-export const manholeState = selector({
+const manholeState = selector({
     key: "manholeState",
     get: ({ get }) => {
-        const structure = get(structureState);
-        const buildingType = get(buildingTypeState);
-        const { manhole: unitCounts } = structure;
-        let ma4 = [];
-        let ma6 = [];
-        let me6 = [];
-        let total = [];
-
-        unitCounts.forEach((value) => {
-            if (!isNaN(value)) {
-                const weights = buildingType === RESIDENT ? [0.194, 0.278, 0.37] : [0.192, 0.297, 0.417];
-                const weight_sum = weights.reduce((prev, curr) => (prev + curr), 0);
-                const ma4_value = value * weights[0] / weight_sum;
-                const ma6_value = value * weights[1] / weight_sum;
-                const me6_value = value * weights[2] / weight_sum;
-                ma4.push(ma4_value);
-                ma6.push(ma6_value);
-                me6.push(me6_value);
-                total.push(ma4_value + ma6_value + me6_value);
-            } else {
-                ma4.push("-");
-                ma6.push("-");
-                me6.push("-");
-                total.push("-");
-            }
-        });
-
-        return {
-            "unitCounts": unitCounts,
-            "ma4": ma4.map(value => (isNaN(value) ? value : value.toFixed(2))),
-            "ma6": ma6.map(value => (isNaN(value) ? value : value.toFixed(2))),
-            "me6": me6.map(value => (isNaN(value) ? value : value.toFixed(2))),
-            "total": total.map(value => (isNaN(value) ? value : value.toFixed(2)))
-        }
+        const area = get(areaState);
+        const currentScaleValue = get(scaleConstantState);
+        const { manhole } = currentScaleValue;
+        const unitCount = manhole?.unitCount;
+        const ma4 = manhole?.ma4;
+        const me6 = manhole?.me6;
+        const ma6 = manhole?.ma6;
+        return { area, unitCount, ma4, me6, ma6 }
     }
 });
 
@@ -47,35 +21,15 @@ export const ma4State = selector({
     key: "ma4State",
     get: ({ get }) => {
         const manhole = get(manholeState);
-        const { ma4 } = manhole;
-        const result = ma4.find(e => !isNaN(e)) || 0;
-        return {
-            result,
-            "companyBeforeCost": 5701,
-            "companyCost": 9486,
-            "companyResult": 5701 * result,
-            "contractCost": 3785,
-            "contractResult": 3785 * result,
-            "totalResult": 9486 * result
-        }
-    }
-});
-
-export const ma6State = selector({
-    key: "ma6State",
-    get: ({ get }) => {
-        const manhole = get(manholeState);
-        const { ma6 } = manhole;
-        const result = ma6.find(e => !isNaN(e)) || 0;
-        return {
-            result,
-            "companyBeforeCost": 6072,
-            "companyCost": 10050,
-            "companyResult": 6072 * result,
-            "contractCost": 3978,
-            "contractResult": 3978 * result,
-            "totalResult": 10050 * result
-        }
+        const { area, unitCount, ma4 } = manhole;
+        const scale = Math.round(unitCount * ma4 * 1000) / 1000;
+        const count = Math.round(scale * area / 1000);
+        const companyUnitPrice = ma4Price?.company;
+        const customerUnitPrice = ma4Price?.customer;
+        const companyPrice = count * companyUnitPrice;
+        const customerPrice = count * customerUnitPrice;
+        const price = companyPrice + customerPrice;
+        return { scale, count, companyUnitPrice, customerUnitPrice, companyPrice, customerPrice, price }
     }
 });
 
@@ -83,16 +37,51 @@ export const me6State = selector({
     key: "me6State",
     get: ({ get }) => {
         const manhole = get(manholeState);
-        const { me6 } = manhole;
-        const result = me6.find(e => !isNaN(e)) || 0;
+        const { area, unitCount, me6 } = manhole;
+        const scale = Math.round(unitCount * me6 * 1000) / 1000;
+        const count = Math.round(scale * area / 1000);
+        const companyUnitPrice = me6Price?.company;
+        const customerUnitPrice = me6Price?.customer;
+        const companyPrice = count * companyUnitPrice;
+        const customerPrice = count * customerUnitPrice;
+        const price = companyPrice + customerPrice;
+        return { scale, count, companyUnitPrice, customerUnitPrice, companyPrice, customerPrice, price }
+    }
+});
+
+export const ma6State = selector({
+    key: "ma6State",
+    get: ({ get }) => {
+        const manhole = get(manholeState);
+        const { area, unitCount, ma6 } = manhole;
+        const scale = Math.round(unitCount * ma6 * 1000) / 1000;
+        const count = Math.round(scale * area / 1000);
+        const companyUnitPrice = ma6Price?.company;
+        const customerUnitPrice = ma6Price?.customer;
+        const companyPrice = count * companyUnitPrice;
+        const customerPrice = count * customerUnitPrice;
+        const price = companyPrice + customerPrice;
+        return { scale, count, companyUnitPrice, customerUnitPrice, companyPrice, customerPrice, price }
+    }
+});
+
+export const manholeSumState = selector({
+    key: "manholeSum",
+    get: ({ get }) => {
+        const ma4 = get(ma4State);
+        const me6 = get(me6State);
+        const ma6 = get(ma6State);
+        const { scale: ma4Scale, count: ma4Count, companyUnitPrice: ma4CompanyUnitPrice, customerUnitPrice: ma4CustomerUnitPrice, companyPrice: ma4CompanyPrice, customerPrice: ma4CustomerPrice, price: ma4Price } = ma4;
+        const { scale: me6Scale, count: me6Count, companyUnitPrice: me6CompanyUnitPrice, customerUnitPrice: me6CustomerUnitPrice, companyPrice: me6CompanyPrice, customerPrice: me6CustomerPrice, price: me6Price } = me6;
+        const { scale: ma6Scale, count: ma6Count, companyUnitPrice: ma6CompanyUnitPrice, customerUnitPrice: ma6CustomerUnitPrice, companyPrice: ma6CompanyPrice, customerPrice: ma6CustomerPrice, price: ma6Price } = ma6;
         return {
-            result,
-            "companyBeforeCost": 11187,
-            "companyCost": 17444,
-            "companyResult": 11187 * result,
-            "contractCost": 6257,
-            "contractResult": 6257 * result,
-            "totalResult": 17444 * result
+            scale: Math.round((ma4Scale + me6Scale + ma6Scale) * 1000) / 1000,
+            count: ma4Count + me6Count + ma6Count,
+            companyUnitPrice: ma4CompanyUnitPrice + me6CompanyUnitPrice + ma6CompanyUnitPrice,
+            companyPrice: ma4CompanyPrice + me6CompanyPrice + ma6CompanyPrice,
+            customerUnitPrice: ma4CustomerUnitPrice + me6CustomerUnitPrice + ma6CustomerUnitPrice,
+            customerPrice: ma4CustomerPrice + me6CustomerPrice + ma6CustomerPrice,
+            price: ma4Price + me6Price + ma6Price
         }
     }
 });

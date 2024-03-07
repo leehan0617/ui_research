@@ -1,173 +1,155 @@
 import { selector } from "recoil";
 import { areaState } from "./atom";
-import { scale1State } from "./input_selector";
-import { buildingTypeState } from "./atom";
-import { INDUSTRY, RESIDENT } from "@/constants/constant";
+import { scaleConstantState } from "./input_selector";
+import { pipeline9Price, pipeline6Price, pipeline4Price, pipeline2Price } from "@/constants/price";
 
-export const pipelineState = selector({
+const pipelineState = selector({
     key: "pipelineState",
     get: ({ get }) => {
         const area = get(areaState);
-        const scale = get(scale1State);
-        const buildingType = get(buildingTypeState);
-        const unitCounts = [0.06, 0.052, 0.043, 0.069];
-        const weights175 = [0.418, 0.351, 0.315, 0.453];
-        const weights150 = [0.248, 0.281, 0.272, 0.325];
-        const weights100 = [0.334, 0.368, 0.413, 0.222];
-
-        const result175 = weights175.map((value, index) => {
-            return index === scale ? unitCounts[index] * area / 1000 * value : "-";
-        });
-        const result150 = weights150.map((value, index) => {
-            return index === scale ? unitCounts[index] * area / 1000 * value : "-";
-        });
-        const result100 = weights100.map((value, index) => {
-            return index === scale ? unitCounts[index] * area / 1000 * value : "-";
-        });
-        const total = unitCounts.map((value, index) => {
-            if (index === scale) {
-                return (result175[index] + result150[index] + result100[index]).toFixed(2);
-            } else {
-                return "-";
-            }
-        })
-        // 2번째 테이블 로직
-        const scaleArray = ["상", "중", "하"];
-        const scaleKr = buildingType === INDUSTRY ? "평균" : scaleArray[scale];
-
-        const subWeights175 = buildingType === INDUSTRY ? [0.241, 0.12, 0.08, 0] : [0.185, 0.093, 0.062, 0];
-        const subWeights175Sum = subWeights175.reduce((prev, curr) => prev + curr, 0);
-        const subWeights150 = buildingType === INDUSTRY ? [0.129, 0.13, 0.065, 0] : [0.106, 0.106, 0.053, 0];
-        const subWeights150Sum = subWeights150.reduce((prev, curr) => prev + curr, 0);
-        const subWeights100 = buildingType === INDUSTRY ? [0.047, 0.047, 0.047, 0.094] : [0.079, 0.079, 0.079, 0.158];
-        const subWeights100Sum = subWeights100.reduce((prev, curr) => prev + curr, 0);
-        
-        const sub3x3 = [result175[scale] * subWeights175[0] / subWeights175Sum, result150[scale] * subWeights150[0] / subWeights150Sum, result100[scale] * subWeights100[0] / subWeights100Sum];
-        sub3x3.push(sub3x3.reduce((prev, curr) => prev + curr, 0) / 9);
-        const sub3x2 = [result175[scale] * subWeights175[1] / subWeights175Sum, result150[scale] * subWeights150[1] / subWeights150Sum, result100[scale] * subWeights100[1] / subWeights100Sum];
-        sub3x2.push(sub3x2.reduce((prev, curr) => prev + curr, 0) / 6);
-        const sub2x2 = [result175[scale] * subWeights175[2] / subWeights175Sum, result150[scale] * subWeights150[2] / subWeights150Sum, result100[scale] * subWeights100[2] / subWeights100Sum];
-        sub2x2.push(sub2x2.reduce((prev, curr) => prev + curr, 0) / 4);
-        const sub2x1 = [result175[scale] * subWeights175[3] / subWeights175Sum, result150[scale] * subWeights150[3] / subWeights150Sum, result100[scale] * subWeights100[3] / subWeights100Sum];
-        sub2x1.push(sub2x1.reduce((prev, curr) => prev + curr, 0) / 2);
-        const subTotal = [sub3x3[0] + sub3x2[0] + sub2x2[0] + sub2x1[0], sub3x3[1] + sub3x2[1] + sub2x2[1] + sub2x1[1], sub3x3[2] + sub3x2[2] + sub2x2[2] + sub2x1[2], sub3x3[3] + sub3x2[3] + sub2x2[3] + sub2x1[3]];
+        const currentScale = get(scaleConstantState);
+        const { pipeline } = currentScale;
+        const { unitCount, p175, p150, p100 } = pipeline;
+        const { p175x9, p175x6, p175x4, p175x2 } = pipeline;
+        const { p150x9, p150x6, p150x4, p150x2 } = pipeline;
+        const { p100x9, p100x6, p100x4, p100x2 } = pipeline;
         return {
-            "unitCounts": unitCounts,
-            "buildingType": buildingType === RESIDENT ? "주택단지" : "산업단지",
-            "scale": scaleKr,
-            "result175": result175.map(value => isNaN(value) ? value : value.toFixed(2)),
-            "result150": result150.map(value => isNaN(value) ? value : value.toFixed(2)),
-            "result100": result100.map(value => isNaN(value) ? value : value.toFixed(2)),
-            "sub3x3": sub3x3.map(value => isNaN(value) ? value : value.toFixed(2)),
-            "sub3x2": sub3x2.map(value => isNaN(value) ? value : value.toFixed(2)),
-            "sub2x2": sub2x2.map(value => isNaN(value) ? value : value.toFixed(2)),
-            "sub2x1": sub2x1.map(value => isNaN(value) ? value : value.toFixed(2)),
-            "subTotal": subTotal.map(value => isNaN(value) ? value : value.toFixed(2)),
-            "total": total
+            area, unitCount, p175, p150, p100,
+            p175x9, p175x6, p175x4, p175x2,
+            p150x9, p150x6, p150x4, p150x2,
+            p100x9, p100x6, p100x4, p100x2
         }
     }
 });
 
-export const pipeline2x1State = selector({
-    key: "pipeline2x1State",
+export const p175State = selector({
+    key: "p175State",
     get: ({ get }) => {
         const pipeline = get(pipelineState);
-        const { sub2x1 } = pipeline;
-        const result = sub2x1[sub2x1.length - 1] || 0;
-
-        return {
-            result,
-            "companyBeforeCost": 6698,
-            "companyCost": 40607,
-            "companyResult": 6698 * result,
-            "contractCost": 33910,
-            "contractResult": 33910 * result,
-            "totalResult": 40607 * result
-        }
+        const { area, unitCount, p175, p175x9, p175x6, p175x4, p175x2 } = pipeline;
+        const scale = Math.round(unitCount * p175 * 1000) / 1000;
+        const count9 = Math.round(scale * p175x9 * area / 1000 * 100) / 100;
+        const count6 = Math.round(scale * p175x6 * area / 1000 * 100) / 100;
+        const count4 = Math.round(scale * p175x4 * area / 1000 * 100) / 100;
+        const count2 = Math.round(scale * p175x2 * area / 1000 * 100) / 100;
+        return { scale, count9, count6, count4, count2 }
     }
 });
 
-export const pipeline2x2State = selector({
-    key: "pipeline2x2State",
+export const p150State = selector({
+    key: "p150State",
     get: ({ get }) => {
         const pipeline = get(pipelineState);
-        const { sub2x2 } = pipeline;
-        const result = sub2x2[sub2x2.length - 1] || 0;
-
-        return {
-            result,
-            "companyBeforeCost": 32754,
-            "companyCost": 138213,
-            "companyResult": 32754 * result,
-            "contractCost": 105458,
-            "contractResult": 105458 * result,
-            "totalResult": 138213 * result
-        }
+        const { area, unitCount, p150, p150x9, p150x6, p150x4, p150x2 } = pipeline;
+        const scale = Math.round(unitCount * p150 * 1000) / 1000;
+        const count9 = Math.round(scale * p150x9 * area / 1000 * 100) / 100;
+        const count6 = Math.round(scale * p150x6 * area / 1000 * 100) / 100;
+        const count4 = Math.round(scale * p150x4 * area / 1000 * 100) / 100;
+        const count2 = Math.round(scale * p150x2 * area / 1000 * 100) / 100;
+        return { scale, count9, count6, count4, count2 }
     }
 });
 
-export const pipeline3x2State = selector({
-    key: "pipeline3x2State",
+export const p100State = selector({
+    key: "p100State",
     get: ({ get }) => {
         const pipeline = get(pipelineState);
-        const { sub3x2 } = pipeline;
-        const result = sub3x2[sub3x2.length - 1] || 0;
+        const { area, unitCount, p100, p100x9, p100x6, p100x4, p100x2 } = pipeline;
+        const scale = Math.round(unitCount * p100 * 1000) / 1000;
+        const count9 = Math.round(scale * p100x9 * area / 1000 * 100) / 100;
+        const count6 = Math.round(scale * p100x6 * area / 1000 * 100) / 100;
+        const count4 = Math.round(scale * p100x4 * area / 1000 * 100) / 100;
+        const count2 = Math.round(scale * p100x2 * area / 1000 * 100) / 100;
+        return { scale, count9, count6, count4, count2 }
+    }
+});
 
+export const p9PriceState = selector({
+    key: "p9Price",
+    get: ({ get }) => {
+        const p175 = get(p175State);
+        const p150 = get(p150State);
+        const p100 = get(p100State);
+        const companyPrice = (p175?.count9 + p150?.count9 + p100?.count9) / 9 * pipeline9Price?.company;
+        const customerPrice = (p175?.count9 + p150?.count9 + p100?.count9) / 9 * pipeline9Price?.customer;
+        const price = companyPrice + customerPrice;
         return {
-            result,
-            "companyBeforeCost": 50295,
-            "companyCost": 186948,
-            "companyResult": 50295 * result,
-            "contractCost": 136653,
-            "contractResult": 136653 * result,
-            "totalResult": 186948 * result
+            companyPrice: Math.round(companyPrice),
+            customerPrice: Math.round(customerPrice),
+            price: Math.round(price)
         }
     }
 });
 
-export const pipeline3x3State = selector({
-    key: "pipeline3x3State",
+export const p6PriceState = selector({
+    key: "p6Price",
     get: ({ get }) => {
-        const pipeline = get(pipelineState);
-        const { sub3x3 } = pipeline;
-        const result = sub3x3[sub3x3.length - 1] || 0;
-
+        const p175 = get(p175State);
+        const p150 = get(p150State);
+        const p100 = get(p100State);
+        const companyPrice = (p175?.count6 + p150?.count6 + p100?.count6) / 6 * pipeline6Price?.company;
+        const customerPrice = (p175?.count6 + p150?.count6 + p100?.count6) / 6 * pipeline6Price?.customer;
+        const price = companyPrice + customerPrice;
         return {
-            result,
-            "companyBeforeCost": 79276,
-            "companyCost": 270711,
-            "companyResult": 79276 * result,
-            "contractCost": 191435,
-            "contractResult": 191435 * result,
-            "totalResult": 270711 * result
+            companyPrice: Math.round(companyPrice),
+            customerPrice: Math.round(customerPrice),
+            price: Math.round(price)
         }
     }
 });
 
-export const highPipelineTotalState = selector({
-    key: "highPipelineTotalState",
+export const p4PriceState = selector({
+    key: "p4Price",
     get: ({ get }) => {
-        const pipeline2x2 = get(pipeline2x2State);
-        const pipeline3x2 = get(pipeline3x2State);
-        const pipeline3x3 = get(pipeline3x3State);
-
+        const p175 = get(p175State);
+        const p150 = get(p150State);
+        const p100 = get(p100State);
+        const companyPrice = (p175?.count4 + p150?.count4 + p100?.count4) / 4 * pipeline4Price?.company;
+        const customerPrice = (p175?.count4 + p150?.count4 + p100?.count4) / 4 * pipeline4Price?.customer;
+        const price = companyPrice + customerPrice;
         return {
-            "companySum": Number(pipeline2x2.companyResult) + Number(pipeline3x2.companyResult) + Number(pipeline3x3.companyResult),
-            "contractSum": Number(pipeline2x2.contractResult) + Number(pipeline3x2.contractResult) + Number(pipeline3x3.contractResult),
-            "totalSum": Number(pipeline2x2.totalResult) + Number(pipeline3x2.totalResult) + Number(pipeline3x3.totalResult),
+            companyPrice: Math.round(companyPrice),
+            customerPrice: Math.round(customerPrice),
+            price: Math.round(price)
         }
     }
 });
 
-export const lowPipelineTotalState = selector({
-    key: "lowPipelineTotalState",
+export const p2PriceState = selector({
+    key: "p2Price",
     get: ({ get }) => {
-        const pipeline2x1 = get(pipeline2x1State);
-
+        const p175 = get(p175State);
+        const p150 = get(p150State);
+        const p100 = get(p100State);
+        const companyPrice = (p175?.count2 + p150?.count2 + p100?.count2) / 2 * pipeline2Price?.company;
+        const customerPrice = (p175?.count2 + p150?.count2 + p100?.count2) / 2 * pipeline2Price?.customer;
+        const price = companyPrice + customerPrice;
         return {
-            "companySum": Number(pipeline2x1.companyResult),
-            "contractSum": Number(pipeline2x1.contractResult),
-            "totalSum": Number(pipeline2x1.totalResult)
+            companyPrice: Math.round(companyPrice),
+            customerPrice: Math.round(customerPrice),
+            price: Math.round(price)
         }
+    }
+});
+
+export const pipelineSumState = selector({
+    key: "pipelineSumState",
+    get: ({ get }) => {
+        const p175 = get(p175State);
+        const p150 = get(p150State);
+        const p100 = get(p100State);
+        const p9Price = get(p9PriceState);
+        const p6Price = get(p6PriceState);
+        const p4Price = get(p4PriceState);
+        const p2Price = get(p2PriceState);
+        const scale = Math.round((p175?.scale + p150?.scale + p100?.scale) * 1000) / 1000;
+        const count9 = Math.round((p175?.count9 + p150?.count9 + p100?.count9) / 9 * 100 / 100);
+        const count6 = Math.round((p175?.count6 + p150?.count6 + p100?.count6) / 6 * 100 / 100);
+        const count4 = Math.round((p175?.count4 + p150?.count4 + p100?.count4) / 4 * 100 / 100);
+        const count2 = Math.round((p175?.count2 + p150?.count2 + p100?.count2) / 2 * 100 / 100); 
+        const companyPrice = p9Price?.companyPrice + p6Price?.companyPrice + p4Price?.companyPrice + p2Price?.companyPrice;
+        const customerPrice = p9Price?.customerPrice + p6Price?.customerPrice + p4Price?.customerPrice + p2Price?.customerPrice;
+        const price = p9Price?.price + p6Price?.price + p4Price?.price + p2Price?.price;
+        return { scale, count9, count6, count4, count2, companyPrice: Math.round(companyPrice), customerPrice: Math.round(customerPrice), price: Math.round(price) }
     }
 });

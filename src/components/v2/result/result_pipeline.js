@@ -1,16 +1,17 @@
-import { pipeline9Price, pipeline6Price, pipeline4Price, pipeline2Price } from "@/constants/price";
 import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, ModalFooter } from "@nextui-org/react";
+import { p175State, p150State, p100State, p9PriceState, p6PriceState, p4PriceState, p2PriceState, pipelineSumState } from "@/states/pipeline_selector";
+import { useRecoilValue } from "recoil";
 
-export default function ResultPipeline({ props }) {
+export default function ResultPipeline() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { pipeline, area } = props;
-    const { unitCount, p175, p150, p100 } = pipeline;
-    const { p175x9, p175x6, p175x4, p175x2 } = pipeline;
-    const { p150x9, p150x6, p150x4, p150x2 } = pipeline;
-    const { p100x9, p100x6, p100x4, p100x2 } = pipeline;
-    const p175Scale = Math.round(unitCount * p175 * 1000) / 1000;
-    const p150Scale = Math.round(unitCount * p150 * 1000) / 1000;
-    const p100Scale = Math.round(unitCount * p100 * 1000) / 1000;
+    const p175 = useRecoilValue(p175State);
+    const p150 = useRecoilValue(p150State);
+    const p100 = useRecoilValue(p100State);
+    const p9Price = useRecoilValue(p9PriceState);
+    const p6Price = useRecoilValue(p6PriceState);
+    const p4Price = useRecoilValue(p4PriceState);
+    const p2Price = useRecoilValue(p2PriceState);
+    const pipelineTotal = useRecoilValue(pipelineSumState);
 
     return <>
         <div className="col-span-6 mt-3">
@@ -34,63 +35,37 @@ export default function ResultPipeline({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">175mm</td>
-                        <td className="border border-slate-600">{p175Scale}</td>
-                        <td className="border border-slate-600">{Math.round(p175Scale * p175x9 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p175Scale * p175x6 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p175Scale * p175x4 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p175Scale * p175x2 * area / 1000 * 100) / 100}</td>
+                        <td className="border border-slate-600">{p175?.scale}</td>
+                        <td className="border border-slate-600">{p175?.count9}</td>
+                        <td className="border border-slate-600">{p175?.count6}</td>
+                        <td className="border border-slate-600">{p175?.count4}</td>
+                        <td className="border border-slate-600">{p175?.count2}</td>
                         <td rowSpan={4} className="cursor-pointer border border-slate-600" onClick={onOpen}></td>
                         <td rowSpan={4} className="cursor-pointer border border-slate-600" onClick={onOpen}></td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">150mm</td>
-                        <td className="border border-slate-600">{p150Scale}</td>
-                        <td className="border border-slate-600">{Math.round(p150Scale * p150x9 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p150Scale * p150x6 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p150Scale * p150x4 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p150Scale * p150x2 * area / 1000 * 100) / 100}</td>
+                        <td className="border border-slate-600">{p150?.scale}</td>
+                        <td className="border border-slate-600">{p150?.count9}</td>
+                        <td className="border border-slate-600">{p150?.count6}</td>
+                        <td className="border border-slate-600">{p150?.count4}</td>
+                        <td className="border border-slate-600">{p150?.count2}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">100mm</td>
-                        <td className="border border-slate-600">{p100Scale}</td>
-                        <td className="border border-slate-600">{Math.round(p100Scale * p100x9 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p100Scale * p100x6 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p100Scale * p100x4 * area / 1000 * 100) / 100}</td>
-                        <td className="border border-slate-600">{Math.round(p100Scale * p100x2 * area / 1000 * 100) / 100}</td>
+                        <td className="border border-slate-600">{p100?.scale}</td>
+                        <td className="border border-slate-600">{p100?.count9}</td>
+                        <td className="border border-slate-600">{p100?.count6}</td>
+                        <td className="border border-slate-600">{p100?.count4}</td>
+                        <td className="border border-slate-600">{p100?.count2}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">
-                            {Math.round((p175Scale + p150Scale + p100Scale) * 1000) / 1000}
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x9 * area / 1000) + 
-                                (p150Scale * p150x9 * area / 1000) + 
-                                (p100Scale * p100x9 * area / 1000)) / 9 * 100) / 100
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x6 * area / 1000) + 
-                                (p150Scale * p150x6 * area / 1000) + 
-                                (p100Scale * p100x6 * area / 1000)) / 6 * 100) / 100
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x4 * area / 1000) + 
-                                (p150Scale * p150x4 * area / 1000) + 
-                                (p100Scale * p100x4 * area / 1000)) / 4 * 100) / 100
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x2 * area / 1000) + 
-                                (p150Scale * p150x2 * area / 1000) + 
-                                (p100Scale * p100x2 * area / 1000)) / 2 * 100) / 100
-                            }
-                        </td>
+                        <td className="border border-slate-600">{pipelineTotal?.scale?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{pipelineTotal?.count9?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{pipelineTotal?.count6?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{pipelineTotal?.count4?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{pipelineTotal?.count2?.toLocaleString()}</td>
                     </tr>
                 </tbody>
             </table>
@@ -111,155 +86,33 @@ export default function ResultPipeline({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">9공</td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x9 * area / 1000) + 
-                                (p150Scale * p150x9 * area / 1000) + 
-                                (p100Scale * p100x9 * area / 1000)) / 9 * pipeline9Price?.company).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x9 * area / 1000) + 
-                                (p150Scale * p150x9 * area / 1000) + 
-                                (p100Scale * p100x9 * area / 1000)) / 9 * pipeline9Price?.customer).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                (Math.round(((p175Scale * p175x9 * area / 1000) + 
-                                (p150Scale * p150x9 * area / 1000) + 
-                                (p100Scale * p100x9 * area / 1000)) / 9 * pipeline9Price?.company)
-                                +
-                                Math.round(((p175Scale * p175x9 * area / 1000) + 
-                                (p150Scale * p150x9 * area / 1000) + 
-                                (p100Scale * p100x9 * area / 1000)) / 9 * pipeline9Price?.customer)).toLocaleString()
-                            }
-                        </td>
+                        <td className="border border-slate-600">{p9Price?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{p9Price?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{p9Price?.price?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">6공</td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x6 * area / 1000) + 
-                                (p150Scale * p150x6 * area / 1000) + 
-                                (p100Scale * p100x6 * area / 1000)) / 6 * pipeline6Price?.company).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x6 * area / 1000) + 
-                                (p150Scale * p150x6 * area / 1000) + 
-                                (p100Scale * p100x6 * area / 1000)) / 6 * pipeline6Price?.customer).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                (Math.round(((p175Scale * p175x6 * area / 1000) + 
-                                (p150Scale * p150x6 * area / 1000) + 
-                                (p100Scale * p100x6 * area / 1000)) / 6 * pipeline6Price?.company)
-                                +
-                                Math.round(((p175Scale * p175x6 * area / 1000) + 
-                                (p150Scale * p150x6 * area / 1000) + 
-                                (p100Scale * p100x6 * area / 1000)) / 6 * pipeline6Price?.customer)).toLocaleString()
-                            }
-                        </td>
+                        <td className="border border-slate-600">{p6Price?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{p6Price?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{p6Price?.price?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">4공</td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x4 * area / 1000) + 
-                                (p150Scale * p150x4 * area / 1000) + 
-                                (p100Scale * p100x4 * area / 1000)) / 4 * pipeline4Price?.company).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x4 * area / 1000) + 
-                                (p150Scale * p150x4 * area / 1000) + 
-                                (p100Scale * p100x4 * area / 1000)) / 4 * pipeline4Price?.customer).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                (Math.round(((p175Scale * p175x4 * area / 1000) + 
-                                (p150Scale * p150x4 * area / 1000) + 
-                                (p100Scale * p100x4 * area / 1000)) / 4 * pipeline4Price?.company)
-                                +
-                                Math.round(((p175Scale * p175x4 * area / 1000) + 
-                                (p150Scale * p150x4 * area / 1000) + 
-                                (p100Scale * p100x4 * area / 1000)) / 4 * pipeline4Price?.customer)).toLocaleString()
-                            }
-                        </td>
+                        <td className="border border-slate-600">{p4Price?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{p4Price?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{p4Price?.price?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">2공</td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x2 * area / 1000) + 
-                                (p150Scale * p150x2 * area / 1000) + 
-                                (p100Scale * p100x2 * area / 1000)) / 2 * pipeline2Price?.company).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(((p175Scale * p175x2 * area / 1000) + 
-                                (p150Scale * p150x2 * area / 1000) + 
-                                (p100Scale * p100x2 * area / 1000)) / 2 * pipeline2Price?.customer).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                (Math.round(((p175Scale * p175x2 * area / 1000) + 
-                                (p150Scale * p150x2 * area / 1000) + 
-                                (p100Scale * p100x2 * area / 1000)) / 2 * pipeline2Price?.company)
-                                +
-                                Math.round(((p175Scale * p175x2 * area / 1000) + 
-                                (p150Scale * p150x2 * area / 1000) + 
-                                (p100Scale * p100x2 * area / 1000)) / 2 * pipeline2Price?.customer)).toLocaleString()
-                            }
-                        </td>
+                        <td className="border border-slate-600">{p2Price?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{p2Price?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{p2Price?.price?.toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(
-                                    Math.round(((p175Scale * p175x9 * area / 1000) + (p150Scale * p150x9 * area / 1000) + (p100Scale * p100x9 * area / 1000)) / 9 * pipeline9Price?.company) +
-                                    Math.round(((p175Scale * p175x6 * area / 1000) + (p150Scale * p150x6 * area / 1000) + (p100Scale * p100x6 * area / 1000)) / 6 * pipeline6Price?.company) +
-                                    Math.round(((p175Scale * p175x4 * area / 1000) + (p150Scale * p150x4 * area / 1000) + (p100Scale * p100x4 * area / 1000)) / 4 * pipeline4Price?.company) +
-                                    Math.round(((p175Scale * p175x2 * area / 1000) + (p150Scale * p150x2 * area / 1000) + (p100Scale * p100x2 * area / 1000)) / 2 * pipeline2Price?.company)
-                                ).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(
-                                    Math.round(((p175Scale * p175x9 * area / 1000) + (p150Scale * p150x9 * area / 1000) + (p100Scale * p100x9 * area / 1000)) / 9 * pipeline9Price?.customer) +
-                                    Math.round(((p175Scale * p175x6 * area / 1000) + (p150Scale * p150x6 * area / 1000) + (p100Scale * p100x6 * area / 1000)) / 6 * pipeline6Price?.customer) +
-                                    Math.round(((p175Scale * p175x4 * area / 1000) + (p150Scale * p150x4 * area / 1000) + (p100Scale * p100x4 * area / 1000)) / 4 * pipeline4Price?.customer) +
-                                    Math.round(((p175Scale * p175x2 * area / 1000) + (p150Scale * p150x2 * area / 1000) + (p100Scale * p100x2 * area / 1000)) / 2 * pipeline2Price?.customer)
-                                ).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round(Math.round(
-                                    Math.round(((p175Scale * p175x9 * area / 1000) + (p150Scale * p150x9 * area / 1000) + (p100Scale * p100x9 * area / 1000)) / 9 * pipeline9Price?.company) +
-                                    Math.round(((p175Scale * p175x6 * area / 1000) + (p150Scale * p150x6 * area / 1000) + (p100Scale * p100x6 * area / 1000)) / 6 * pipeline6Price?.company) +
-                                    Math.round(((p175Scale * p175x4 * area / 1000) + (p150Scale * p150x4 * area / 1000) + (p100Scale * p100x4 * area / 1000)) / 4 * pipeline4Price?.company) +
-                                    Math.round(((p175Scale * p175x2 * area / 1000) + (p150Scale * p150x2 * area / 1000) + (p100Scale * p100x2 * area / 1000)) / 2 * pipeline2Price?.company)
-                                )
-                                +
-                                Math.round(
-                                    Math.round(((p175Scale * p175x9 * area / 1000) + (p150Scale * p150x9 * area / 1000) + (p100Scale * p100x9 * area / 1000)) / 9 * pipeline9Price?.customer) +
-                                    Math.round(((p175Scale * p175x6 * area / 1000) + (p150Scale * p150x6 * area / 1000) + (p100Scale * p100x6 * area / 1000)) / 6 * pipeline6Price?.customer) +
-                                    Math.round(((p175Scale * p175x4 * area / 1000) + (p150Scale * p150x4 * area / 1000) + (p100Scale * p100x4 * area / 1000)) / 4 * pipeline4Price?.customer) +
-                                    Math.round(((p175Scale * p175x2 * area / 1000) + (p150Scale * p150x2 * area / 1000) + (p100Scale * p100x2 * area / 1000)) / 2 * pipeline2Price?.customer)
-                                )).toLocaleString()
-                            }
-                        </td>
+                        <td className="border border-slate-600">{pipelineTotal?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{pipelineTotal?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{pipelineTotal?.price?.toLocaleString()}</td>
                     </tr>
                 </tbody>
             </table>

@@ -7,8 +7,8 @@ const manholeState = selector({
     key: "manholeState",
     get: ({ get }) => {
         const area = get(areaState);
-        const currentScaleValue = get(scaleConstantState);
-        const { manhole } = currentScaleValue;
+        const currentScale = get(scaleConstantState);
+        const { manhole } = currentScale;
         const unitCount = manhole?.unitCount;
         const ma4 = manhole?.ma4;
         const me6 = manhole?.me6;

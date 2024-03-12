@@ -1,69 +1,65 @@
 import { selector } from "recoil";
-import { powerState } from "./atom";
-import { scale1State } from "./input_selector";
-import { pipelineState } from "./pipeline_selector";
+import { areaState } from "./atom";
+import { scaleConstantState } from "./input_selector";
+import { lowCablePrice } from "@/constants/price";
 
-export const cv240State = selector({
-    key: "cv240State",
+const lowCableState = selector({
+    key: "lowCableState",
     get: ({ get }) => {
-        const scale = get(scale1State);
-        const pipeline = get(pipelineState);
-        const { sub2x1 } = pipeline;
-        const unitCount = Number(sub2x1[3]);
-        // 저압케이블은 weight가 모두 동일하다.
-        const weight = 0.5;
-        const materialCalculation = (unitCount * weight);
-        const result = isNaN(materialCalculation) ? 0 : Number(materialCalculation).toFixed(2) 
-        return {
-            "result": result,
-            "scale": scale,
-            "companyBeforeCost": 97088,
-            "companyCost": 139828,
-            "companyResult": 97088 * materialCalculation,
-            "contractCost": 42740,
-            "contractResult": 42740 * materialCalculation,
-            "totalResult": materialCalculation * 139828
-        }
+        const area = get(areaState);
+        const currentScale = get(scaleConstantState);
+        const { lowCable } = currentScale;
+        const { unitCount, cable240, cable120, cable70 } = lowCable;
+        return { area, unitCount, cable240, cable120, cable70 };
     }
 });
 
-export const cv120State = selector({
-    key: "cv120State",
+export const cable240State = selector({
+    key: "cable240State",
     get: ({ get }) => {
-        const weight = 0.5;
-        const power = get(powerState);
-        const scale = get(scale1State);
-        const pipeline = get(pipelineState);
-        const { sub2x1 } = pipeline;
-        const unitCount = Number(sub2x1[3]);
-        const materialCalculation = power < 400000 && scale == 2 ? 0 : (unitCount * weight);
-        const result = isNaN(materialCalculation) ? 0 : Number(materialCalculation).toFixed(2) 
-        return {
-            "result": result,
-            "scale": scale,
-            "companyBeforeCost": 50781,
-            "companyCost": 78580,
-            "companyResult": 50781 * materialCalculation,
-            "contractCost": 27799,
-            "contractResult": 27799 * materialCalculation,
-            "totalResult": materialCalculation * 78580
-        }
+        const lowCable = get(lowCableState);
+        const { area, unitCount, cable240 } = lowCable;
+        const scale = Math.round(unitCount * cable240 * 1000) / 1000;
+        const count = Math.round(scale * area / 1000 * 100) / 100;
+        const companyPrice = lowCablePrice?.company;
+        const customerPrice = lowCablePrice?.customer;
+        return { scale, count, companyPrice, customerPrice };
     }
 });
 
-export const totalState = selector({
+export const cable120State = selector({
+    key: "cable120State",
+    get: ({ get }) => {
+        const lowCable = get(lowCableState);
+        const { area, unitCount, cable120 } = lowCable;
+        const scale = Math.round(unitCount * cable120 * 1000) / 1000;
+        const count = Math.round(scale * area / 1000 * 100) / 100;
+        return { scale, count };
+    }
+});
+
+export const cable70State = selector({
+    key: "cable70State",
+    get: ({ get }) => {
+        const lowCable = get(lowCableState);
+        const { area, unitCount, cable70 } = lowCable;
+        const scale = Math.round(unitCount * cable70 * 1000) / 1000;
+        const count = Math.round(scale * area / 1000 * 100) / 100;
+        return { scale, count };
+    }
+});
+
+export const lowCableTotalState = selector({
     key: "lowCableTotalState",
     get: ({ get }) => {
-        const scale = get(scale1State);
-        const cv240 = get(cv240State);
-        const cv120 = get(cv120State);
-
-        return {
-            "scale": scale,
-            "sum": Number(cv240.result) + Number(cv120.result),
-            "companySum": Number(cv240.companyResult) + Number(cv120.companyResult),
-            "contractSum": Number(cv240.contractResult) + Number(cv120.contractResult),
-            "totalSum": Number(cv240.totalResult) + Number(cv120.totalResult),
-        }
+        const cable240 = get(cable240State);
+        const cable120 = get(cable120State);
+        const cable70 = get(cable70State);
+        const count = cable240?.count + cable120?.count + cable70?.count;
+        const scale = cable240?.scale + cable120?.scale + cable70?.scale;
+        const companyPrice = count * lowCablePrice?.company;
+        const customerPrice = count * lowCablePrice?.customer;
+        const price = companyPrice + customerPrice;
+        return { count, scale, companyPrice, customerPrice, price };
     }
 });

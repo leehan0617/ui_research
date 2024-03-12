@@ -1,14 +1,11 @@
-import { lowCablePrice } from "@/constants/price";
+import { useRecoilValue } from "recoil";
+import { cable240State, cable120State, cable70State, lowCableTotalState } from "@/states/low_cable_selector";
 
-export default function ResultLowCable({ props }) {
-    const { lowCable, area } = props;
-    const { unitCount, cable240, cable120, cable70 } = lowCable;
-    const cable240Scale = Math.round(unitCount * cable240 * 1000) / 1000;
-    const cable120Scale = Math.round(unitCount * cable120 * 1000) / 1000;
-    const cable70Scale = Math.round(unitCount * cable70 * 1000) / 1000;
-    const cable240Count = Math.round(cable240Scale * area / 1000 * 100) / 100;
-    const cable120Count = Math.round(cable120Scale * area / 1000 * 100) / 100;
-    const cable70Count = Math.round(cable70Scale * area / 1000 * 100) / 100;
+export default function ResultLowCable() {
+    const cable240 = useRecoilValue(cable240State);
+    const cable120 = useRecoilValue(cable120State);
+    const cable70 = useRecoilValue(cable70State);
+    const total = useRecoilValue(lowCableTotalState);
 
     return <>
         <div className="col-span-6 mt-3">
@@ -31,29 +28,29 @@ export default function ResultLowCable({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">240mm</td>
-                        <td className="border border-slate-600">{cable240Scale}</td>
-                        <td className="border border-slate-600">{cable240Count.toLocaleString()}</td>
-                        <td className="border border-slate-600">{lowCablePrice?.company.toLocaleString()}</td>
-                        <td className="border border-slate-600">{lowCablePrice?.customer.toLocaleString()}</td>
+                        <td className="border border-slate-600">{cable240?.scale}</td>
+                        <td className="border border-slate-600">{cable240?.count}</td>
+                        <td className="border border-slate-600">{cable240?.companyPrice.toLocaleString()}</td>
+                        <td className="border border-slate-600">{cable240?.customerPrice.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">120mm</td>
-                        <td className="border border-slate-600">{cable120Scale}</td>
-                        <td className="border border-slate-600">{cable120Count.toLocaleString()}</td>
+                        <td className="border border-slate-600">{cable120?.scale}</td>
+                        <td className="border border-slate-600">{cable120?.count}</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">70mm</td>
-                        <td className="border border-slate-600">{cable70Scale}</td>
-                        <td className="border border-slate-600">{cable70Count.toLocaleString()}</td>
+                        <td className="border border-slate-600">{cable70?.scale}</td>
+                        <td className="border border-slate-600">{cable70?.count}</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">{(Math.round((cable240Scale + cable120Scale + cable70Scale) * 1000) /1000).toLocaleString()}</td>
-                        <td className="border border-slate-600">{(Math.round((cable240Count + cable120Count + cable70Count)* 1000) / 1000).toLocaleString()}</td>
+                        <td className="border border-slate-600">{(Math.round(total?.scale * 1000) / 1000).toLocaleString()}</td>
+                        <td className="border border-slate-600">{(Math.round(total?.count * 1000) / 1000).toLocaleString()}</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
                     </tr>
@@ -79,41 +76,15 @@ export default function ResultLowCable({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">240mm x 3<br/>120 x 1</td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round((cable240Count + cable120Count + cable70Count) * lowCablePrice?.company).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round((cable240Count + cable120Count + cable70Count) * lowCablePrice?.customer).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round((cable240Count + cable120Count + cable70Count) * lowCablePrice?.company +
-                                (cable240Count + cable120Count + cable70Count) * lowCablePrice?.customer).toLocaleString()
-                            }
-                        </td>
+                        <td className="border border-slate-600">{Math.round(total?.companyPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.customerPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.price).toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round((cable240Count + cable120Count + cable70Count) * lowCablePrice?.company).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round((cable240Count + cable120Count + cable70Count) * lowCablePrice?.customer).toLocaleString()
-                            }
-                        </td>
-                        <td className="border border-slate-600">
-                            {
-                                Math.round((cable240Count + cable120Count + cable70Count) * lowCablePrice?.company +
-                                (cable240Count + cable120Count + cable70Count) * lowCablePrice?.customer).toLocaleString()
-                            }
-                        </td>
+                        <td className="border border-slate-600">{Math.round(total?.companyPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.customerPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.price).toLocaleString()}</td>
                     </tr>
                 </tbody>
             </table>

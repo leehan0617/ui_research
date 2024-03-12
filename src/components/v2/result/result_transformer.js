@@ -1,14 +1,11 @@
-import { transformer75Price, transformer150Price, transformer300Price } from "@/constants/price";
+import { useRecoilValue } from "recoil";
+import { kva75State, kva150State, kva300State, transformerTotalState } from "@/states/transformer_selector";
 
-export default function ResultTransformer({ props }) {
-    const { transformer, area } = props;
-    const { unitCount, kva75, kva150, kva300 } = transformer;
-    const kva75Scale = Math.round(unitCount * kva75 * 1000) / 1000;
-    const kva150Scale = Math.round(unitCount * kva150 * 1000) / 1000;
-    const kva300Scale = Math.round(unitCount * kva300 * 1000) / 1000;
-    const kva75Count = Math.round(kva75Scale * area / 1000);
-    const kva150Count = Math.round(kva150Scale * area / 1000);
-    const kva300Count = Math.round(kva300Scale * area / 1000);
+export default function ResultTransformer() {
+    const kva75 = useRecoilValue(kva75State);
+    const kva150 = useRecoilValue(kva150State);
+    const kva300 = useRecoilValue(kva300State);
+    const total = useRecoilValue(transformerTotalState);
 
     return <>
         <div className="col-span-6 mt-3">
@@ -28,29 +25,29 @@ export default function ResultTransformer({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">75kVA</td>
-                        <td className="border border-slate-600">{kva75Scale}</td>
-                        <td className="border border-slate-600">{kva75Count}</td>
-                        <td className="border border-slate-600">{transformer75Price?.company.toLocaleString()}</td>
-                        <td className="border border-slate-600">{transformer75Price?.customer.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva75?.scale}</td>
+                        <td className="border border-slate-600">{kva75?.count}</td>
+                        <td className="border border-slate-600">{kva75?.companyUnitPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva75?.customerUnitPrice?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">150kVA</td>
-                        <td className="border border-slate-600">{kva150Scale}</td>
-                        <td className="border border-slate-600">{kva150Count}</td>
-                        <td className="border border-slate-600">{transformer150Price?.company.toLocaleString()}</td>
-                        <td className="border border-slate-600">{transformer150Price?.customer.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva150?.scale}</td>
+                        <td className="border border-slate-600">{kva150?.count}</td>
+                        <td className="border border-slate-600">{kva150?.companyUnitPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva150?.customerUnitPrice?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">300kVA</td>
-                        <td className="border border-slate-600">{kva300Scale}</td>
-                        <td className="border border-slate-600">{kva300Count}</td>
-                        <td className="border border-slate-600">{transformer300Price?.company.toLocaleString()}</td>
-                        <td className="border border-slate-600">{transformer300Price?.customer.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva300?.scale}</td>
+                        <td className="border border-slate-600">{kva300?.count}</td>
+                        <td className="border border-slate-600">{kva300?.companyUnitPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva300?.customerUnitPrice?.toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">{(Math.round((kva75Scale + kva150Scale + kva300Scale) * 1000) / 1000).toLocaleString()}</td>
-                        <td className="border border-slate-600">{Math.round(kva75Count + kva150Count + kva300Count).toLocaleString()}</td>
+                        <td className="border border-slate-600">{total?.scale}</td>
+                        <td className="border border-slate-600">{total?.count}</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
                     </tr>
@@ -73,51 +70,27 @@ export default function ResultTransformer({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">75kVA</td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva75Count * transformer75Price?.company).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva75Count * transformer75Price?.customer).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva75Count * (transformer75Price?.company + transformer75Price?.customer)).toLocaleString()}
-                        </td>
+                        <td className="border border-slate-600">{kva75?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva75?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva75?.price?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">150kVA</td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva150Count * transformer150Price?.company).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva150Count * transformer150Price?.customer).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva150Count * (transformer150Price?.company + transformer150Price?.customer)).toLocaleString()}
-                        </td>
+                        <td className="border border-slate-600">{kva150?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva150?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva150?.price?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">300kVA</td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva300Count * transformer300Price?.company).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva300Count * transformer300Price?.customer).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva300Count * (transformer300Price?.company + transformer300Price?.customer)).toLocaleString()}
-                        </td>
+                        <td className="border border-slate-600">{kva300?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva300?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{kva300?.price?.toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva75Count * transformer75Price?.company + kva150Count * transformer150Price?.company + kva300Count * transformer300Price?.company).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva75Count * transformer75Price?.customer + kva150Count * transformer150Price?.customer + kva300Count * transformer300Price?.customer).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(kva75Count * (transformer75Price?.company + transformer75Price?.customer) + kva150Count * (transformer150Price?.company + transformer150Price?.customer) + kva300Count * (transformer300Price?.company + transformer300Price?.customer)).toLocaleString()}
-                        </td>
+                        <td className="border border-slate-600">{total?.companyPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{total?.customerPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{total?.price?.toLocaleString()}</td>
                     </tr>
                 </tbody>
             </table>

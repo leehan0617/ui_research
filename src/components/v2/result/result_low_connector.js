@@ -1,10 +1,11 @@
-import { jblPrice, jbsPrice } from "@/constants/price";
-export default function ResultLowConnector({ props }) {
-    const { lowConnector, area } = props;
-    const { unitCount, jbl } = lowConnector;
-    const jblScale = Math.round(unitCount * jbl * 1000) / 1000;
-    const jblCount = Math.round(jblScale * area / 1000);
-    
+import { useRecoilValue } from "recoil";
+import { jblState, jbsState, lowConnectorTotalState } from "@/states/low_connector_selector";
+
+export default function ResultLowConnector() {
+    const jbl = useRecoilValue(jblState);
+    const jbs = useRecoilValue(jbsState);
+    const total = useRecoilValue(lowConnectorTotalState);
+
     return <>
         <div className="col-span-6 mt-3">
             <table className="w-full text-sm text-center">
@@ -23,22 +24,22 @@ export default function ResultLowConnector({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">JBL</td>
-                        <td className="border border-slate-600">{jblScale}</td>
-                        <td className="border border-slate-600">{jblCount.toLocaleString()}</td>
-                        <td className="border border-slate-600">{jblPrice?.company.toLocaleString()}</td>
-                        <td className="border border-slate-600">{jblPrice?.customer.toLocaleString()}</td>
+                        <td className="border border-slate-600">{jbl?.scale}</td>
+                        <td className="border border-slate-600">{jbl?.count.toLocaleString()}</td>
+                        <td className="border border-slate-600">{jbl?.companyUnitPrice.toLocaleString()}</td>
+                        <td className="border border-slate-600">{jbl?.customerUnitPrice.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">JBS</td>
-                        <td className="border border-slate-600">0</td>
-                        <td className="border border-slate-600">0</td>
-                        <td className="border border-slate-600">{jbsPrice?.company.toLocaleString()}</td>
-                        <td className="border border-slate-600">{jbsPrice?.customer.toLocaleString()}</td>
+                        <td className="border border-slate-600">{jbs?.scale}</td>
+                        <td className="border border-slate-600">{jbs?.count.toLocaleString()}</td>
+                        <td className="border border-slate-600">{jbs?.companyUnitPrice.toLocaleString()}</td>
+                        <td className="border border-slate-600">{jbs?.customerUnitPrice.toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">{jblScale}</td>
-                        <td className="border border-slate-600">{jblCount.toLocaleString()}</td>
+                        <td className="border border-slate-600">{total?.scale}</td>
+                        <td className="border border-slate-600">{total?.count.toLocaleString()}</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
                     </tr>
@@ -61,33 +62,21 @@ export default function ResultLowConnector({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">JBL</td>
-                        <td className="border border-slate-600">
-                            {Math.round(jblCount * jblPrice?.company).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(jblCount * jblPrice?.customer).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(jblCount * (jblPrice?.company + jblPrice?.customer)).toLocaleString()}
-                        </td>
+                        <td className="border border-slate-600">{Math.round(jbl?.companyPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(jbl?.customerPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(jbl?.price).toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">JBS</td>
-                        <td className="border border-slate-600"></td>
-                        <td className="border border-slate-600"></td>
-                        <td className="border border-slate-600"></td>
+                        <td className="border border-slate-600">{Math.round(jbs?.companyPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(jbs?.customerPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(jbs?.price).toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">
-                            {Math.round(jblCount * jblPrice?.company).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(jblCount * jblPrice?.customer).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(jblCount * (jblPrice?.company + jblPrice?.customer)).toLocaleString()}
-                        </td>
+                        <td className="border border-slate-600">{Math.round(total?.companyPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.customerPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.price).toLocaleString()}</td>
                     </tr>
                 </tbody>
             </table>

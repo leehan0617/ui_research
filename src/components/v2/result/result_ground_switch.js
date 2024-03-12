@@ -1,9 +1,8 @@
-import { groundSwitchPrice } from "@/constants/price";
+import { useRecoilValue } from "recoil";
+import { groundSwitchState } from "@/states/ground_switch_selector";
 
-export default function ResultGroundSwitch({ props }) {
-    const { groundSwitch, area } = props;
-    const { unitCount: groundSwitchScale } = groundSwitch;
-    const groundSwitchCount = Math.round(groundSwitchScale * area / 1000);
+export default function ResultGroundSwitch() {
+    const groundSwitch = useRecoilValue(groundSwitchState);
 
     return <>
         <div className="col-span-6 mt-3">
@@ -23,15 +22,15 @@ export default function ResultGroundSwitch({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">개폐기</td>
-                        <td className="border border-slate-600">{groundSwitchScale.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitchCount.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitchPrice?.company.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitchPrice?.customer.toLocaleString()}</td>
+                        <td className="border border-slate-600">{groundSwitch?.unitCount?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{groundSwitch?.count?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{groundSwitch?.companyUnitPrice?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{groundSwitch?.customerUnitPrice?.toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">{groundSwitchScale.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitchCount.toLocaleString()}</td>
+                        <td className="border border-slate-600">{groundSwitch?.unitCount?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{groundSwitch?.count?.toLocaleString()}</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
                     </tr>
@@ -54,27 +53,15 @@ export default function ResultGroundSwitch({ props }) {
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">개폐기</td>
-                        <td className="border border-slate-600">
-                            {Math.round(groundSwitchCount * groundSwitchPrice?.company).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(groundSwitchCount * groundSwitchPrice?.customer).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(groundSwitchCount * (groundSwitchPrice?.company + groundSwitchPrice?.customer)).toLocaleString()}
-                        </td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.companyPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.customerPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.price).toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">
-                            {Math.round(groundSwitchCount * groundSwitchPrice?.company).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(groundSwitchCount * groundSwitchPrice?.customer).toLocaleString()}
-                        </td>
-                        <td className="border border-slate-600">
-                            {Math.round(groundSwitchCount * (groundSwitchPrice?.company + groundSwitchPrice?.customer)).toLocaleString()}
-                        </td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.companyPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.customerPrice).toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.price).toLocaleString()}</td>
                     </tr>
                 </tbody>
             </table>

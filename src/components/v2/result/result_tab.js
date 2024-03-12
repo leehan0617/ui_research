@@ -2,7 +2,6 @@ import { useRecoilValue } from "recoil";
 import { powerState, areaState } from "@/states/atom";
 import { buildingKr } from "@/states/input_selector";
 import { densityState, scaleState } from "@/states/input_selector";
-import { scaleConstantState } from "@/states/input_selector";
 import { Card, CardBody } from "@nextui-org/react";
 import InputViewer from "./input_viewer";
 import ResultManhole from "./result_manhole";
@@ -21,8 +20,6 @@ export default function ResultTab() {
     const buildingType = useRecoilValue(buildingKr);
     const density = useRecoilValue(densityState);
     const scale = useRecoilValue(scaleState);
-    const currentScaleValue = useRecoilValue(scaleConstantState);
-    const { handhole, pipeline, highCable, lowCable, lowConnector, groundSwitch, transformer } = currentScaleValue;
 
     return <>
         <Card className="border-none">
@@ -32,13 +29,13 @@ export default function ResultTab() {
                         <InputViewer props={{ power, area, buildingType, density, scale }} />
                     </div>
                     <ResultManhole />
-                    <ResultHandhole props={{ handhole, area }}/>
-                    <ResultPipeline props={{ pipeline, area }}/>
-                    <ResultHighCable props={{ highCable, area }}/>
-                    <ResultLowCable props={{ lowCable, area }} />
-                    <ResultLowConnector props={{ lowConnector, area }} />
-                    <ResultGroundSwitch props={{ groundSwitch, area }} />
-                    <ResultTransformer props={{ transformer, area }} />
+                    <ResultHandhole />
+                    <ResultPipeline />
+                    <ResultHighCable />
+                    <ResultLowCable />
+                    <ResultLowConnector />
+                    <ResultGroundSwitch />
+                    <ResultTransformer />
                 </div>
             </CardBody>
         </Card>

@@ -7,6 +7,7 @@ import ResultTab from "@/components/v2/result/result_tab";
 import MainMaterialTab from "@/components/v2/main_material/main_material_tab";
 import DetailMaterialTab from "@/components/v2/detail_material/detail_material_tab";
 import ReferenceTab from "@/components/v2/reference/reference_tab";
+import ReportV2Tab from "@/components/v2/report/report_tab";
 
 export default function Home() {
   return (
@@ -27,6 +28,9 @@ export default function Home() {
           </Tab>
           <Tab key="reference_tab" title="기준단가">
             <ReferenceTab />
+          </Tab>
+          <Tab key="report_tab" title="보고서">
+            <ReportV2Tab />
           </Tab>
           {/* <Tab key="invoice_tab" title="설계용역비 산출 내역">
             <InvoiceTab />

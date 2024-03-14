@@ -8,6 +8,7 @@ import MainMaterialTab from "@/components/v2/main_material/main_material_tab";
 import DetailMaterialTab from "@/components/v2/detail_material/detail_material_tab";
 import ReferenceTab from "@/components/v2/reference/reference_tab";
 import ReportV2Tab from "@/components/v2/report/report_tab";
+import InvoiceV2Tab from "@/components/v2/invoice/invoice_tab";
 
 export default function Home() {
   return (
@@ -16,6 +17,9 @@ export default function Home() {
         <Tabs className="mt-3">
           <Tab key="input_tab" title="자동산출 입력창">
             <InputTab />
+          </Tab>
+          <Tab key="invoice_tab" title="설계용역비 산출">
+            <InvoiceV2Tab />
           </Tab>
           <Tab key="result_tab" title="개략공사비 산출">
             <ResultTab />

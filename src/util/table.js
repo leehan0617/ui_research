@@ -1,4 +1,4 @@
-const indexTableList = [
+export const indexTableList = [
     { "start": 0, "end": 0.2, "index": 0, "basic": 0, "real": 0, "management": 0, "total": 0 },
     { "start": 0.2, "end": 0.3, "index": 1, "basic": 3.79, "real": 11.38, "management": 1.89, "total": 17.06 },
     { "start": 0.3, "end": 0.5, "index": 2, "basic": 3.07, "real": 9.19, "management": 1.53, "total": 13.79 },

@@ -1,7 +1,7 @@
 import { Card, CardBody, Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, ModalFooter } from "@nextui-org/react";
 import { useRecoilValue } from "recoil";
 import { useState, useEffect } from "react";
-import { findTable, findNextTable } from "@/util/table";
+import { indexTableList, findTable, findNextTable } from "@/util/table";
 import { reportState } from "@/states/report_selector";
 
 export default function InvoiceV2Tab() {
@@ -105,13 +105,9 @@ export default function InvoiceV2Tab() {
     }, [totalCost]);
 
     const tableLine = {
-        "backgroundImage": "linear-gradient(to left bottom, transparent calc(50% - 1px), #d4a12c, transparent calc(50% + 1px))",
+        "backgroundImage": "linear-gradient(to left bottom, transparent calc(50% - 1px), #000000, transparent calc(50% + 1px))",
         "backgroundSize": "120% 120%",
         "backgroundPosition": "center"
-    };
-    const backSlash = {
-        "background": "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><line x1='0' y1='0' x2='100%' y2='100%' stroke='gray' /></svg>')",
-        "textAlign": "left"
     };
 
     return (
@@ -202,7 +198,7 @@ export default function InvoiceV2Tab() {
                                 </tbody>
                             </table>
                             <div className="p-3 mt-3 border-solid border border-lime-500 text-center hover:bg-lime-200 cursor-pointer" onClick={onOpen}>
-                                전력시설물공사 설계 및 설계감리 요율표<small>(클릭)</small>
+                                <p className="text-red-400">전력시설물공사 설계 및 설계감리 요율표<small>(클릭)</small></p>
                             </div>
                         </div>
                     </div>
@@ -224,20 +220,42 @@ export default function InvoiceV2Tab() {
                                     <thead>
                                         <tr>
                                             <th rowSpan={2} className="border border-slate-600" style={tableLine}>
-                                                <div className="text-right">ㅇㅇ</div>
-                                                <div className="text-left">ㅇㅇ2</div>
+                                                <div className="text-right">공사비</div>
+                                                <div className="text-left">(억원)</div>
                                             </th>
                                             <th colSpan={4} className="border border-slate-600">요    율(%)</th>
                                             <th rowSpan={2} className="border border-slate-600">INDEX</th>
                                         </tr>
                                         <tr>
-                                            <th className="border border-slate-600 w-1/6">기본설계</th>
-                                            <th className="border border-slate-600 w-1/6">실시설계</th>
+                                            <th className="border border-slate-600 w-1/6 bg-lime-200">기본설계</th>
+                                            <th className="border border-slate-600 w-1/6 bg-sky-200">실시설계</th>
                                             <th className="border border-slate-600 w-1/6">설계감리</th>
                                             <th className="border border-slate-600 w-1/6">계</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        {
+                                            indexTableList.map((e, i) => {
+                                                if (i === 0) return <></>;
+                                                return <tr>
+                                                    <td className="border border-slate-600">{Number(e.start).toLocaleString()}</td>
+                                                    <td className="border border-slate-600">{e.basic}</td>
+                                                    <td className="border border-slate-600">{e.real}</td>
+                                                    <td className="border border-slate-600">{e.management}</td>
+                                                    <td className="border border-slate-600">{e.total}</td>
+                                                    <td className="border border-slate-600">{e.index}</td>
+                                                </tr>;
+
+                                            })
+                                        }
+                                    </tbody>
                                 </table>
+                                <div className="mt-3">
+                                    <p>* 비고</p>
+                                    <p>1. 발주자가 기본설계를 시행하지 아니하거나 또는 기본설계용역을 발주하지 아니하고</p>
+                                    <p>실시설계만을 발주하는 경우에는 당해 실시설계요율의 1.3배를 적용한다.</p>
+                                    <p>2. 기본설계와 실시설계를 동시에 발주하는 경우에는 당해 실시설계요율의 1.3배를 적용한다.</p>
+                                </div>
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="primary" variant="light" onPress={onClose}>닫기</Button>

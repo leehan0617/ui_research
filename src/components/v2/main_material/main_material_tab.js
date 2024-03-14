@@ -6,15 +6,17 @@ export default function MainMaterialTab() {
         <div className="col-span-12 mt-3">
             <table className="w-full text-sm text-center">
                 <thead className="bg-blue-100">
-                    <th className="border border-slate-600">주택단지</th>
-                    <th className="border border-slate-600">맨홀<br/>(조/천m2)</th>
-                    <th className="border border-slate-600">핸드홀<br/>(조/천m2)</th>
-                    <th className="border border-slate-600">관로<br/>(km/천m2)</th>
-                    <th className="border border-slate-600">고압케이블<br/>(km/천m2)</th>
-                    <th className="border border-slate-600">저압케이블<br/>(km/천m2)</th>
-                    <th className="border border-slate-600">저압접속함<br/>(조/천m2)</th>
-                    <th className="border border-slate-600">지상개폐기<br/>(대/천m2)</th>
-                    <th className="border border-slate-600">지상변압기<br/>(대/천m2)</th>
+                    <tr>
+                        <th className="border border-slate-600">주택단지</th>
+                        <th className="border border-slate-600">맨홀<br/>(조/천m2)</th>
+                        <th className="border border-slate-600">핸드홀<br/>(조/천m2)</th>
+                        <th className="border border-slate-600">관로<br/>(km/천m2)</th>
+                        <th className="border border-slate-600">고압케이블<br/>(km/천m2)</th>
+                        <th className="border border-slate-600">저압케이블<br/>(km/천m2)</th>
+                        <th className="border border-slate-600">저압접속함<br/>(조/천m2)</th>
+                        <th className="border border-slate-600">지상개폐기<br/>(대/천m2)</th>
+                        <th className="border border-slate-600">지상변압기<br/>(대/천m2)</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>
@@ -122,15 +124,17 @@ export default function MainMaterialTab() {
         <div className="col-span-12 mt-3">
             <table className="w-full text-sm text-center">
                 <thead className="bg-blue-100">
-                    <th className="border border-slate-600">산업단지</th>
-                    <th className="border border-slate-600">맨홀<br/>(조/천m2)</th>
-                    <th className="border border-slate-600">핸드홀<br/>(조/천m2)</th>
-                    <th className="border border-slate-600">관로<br/>(km/천m2)</th>
-                    <th className="border border-slate-600">고압케이블<br/>(km/천m2)</th>
-                    <th className="border border-slate-600">저압케이블<br/>(km/천m2)</th>
-                    <th className="border border-slate-600">저압접속함<br/>(조/천m2)</th>
-                    <th className="border border-slate-600">지상개폐기<br/>(대/천m2)</th>
-                    <th className="border border-slate-600">지상변압기<br/>(대/천m2)</th>
+                    <tr>
+                        <th className="border border-slate-600">산업단지</th>
+                        <th className="border border-slate-600">맨홀<br/>(조/천m2)</th>
+                        <th className="border border-slate-600">핸드홀<br/>(조/천m2)</th>
+                        <th className="border border-slate-600">관로<br/>(km/천m2)</th>
+                        <th className="border border-slate-600">고압케이블<br/>(km/천m2)</th>
+                        <th className="border border-slate-600">저압케이블<br/>(km/천m2)</th>
+                        <th className="border border-slate-600">저압접속함<br/>(조/천m2)</th>
+                        <th className="border border-slate-600">지상개폐기<br/>(대/천m2)</th>
+                        <th className="border border-slate-600">지상변압기<br/>(대/천m2)</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>

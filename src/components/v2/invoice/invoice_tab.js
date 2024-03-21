@@ -90,7 +90,7 @@ export default function InvoiceV2Tab() {
         } else {
             insuranceRate = optionType === "basic" ? 0.308 : 0.449;
         }
-        setInsuranceCost(Math.round(constructionCost * insuranceRate / 100));
+        setInsuranceCost(Math.round(constructionCost * insuranceRate / 100 / 100));
     }, [constructionCost, optionType, copyRate, coefficient]);
 
     // 단순히 모달 상단 테이블 빗금치기용 css

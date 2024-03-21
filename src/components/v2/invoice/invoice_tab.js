@@ -28,40 +28,41 @@ export default function InvoiceV2Tab() {
     const [copyRate, setCopyRate] = useState(0);
     // 계수
     const [coefficient, setCoefficient] = useState(0);
+
     useEffect(() => {
         const { totalPrice } = report;
         setConstructCost(Math.round(totalPrice) * 1000);
     }, [report]);
+
     useEffect(() => {
         // 테이블 요율 찾기
         const currentTable = findTable(constructionCost/100000000);
         const { index } = currentTable;
+        const currentNextTable = findNextTable(index);
         setTable(currentTable);
-        setNextTable(findNextTable(index));
-    }, [constructionCost]);
+        setNextTable(currentNextTable);
 
-    useEffect(() => {
         // 적용요율 계산
         if (constructionCost <= 20000000) {
-            setBasicRate(nextTable.basic);
-            setRealRate(nextTable.real);
+            setBasicRate(currentNextTable.basic);
+            setRealRate(currentNextTable.real);
         } else {
-            const e13 = table.basic;
+            const e13 = currentTable.basic;
             const e10 = constructionCost;
-            const e12 = table.start * 100000000;
-            const e14 = nextTable.basic;
-            const e11 = nextTable.start * 100000000;
+            const e12 = currentTable.start * 100000000;
+            const e14 = currentNextTable.basic;
+            const e11 = currentNextTable.start * 100000000;
             const basicRateResult = e13 - (((e10-e12)*(e13-e14))/(e11-e12));
             setBasicRate(Math.round(basicRateResult * 100) / 100);
-            const f13 = table.real;
+            const f13 = currentTable.real;
             const f10 = constructionCost;
             const f12 = e12;
-            const f14 = nextTable.real;
-            const f11 = nextTable.start * 100000000;
+            const f14 = currentNextTable.real;
+            const f11 = currentNextTable.start * 100000000;
             const realRateResult = f13 - (((f10-f12)*(f13-f14))/(f11-f12));
             setRealRate(Math.round(realRateResult * 100) / 100);
         }
-    }, [constructionCost, table, nextTable]);
+    }, [constructionCost]);
 
     useEffect(() => {
         // 복제 절감률 & 계수
@@ -73,9 +74,7 @@ export default function InvoiceV2Tab() {
         // 설계용역비 계산
         const rate = optionType === "basic" ? basicRate : realRate;
         setServiceFee(Math.round(constructionCost*rate/100*coefficient*(1-(copyRate/100))));
-    }, [constructionCost, optionType, copyRate, coefficient]);
 
-    useEffect(() => {
         // 손해배상보험료 계산
         let insuranceRate = 0;
         if (constructionCost < 500000000) {
@@ -92,7 +91,7 @@ export default function InvoiceV2Tab() {
             insuranceRate = optionType === "basic" ? 0.308 : 0.449;
         }
         setInsuranceCost(Math.round(constructionCost * insuranceRate / 100));
-    }, [constructionCost, optionType]);
+    }, [constructionCost, optionType, copyRate, coefficient]);
 
     // 단순히 모달 상단 테이블 빗금치기용 css
     const tableLine = {

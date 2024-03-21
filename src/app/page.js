@@ -9,12 +9,16 @@ import DetailMaterialTab from "@/components/v2/detail_material/detail_material_t
 import ReferenceTab from "@/components/v2/reference/reference_tab";
 import ReportV2Tab from "@/components/v2/report/report_tab";
 import InvoiceV2Tab from "@/components/v2/invoice/invoice_tab";
+import InputAreaTab from "@/components/v2/input/input_area_tab";
 
 export default function Home() {
   return (
     <RecoilRoot>
       <main>
         <Tabs className="mt-3">
+          <Tab key="input_area_tab" title="면적정보 입력창">
+            <InputAreaTab />
+          </Tab>
           <Tab key="input_tab" title="자동산출 입력창">
             <InputTab />
           </Tab>

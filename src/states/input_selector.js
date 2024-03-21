@@ -2,6 +2,7 @@ import { selector } from "recoil";
 import { powerState, areaState, buildingTypeState } from "./atom";
 import { INDUSTRY } from "@/constants/constant";
 import { scaleConstant } from "@/constants/scale";
+import * as inputAtom from "@/states/input_atom";
 
 export const densityState = selector({
     key: "densityState",
@@ -76,3 +77,28 @@ export const scaleConstantState = selector({
         return currentScale;
     }
 });
+
+export const singleResidentAreaState = selector({
+    key: "singleResidentArea",
+    get: ({ get }) => {
+        const area = get(inputAtom.row1col1State);
+        return area;
+    }
+});
+
+export const commonResidentAreaState = selector({
+    key: "commonResidentArea",
+    get: ({ get }) => {
+        const area = get(inputAtom.row2col1State);
+        return area;
+    }
+});
+
+export const greenAreaState = selector({
+    key: "greenArea",
+    get: ({ get }) => {
+        const parkArea = get(inputAtom.row13col1State);
+        const green = get(inputAtom.row14col1State);
+        return Number(parkArea) + Number(green);
+    }
+ });

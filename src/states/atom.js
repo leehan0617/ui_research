@@ -14,3 +14,14 @@ export const buildingTypeState = atom({
     key: "buildingTypeState",
     default: "resident"
 });
+
+export const projectState = atom({
+    key: "projectNameState",
+    default: ""
+});
+
+export const companyState = atom({
+    key: "companyNameState",
+    default: ""
+});
+

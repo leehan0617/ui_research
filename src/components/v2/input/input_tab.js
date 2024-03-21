@@ -1,28 +1,17 @@
-"use client"
-
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Card, CardBody } from "@nextui-org/react";
 import { powerState, areaState, buildingTypeState } from "@/states/atom";
-import { densityState, scaleState } from "@/states/input_selector";
+import { densityState, scaleState, buildingKr, singleResidentAreaState, commonResidentAreaState, greenAreaState } from "@/states/input_selector";
 
 export default function InputTab() {
-    const [power, setPower] = useRecoilState(powerState);
-    const [area, setArea] = useRecoilState(areaState);
-    const [buildingType, setBuildingType] = useRecoilState(buildingTypeState);
+    const power = useRecoilValue(powerState);
+    const area = useRecoilValue(areaState);
+    const buildingType = useRecoilValue(buildingKr);
     const density = useRecoilValue(densityState);
     const scale = useRecoilValue(scaleState);
-
-    const changePower = (event) => {
-        setPower(event.target.value);
-    };
-
-    const changeArea = (event) => {
-        setArea(event.target.value);
-    };
-
-    const changeBuildingType = (event) => {
-        setBuildingType(event.target.value)
-    };
+    const greenArea = useRecoilValue(greenAreaState);
+    const singleResidentArea = useRecoilValue(singleResidentAreaState);
+    const commonResidentArea = useRecoilValue(commonResidentAreaState);
 
     return (
         <>
@@ -43,49 +32,50 @@ export default function InputTab() {
                                     <tr>
                                         <td className="p-4 border border-slate-400">1</td>
                                         <td className="p-4 border border-slate-400">단지유형</td>
-                                        <td className="p-4 border border-slate-400 bg-yellow-200">
-                                            <input type="radio" name="building_type" value="resident" checked={buildingType === "resident"} onChange={changeBuildingType} />
-                                            <span className="mr-2 ml-2">주택단지</span>
-                                            <input type="radio" name="building_type" value="industry" checked={buildingType === "industry"} onChange={changeBuildingType} />
-                                            <span className="mr-2 ml-2">산업단지</span>
-                                        </td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{buildingType}</td>
                                         <td className="p-4 border border-slate-400"></td>
                                     </tr>
                                     <tr>
                                         <td className="p-4 border border-slate-400">2</td>
                                         <td className="p-4 border border-slate-400">수요전력(비동시부하)</td>
-                                        <td className="p-4 border border-slate-400 bg-yellow-200">
-                                            <input
-                                                type="number"
-                                                name="power"
-                                                value={power}
-                                                onChange={changePower}
-                                                placeholder="수요전력을 입력해 주세요."
-                                                className="text-right rounded-md border border-slate-600"
-                                            />
-                                        </td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{power.toLocaleString()}</td>
                                         <td className="p-4 border border-slate-400">kW</td>
                                     </tr>
                                     <tr>
                                         <td className="p-4 border border-slate-400">3</td>
                                         <td className="p-4 border border-slate-400">대지면적</td>
-                                        <td className="p-4 border border-slate-400 bg-yellow-200">
-                                            <input
-                                                type="number"
-                                                name="area"
-                                                value={area}
-                                                onChange={changeArea}
-                                                placeholder="대지면적을 입력해 주세요."
-                                                className="text-right rounded-md border border-slate-600"
-                                            />
-                                        </td>
-                                        <td className="p-4 border border-slate-400">m2</td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{area.toLocaleString()}</td>
+                                        <td className="p-4 border border-slate-400">㎡</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-4 border border-slate-400">3</td>
+                                        <td className="p-4 border border-slate-400">공원, 녹지 면적</td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{greenArea.toLocaleString()}</td>
+                                        <td className="p-4 border border-slate-400">㎡</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-4 border border-slate-400">3</td>
+                                        <td className="p-4 border border-slate-400">단독주택 비중</td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{(Math.round(singleResidentArea / area * 100 * 100) / 100)}</td>
+                                        <td className="p-4 border border-slate-400">%</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-4 border border-slate-400">3</td>
+                                        <td className="p-4 border border-slate-400">공공주택 비중</td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{(Math.round(commonResidentArea / area * 100 * 100) / 100)}</td>
+                                        <td className="p-4 border border-slate-400">%</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-4 border border-slate-400">3</td>
+                                        <td className="p-4 border border-slate-400">대지면적</td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{area.toLocaleString()}</td>
+                                        <td className="p-4 border border-slate-400">㎡</td>
                                     </tr>
                                     <tr>
                                         <td className="p-4 border border-slate-400">4</td>
                                         <td className="p-4 border border-slate-400">부하밀도</td>
                                         <td className="p-4 border border-slate-400">{ density != 0 ? density.toFixed(3) : 0 }</td>
-                                        <td className="p-4 border border-slate-400">kW/m2</td>
+                                        <td className="p-4 border border-slate-400">kW/㎡</td>
                                     </tr>
                                     <tr>
                                         <td className="p-4 border border-slate-400">5</td>

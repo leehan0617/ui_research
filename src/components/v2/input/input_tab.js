@@ -56,13 +56,13 @@ export default function InputTab() {
                                     <tr>
                                         <td className="p-4 border border-slate-400">3</td>
                                         <td className="p-4 border border-slate-400">단독주택 비중</td>
-                                        <td className="p-4 border border-slate-400 bg-yellow-200">{(Math.round(singleResidentArea / area * 100 * 100) / 100)}</td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{(Math.round(singleResidentArea / area * 100 * 100) / 100) || 0}</td>
                                         <td className="p-4 border border-slate-400">%</td>
                                     </tr>
                                     <tr>
                                         <td className="p-4 border border-slate-400">3</td>
                                         <td className="p-4 border border-slate-400">공공주택 비중</td>
-                                        <td className="p-4 border border-slate-400 bg-yellow-200">{(Math.round(commonResidentArea / area * 100 * 100) / 100)}</td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{(Math.round(commonResidentArea / area * 100 * 100) / 100) || 0}</td>
                                         <td className="p-4 border border-slate-400">%</td>
                                     </tr>
                                     <tr>

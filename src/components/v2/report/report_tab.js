@@ -1,6 +1,6 @@
 import { Card, CardBody } from "@nextui-org/react";
 import { useRecoilValue } from "recoil";
-import { powerState, areaState } from "@/states/atom";
+import { powerState, areaState, projectState } from "@/states/atom";
 import { buildingKr } from "@/states/input_selector";
 import { reportState } from "@/states/report_selector";
 
@@ -9,6 +9,7 @@ export default function ReportV2Tab() {
     const area = useRecoilValue(areaState);
     const buildingType = useRecoilValue(buildingKr);
     const report = useRecoilValue(reportState);
+    const projectName = useRecoilValue(projectState);
 
     return (
         <>
@@ -38,8 +39,8 @@ export default function ReportV2Tab() {
                             <tbody>
                                 <tr className="h-16">
                                     <td className="bg-blue-100 p-1 border border-slate-400 w-3/12 text-center" colSpan={2}>공  사  명</td>
-                                    <td className="p-1 border border-slate-400 text-right">
-                                        (공사기간:                                 일)
+                                    <td className="p-1 border border-slate-400"><span className="ml-2">{projectName}</span>
+                                        <span className="float-right">(공사기간:                                 일)</span>
                                     </td>
                                 </tr>
                                 <tr className="h-16">

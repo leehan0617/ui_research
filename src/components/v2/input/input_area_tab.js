@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Card, CardBody } from "@nextui-org/react";
-import { buildingTypeState, projectState, companyState, powerState, areaState } from "@/states/atom";
+import { buildingTypeState, projectState, companyState, powerState, areaState, userState, dateState } from "@/states/atom";
 import * as inputAtom from "@/states/input_atom";
 
 export default function InputAreaTab() {
@@ -11,6 +11,8 @@ export default function InputAreaTab() {
     const [companyName, setCompanyName] = useRecoilState(companyState);
     const [power, setPower] = useRecoilState(powerState);
     const [area, setArea] = useRecoilState(areaState);
+    const [userName, setUserName] = useRecoilState(userState);
+    const [date, setDate] = useRecoilState(dateState);
     const [buildingType, setBuildingType] = useRecoilState(buildingTypeState);
 
     // 주거용지
@@ -188,14 +190,26 @@ export default function InputAreaTab() {
                         <div className="col-span-1 mt-3">
                             <span>1. 사업명</span>
                         </div>
-                        <div className="col-span-11 mt-3">
+                        <div className="col-span-5 mt-3">
                             <input type="text" name="project_name" className="ml-2 rounded-md border border-slate-600 text-right" value={projectName} onChange={(e) => setProjectName(e.target.value)} />
+                        </div>
+                        <div className="col-span-1 mt-3">
+                            <span>설계자</span>
+                        </div>
+                        <div className="col-span-5 mt-3">
+                            <input type="text" name="project_name" className="ml-2 rounded-md border border-slate-600 text-right" value={userName} onChange={(e) => setUserName(e.target.value)} />
                         </div>
                         <div className="col-span-1 mt-3">
                             <span>2. 시행사</span>
                         </div>
-                        <div className="col-span-11 mt-3">
+                        <div className="col-span-5 mt-3">
                             <input type="text" name="company_name" className="ml-2 rounded-md border border-slate-600 text-right"  value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                        </div>
+                        <div className="col-span-1 mt-3">
+                            <span>공사기간(일)</span>
+                        </div>
+                        <div className="col-span-5 mt-3">
+                            <input type="number" name="company_name" className="ml-2 rounded-md border border-slate-600 text-right"  value={date} onChange={(e) => setDate(e.target.value)} />
                         </div>
                         <div className="col-span-1 mt-3">
                             <span>3. 단지유형</span>

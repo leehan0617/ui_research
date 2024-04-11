@@ -1,6 +1,6 @@
 import { Card, CardBody } from "@nextui-org/react";
 import { useRecoilValue } from "recoil";
-import { powerState, areaState, projectState } from "@/states/atom";
+import { powerState, areaState, projectState, dateState, userState } from "@/states/atom";
 import { buildingKr } from "@/states/input_selector";
 import { reportState } from "@/states/report_selector";
 
@@ -10,6 +10,8 @@ export default function ReportV2Tab() {
     const buildingType = useRecoilValue(buildingKr);
     const report = useRecoilValue(reportState);
     const projectName = useRecoilValue(projectState);
+    const userName = useRecoilValue(userState);
+    const dayCount = useRecoilValue(dateState);
 
     return (
         <>
@@ -38,9 +40,9 @@ export default function ReportV2Tab() {
                         <table className="w-full tracking-wider whitespace-pre font-bold">
                             <tbody>
                                 <tr className="h-16">
-                                    <td className="bg-blue-100 p-1 border border-slate-400 w-3/12 text-center" colSpan={2}>공  사  명</td>
+                                    <td className="bg-blue-100 p-1 border border-slate-400 w-3/12 text-center" colSpan={2}>사  업  명</td>
                                     <td className="p-1 border border-slate-400"><span className="ml-2">{projectName}</span>
-                                        <span className="float-right">(공사기간:                                 일)</span>
+                                        <span className="float-right">(공사기간: {Number(dayCount).toLocaleString()} 일)</span>
                                     </td>
                                 </tr>
                                 <tr className="h-16">
@@ -64,7 +66,7 @@ export default function ReportV2Tab() {
                                 </tr>
                                 <tr className="h-16">
                                     <td className="bg-blue-100 p-1 border border-slate-400 text-center" colSpan={2}>설  계  자</td>
-                                    <td className="p-1 border border-slate-400"></td>
+                                    <td className="p-1 border border-slate-400">{ userName }</td>
                                 </tr>
                             </tbody>
                         </table>

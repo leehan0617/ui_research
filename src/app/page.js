@@ -16,7 +16,7 @@ export default function Home() {
     <RecoilRoot>
       <main>
         <Tabs className="mt-3">
-          <Tab key="input_area_tab" title="면적정보 입력창">
+          <Tab key="input_area_tab" title="개발단지정보 입력">
             <InputAreaTab />
           </Tab>
           <Tab key="input_tab" title="자동산출 입력창">

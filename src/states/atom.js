@@ -25,3 +25,12 @@ export const companyState = atom({
     default: ""
 });
 
+export const userState = atom({
+    key: "userState",
+    default: ""
+});
+
+export const dateState = atom({
+    key: "dateState",
+    default: ""
+});

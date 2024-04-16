@@ -45,7 +45,7 @@ export default function ReportTab() {
                                     <tr className="h-1/5">
                                         <td className="border-collapse border border-slate-400">담   당</td>
                                         <td className="border-collapse border border-slate-400">차   장</td>
-                                        <td className="border-collapse border border-slate-400">팀   장</td>
+                                        <td className="border-collapse border border-slate-400">부   장</td>
                                     </tr>
                                     <tr className="h-4/5">
                                         <td className="border-collapse border border-slate-400"></td>

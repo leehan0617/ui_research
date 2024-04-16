@@ -48,37 +48,31 @@ export default function InputTab() {
                                         <td className="p-4 border border-slate-400">㎡</td>
                                     </tr>
                                     <tr>
-                                        <td className="p-4 border border-slate-400">3</td>
+                                        <td className="p-4 border border-slate-400">4</td>
                                         <td className="p-4 border border-slate-400">공원, 녹지 면적</td>
                                         <td className="p-4 border border-slate-400 bg-yellow-200">{greenArea.toLocaleString()}</td>
                                         <td className="p-4 border border-slate-400">㎡</td>
                                     </tr>
                                     <tr>
-                                        <td className="p-4 border border-slate-400">3</td>
+                                        <td className="p-4 border border-slate-400">5</td>
                                         <td className="p-4 border border-slate-400">단독주택 비중</td>
                                         <td className="p-4 border border-slate-400 bg-yellow-200">{(Math.round(singleResidentArea / area * 100 * 100) / 100) || 0}</td>
                                         <td className="p-4 border border-slate-400">%</td>
                                     </tr>
                                     <tr>
-                                        <td className="p-4 border border-slate-400">3</td>
+                                        <td className="p-4 border border-slate-400">6</td>
                                         <td className="p-4 border border-slate-400">공공주택 비중</td>
                                         <td className="p-4 border border-slate-400 bg-yellow-200">{(Math.round(commonResidentArea / area * 100 * 100) / 100) || 0}</td>
                                         <td className="p-4 border border-slate-400">%</td>
                                     </tr>
                                     <tr>
-                                        <td className="p-4 border border-slate-400">3</td>
-                                        <td className="p-4 border border-slate-400">대지면적</td>
-                                        <td className="p-4 border border-slate-400 bg-yellow-200">{area.toLocaleString()}</td>
-                                        <td className="p-4 border border-slate-400">㎡</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="p-4 border border-slate-400">4</td>
+                                        <td className="p-4 border border-slate-400">7</td>
                                         <td className="p-4 border border-slate-400">부하밀도</td>
                                         <td className="p-4 border border-slate-400">{ density != 0 ? density.toFixed(3) : 0 }</td>
                                         <td className="p-4 border border-slate-400">kW/㎡</td>
                                     </tr>
                                     <tr>
-                                        <td className="p-4 border border-slate-400">5</td>
+                                        <td className="p-4 border border-slate-400">8</td>
                                         <td className="p-4 border border-slate-400">규모선정</td>
                                         <td className="p-4 border border-slate-400">규모{scale}</td>
                                         <td className="p-4 border border-slate-400"></td>

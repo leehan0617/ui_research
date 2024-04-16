@@ -19,7 +19,7 @@ export default function Home() {
           <Tab key="input_area_tab" title="개발단지정보 입력">
             <InputAreaTab />
           </Tab>
-          <Tab key="input_tab" title="자동산출 입력창">
+          <Tab key="input_tab" title="입력정보 확인">
             <InputTab />
           </Tab>
           <Tab key="invoice_tab" title="설계용역비 산출">
@@ -28,12 +28,12 @@ export default function Home() {
           <Tab key="result_tab" title="개략공사비 산출">
             <ResultTab />
           </Tab>
-          <Tab key="material_tab" title="주자재 단위수량">
+          {/* <Tab key="material_tab" title="주자재 단위수량">
             <MainMaterialTab />
           </Tab>
           <Tab key="detail_material_tab" title="세부자재 단위수량">
             <DetailMaterialTab />
-          </Tab>
+          </Tab> */}
           <Tab key="reference_tab" title="기준단가">
             <ReferenceTab />
           </Tab>

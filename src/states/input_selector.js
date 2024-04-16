@@ -28,36 +28,39 @@ export const scaleState = selector({
         const area = get(areaState);
         const density = get(densityState);
         const buildingType = get(buildingTypeState);
+        const greenArea = get(greenAreaState);
+        const avgGreenArea = buildingType === INDUSTRY ? 0.125 : 0.156;
+        const devArea = area * (1 - (greenArea / area ) - avgGreenArea);
         let scale = 0;
         if (buildingType === INDUSTRY) {
             if (density > 0.085) {
-                scale = area <= 750000 ? 5 : 4;
+                scale = devArea <= 750000 ? 5 : 4;
             } else if (density <= 0.049) {
-                scale = area <= 750000 ? 1 : 2;
+                scale = devArea <= 750000 ? 1 : 2;
             } else {
-                scale = area <= 750000 ? 3 : 4;
+                scale = devArea <= 750000 ? 3 : 4;
             }
         } else {
             if (density > 0.081) {
-                if (area <= 500000) {
+                if (devArea <= 500000) {
                     scale = 7;
-                } else if (area > 1000000) {
+                } else if (devArea > 1000000) {
                     scale = 6;
                 } else {
                     scale = 8;
                 }
             } else if (density <= 0.035) {
-                if (area <= 500000) {
+                if (devArea <= 500000) {
                     scale = 1;
-                } else if (area > 1000000) {
+                } else if (devArea > 1000000) {
                     scale = 3;
                 } else {
                     scale = 2;
                 }
             } else {
-                if (area <= 500000) {
+                if (devArea <= 500000) {
                     scale = 4;
-                } else if (area > 1000000) {
+                } else if (devArea > 1000000) {
                     scale = 6;
                 } else {
                     scale = 5;

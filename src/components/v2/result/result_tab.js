@@ -30,12 +30,12 @@ export default function ResultTab() {
                     </div>
                     <ResultManhole />
                     <ResultHandhole />
-                    <ResultPipeline />
                     <ResultHighCable />
                     <ResultLowCable />
                     <ResultLowConnector />
                     <ResultGroundSwitch />
                     <ResultTransformer />
+                    <ResultPipeline />
                 </div>
             </CardBody>
         </Card>

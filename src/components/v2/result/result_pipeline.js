@@ -19,33 +19,30 @@ export default function ResultPipeline() {
                 <thead>
                     <tr>
                         <th rowSpan={2} className="w-1/6 bg-sky-50 border border-slate-600">관로</th>
-                        <th rowSpan={2} className="w-1/6 bg-sky-50 border border-slate-600">수요전력규모</th>
-                        <th colSpan={4} className="w-2/6 bg-blue-500 text-white border border-slate-600">설계수량</th>
                         <th colSpan={2} className="w-2/6 bg-green-100 border border-slate-600">공사비 단가</th>
+                        <th colSpan={4} className="w-2/6 bg-blue-500 text-white border border-slate-600">설계수량</th>
                     </tr>
                     <tr>
+                        <th className="bg-green-100 border border-slate-600">회사분</th>
+                        <th className="bg-green-100 border border-slate-600">도급분</th>
                         <th className="bg-blue-500 text-white border border-slate-600">9공</th>
                         <th className="bg-blue-500 text-white border border-slate-600">6공</th>
                         <th className="bg-blue-500 text-white border border-slate-600">4공</th>
                         <th className="bg-blue-500 text-white border border-slate-600">2공</th>
-                        <th className="bg-green-100 border border-slate-600">회사분</th>
-                        <th className="bg-green-100 border border-slate-600">도급분</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td className="border border-slate-600">175mm</td>
-                        <td className="border border-slate-600">{p175?.scale}</td>
+                        <td rowSpan={4} className="cursor-pointer border border-slate-600" onClick={onOpen}></td>
+                        <td rowSpan={4} className="cursor-pointer border border-slate-600" onClick={onOpen}></td>
                         <td className="border border-slate-600">{p175?.count9}</td>
                         <td className="border border-slate-600">{p175?.count6}</td>
                         <td className="border border-slate-600">{p175?.count4}</td>
                         <td className="border border-slate-600">{p175?.count2}</td>
-                        <td rowSpan={4} className="cursor-pointer border border-slate-600" onClick={onOpen}></td>
-                        <td rowSpan={4} className="cursor-pointer border border-slate-600" onClick={onOpen}></td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">150mm</td>
-                        <td className="border border-slate-600">{p150?.scale}</td>
                         <td className="border border-slate-600">{p150?.count9}</td>
                         <td className="border border-slate-600">{p150?.count6}</td>
                         <td className="border border-slate-600">{p150?.count4}</td>
@@ -53,7 +50,6 @@ export default function ResultPipeline() {
                     </tr>
                     <tr>
                         <td className="border border-slate-600">100mm</td>
-                        <td className="border border-slate-600">{p100?.scale}</td>
                         <td className="border border-slate-600">{p100?.count9}</td>
                         <td className="border border-slate-600">{p100?.count6}</td>
                         <td className="border border-slate-600">{p100?.count4}</td>
@@ -61,7 +57,6 @@ export default function ResultPipeline() {
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
-                        <td className="border border-slate-600">{pipelineTotal?.scale?.toLocaleString()}</td>
                         <td className="border border-slate-600">{pipelineTotal?.count9?.toLocaleString()}</td>
                         <td className="border border-slate-600">{pipelineTotal?.count6?.toLocaleString()}</td>
                         <td className="border border-slate-600">{pipelineTotal?.count4?.toLocaleString()}</td>

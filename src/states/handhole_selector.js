@@ -1,18 +1,22 @@
 import { selector } from "recoil";
 import { areaState } from "./atom";
-import { scaleConstantState } from "./input_selector";
+import { commonAdjState, densityState, devAreaState, scaleConstantState } from "./input_selector";
 import { hb4hb2Price, hscPrice } from "@/constants/price";
 
 const handholeState = selector({
     key: "handholeState",
     get: ({ get }) => {
         const area = get(areaState);
+        const density = get(densityState);
+        const devArea = get(devAreaState);
+        const commonAdj = get(commonAdjState);
         const currentScale = get(scaleConstantState);
-        const { handhole } = currentScale;
+        const { handhole, densityAvg } = currentScale;
         const unitCount = handhole?.unitCount;
         const hb4hb2 = handhole?.hb4hb2;
         const hsc = handhole?.hsc;
-        return { area, unitCount, hb4hb2, hsc }
+        const densityConstant = densityAvg > density ? 1 - (densityAvg - density) / densityAvg : 1; 
+        return { area, unitCount, hb4hb2, hsc, densityConstant, devArea, commonAdj };
     }
 });
 
@@ -20,9 +24,10 @@ export const hb4hb2State = selector({
     key: "hb4hb2State",
     get: ({ get }) => {
         const handhole = get(handholeState);
-        const { area, unitCount, hb4hb2 } = handhole;
+        const { area, unitCount, hb4hb2, devArea, commonAdj, densityConstant } = handhole;
         const scale = Math.round(unitCount * hb4hb2 * 1000) / 1000;
-        const count = Math.round(scale * area / 1000);
+        // const count = Math.round(scale * area / 1000);
+        const count = Math.round(devArea * unitCount * hb4hb2 * commonAdj * densityConstant / 1000);
         const companyUnitPrice = hb4hb2Price?.company;
         const customerUnitPrice = hb4hb2Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -36,9 +41,10 @@ export const hscState = selector({
     key: "hscState",
     get: ({ get }) => {
         const handhole = get(handholeState);
-        const { area, unitCount, hsc } = handhole;
+        const { area, unitCount, hsc, devArea, commonAdj, densityConstant } = handhole;
         const scale = Math.round(unitCount * hsc * 1000) / 1000;
-        const count = Math.round(scale * area / 1000);
+        // const count = Math.round(scale * area / 1000);
+        const count = Math.round(devArea * unitCount * hsc * commonAdj * densityConstant / 1000);
         const companyUnitPrice = hscPrice?.company;
         const customerUnitPrice = hscPrice?.customer;
         const companyPrice = count * companyUnitPrice;

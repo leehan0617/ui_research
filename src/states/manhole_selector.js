@@ -1,19 +1,23 @@
 import { selector } from "recoil";
 import { areaState } from "./atom";
-import { scaleConstantState } from "./input_selector";
+import { commonAdjState, densityState, devAreaState, scaleConstantState } from "./input_selector";
 import { ma4Price, me6Price, ma6Price } from "@/constants/price";
 
 const manholeState = selector({
     key: "manholeState",
     get: ({ get }) => {
         const area = get(areaState);
+        const density = get(densityState);
+        const devArea = get(devAreaState);
+        const commonAdj = get(commonAdjState);
         const currentScale = get(scaleConstantState);
-        const { manhole } = currentScale;
+        const { manhole, densityAvg } = currentScale;
         const unitCount = manhole?.unitCount;
         const ma4 = manhole?.ma4;
         const me6 = manhole?.me6;
         const ma6 = manhole?.ma6;
-        return { area, unitCount, ma4, me6, ma6 }
+        const densityConstant = densityAvg > density ? 1 - (densityAvg - density) / densityAvg : 1; 
+        return { area, unitCount, ma4, me6, ma6, densityConstant, devArea, commonAdj };
     }
 });
 
@@ -21,9 +25,10 @@ export const ma4State = selector({
     key: "ma4State",
     get: ({ get }) => {
         const manhole = get(manholeState);
-        const { area, unitCount, ma4 } = manhole;
+        const { area, unitCount, ma4, devArea, commonAdj, densityConstant } = manhole;
         const scale = Math.round(unitCount * ma4 * 1000) / 1000;
-        const count = Math.round(scale * area / 1000);
+        // const count = Math.round(scale * area / 1000);
+        const count = Math.round(devArea * unitCount * ma4 * commonAdj * densityConstant / 1000);
         const companyUnitPrice = ma4Price?.company;
         const customerUnitPrice = ma4Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -37,9 +42,10 @@ export const me6State = selector({
     key: "me6State",
     get: ({ get }) => {
         const manhole = get(manholeState);
-        const { area, unitCount, me6 } = manhole;
+        const { area, unitCount, me6, devArea, commonAdj, densityConstant } = manhole;
         const scale = Math.round(unitCount * me6 * 1000) / 1000;
-        const count = Math.round(scale * area / 1000);
+        // const count = Math.round(scale * area / 1000);
+        const count = Math.round(devArea * unitCount * me6 * commonAdj * densityConstant / 1000);
         const companyUnitPrice = me6Price?.company;
         const customerUnitPrice = me6Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -53,9 +59,10 @@ export const ma6State = selector({
     key: "ma6State",
     get: ({ get }) => {
         const manhole = get(manholeState);
-        const { area, unitCount, ma6 } = manhole;
+        const { area, unitCount, ma6, devArea, commonAdj, densityConstant } = manhole;
         const scale = Math.round(unitCount * ma6 * 1000) / 1000;
-        const count = Math.round(scale * area / 1000);
+        // const count = Math.round(scale * area / 1000);
+        const count = Math.round(devArea * unitCount * ma6 * commonAdj * densityConstant / 1000);
         const companyUnitPrice = ma6Price?.company;
         const customerUnitPrice = ma6Price?.customer;
         const companyPrice = count * companyUnitPrice;

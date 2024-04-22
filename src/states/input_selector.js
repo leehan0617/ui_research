@@ -82,7 +82,7 @@ export const singleResidentAreaState = selector({
     key: "singleResidentArea",
     get: ({ get }) => {
         const area = get(inputAtom.row1col1State);
-        return area;
+        return Number(area);
     }
 });
 
@@ -90,7 +90,7 @@ export const commonResidentAreaState = selector({
     key: "commonResidentArea",
     get: ({ get }) => {
         const area = get(inputAtom.row2col1State);
-        return area;
+        return Number(area);
     }
 });
 
@@ -111,8 +111,7 @@ export const devAreaState = selector({
         const greenArea = get(greenAreaState);
         const buildingType = get(buildingTypeState);
         const avgGreenArea = buildingType === INDUSTRY ? 0.125 : 0.156;
-        const devArea = area * (1 - (greenArea / area ) - avgGreenArea);
-        return devArea;
+        return area === 0 ? 0 : area * (1 - (greenArea / area ) - avgGreenArea);
     }
 });
 

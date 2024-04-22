@@ -22,7 +22,7 @@ export const indexTableList = [
 ];
 
 export const findTable = cost => {
-    if (cost === 0) return indexTableList[0];
+    if (cost === 0 || isNaN(cost)) return indexTableList[0];
     if (cost > 5000) return indexTableList[indexTableList.length - 1];
     const table = indexTableList.find(e => {
         const { start, end } = e;

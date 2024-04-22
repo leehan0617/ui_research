@@ -1,17 +1,21 @@
 import { selector } from "recoil";
 import { areaState } from "./atom";
-import { scaleConstantState } from "./input_selector";
+import { commonAdjState, densityState, devAreaState, scaleConstantState } from "./input_selector";
 import { groundSwitchPrice } from "@/constants/price";
 
 export const groundSwitchState = selector({
     key: "groundSwitchState",
     get: ({ get }) => {
         const area = get(areaState);
+        const density = get(densityState);
+        const devArea = get(devAreaState);
+        const commonAdj = get(commonAdjState);
         const currentScale = get(scaleConstantState);
-        const { groundSwitch } = currentScale;
+        const { groundSwitch, densityAvg } = currentScale;
+        const densityConstant = densityAvg > density ? 1 - (densityAvg - density) / densityAvg : 1; 
         const { unitCount } = groundSwitch;
         const scale = Math.round(unitCount * 1000) / 1000;
-        const count = Math.round(scale * area / 1000);
+        const count = Math.round(devArea * unitCount * commonAdj * densityConstant / 1000);
         const companyUnitPrice = groundSwitchPrice?.company;
         const customerUnitPrice = groundSwitchPrice?.customer;
         const companyPrice = count * companyUnitPrice;

@@ -25,7 +25,7 @@ export const cable240State = selector({
         const { area, unitCount, cable240, devArea, singleAdj, densityConstant } = lowCable;
         const scale = Math.round(unitCount * cable240 * 1000) / 1000;
         // const count = Math.round(scale * area / 1000 * 100) / 100;
-        const count = Math.round(devArea * unitCount * cable240 * singleAdj * densityConstant / 1000 / 3);
+        const count = Math.round(devArea * unitCount * cable240 * singleAdj * densityConstant / 1000 / 3 * 1000) / 1000;
         const companyPrice = lowCablePrice?.company;
         const customerPrice = lowCablePrice?.customer;
         return { scale, count, companyPrice, customerPrice };
@@ -39,7 +39,7 @@ export const cable120State = selector({
         const { area, unitCount, cable120, devArea, singleAdj, densityConstant } = lowCable;
         const scale = Math.round(unitCount * cable120 * 1000) / 1000;
         // const count = Math.round(scale * area / 1000 * 100) / 100;
-        const count = Math.round(devArea * unitCount * cable120 * singleAdj * densityConstant / 1000 / 3);
+        const count = Math.round(devArea * unitCount * cable120 * singleAdj * densityConstant / 1000 / 3 * 1000) / 1000;
         return { scale, count };
     }
 });
@@ -51,7 +51,7 @@ export const cable70State = selector({
         const { area, unitCount, cable70, devArea, singleAdj, densityConstant } = lowCable;
         const scale = Math.round(unitCount * cable70 * 1000) / 1000;
         // const count = Math.round(scale * area / 1000 * 100) / 100;
-        const count = Math.round(devArea * unitCount * cable70 * singleAdj * densityConstant / 1000 / 3);
+        const count = Math.round(devArea * unitCount * cable70 * singleAdj * densityConstant / 1000 / 3 * 1000) / 1000;
         return { scale, count };
     }
 });

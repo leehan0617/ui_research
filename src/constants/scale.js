@@ -33,6 +33,7 @@ const industryPipelineCount = {
 // 규모별 단위수량 상수
 const scale1 = {
     [RESIDENT]: {
+        densityAvg: 0.019, 
         manhole: {
             unitCount: 0.021,
             ma4: 0.89,
@@ -79,6 +80,7 @@ const scale1 = {
         }
     },
     [INDUSTRY]: {
+        densityAvg: 0.027,
         manhole: {
             unitCount: 0.023,
             ma4: 0.72,
@@ -127,6 +129,7 @@ const scale1 = {
 
 const scale2 = {
     [RESIDENT]: {
+        densityAvg: 0.024,
         manhole: {
             unitCount: 0.041,
             ma4: 0.72,
@@ -173,6 +176,7 @@ const scale2 = {
         }
     },
     [INDUSTRY]: {
+        densityAvg: 0.036,
         manhole: {
             unitCount: 0.025,
             ma4: 0.91,
@@ -221,6 +225,7 @@ const scale2 = {
 
 const scale3 = {
     [RESIDENT]: {
+        densityAvg: 0.021,
         manhole: {
             unitCount: 0.029,
             ma4: 0.76,
@@ -267,6 +272,7 @@ const scale3 = {
         }
     },
     [INDUSTRY]: {
+        densityAvg: 0.067,
         manhole: {
             unitCount: 0.033,
             ma4: 0.25,
@@ -315,6 +321,7 @@ const scale3 = {
 
 const scale4 = {
     [RESIDENT]: {
+        densityAvg: 0.051,
         manhole: {
             unitCount: 0.068,
             ma4: 0.84,
@@ -361,6 +368,7 @@ const scale4 = {
         }
     },
     [INDUSTRY]: {
+        densityAvg: 0.063,
         manhole: {
             unitCount: 0.048,
             ma4: 0.66,
@@ -410,6 +418,7 @@ const scale4 = {
 
 const scale5 = {
     [RESIDENT]: {
+        densityAvg: 0.049,
         manhole: {
             unitCount: 0.052,
             ma4: 0.87,
@@ -456,6 +465,7 @@ const scale5 = {
         }
     },
     [INDUSTRY]: {
+        densityAvg: 0.105,
         manhole: {
             unitCount: 0.047,
             ma4: 0.16,
@@ -505,6 +515,7 @@ const scale5 = {
 
 const scale6 = {
     [RESIDENT]: {
+        densityAvg: 0.048,
         manhole: {
             unitCount: 0.037,
             ma4: 0.87,
@@ -554,6 +565,7 @@ const scale6 = {
 
 const scale7 = {
     [RESIDENT]: {
+        densityAvg: 0.111,
         manhole: {
             unitCount: 0.096,
             ma4: 0.56,
@@ -603,6 +615,7 @@ const scale7 = {
 
 const scale8 = {
     [RESIDENT]: {
+        densityAvg: 0.115,
         manhole: {
             unitCount: 0.078,
             ma4: 0.71,

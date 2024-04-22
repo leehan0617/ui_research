@@ -25,12 +25,9 @@ export const buildingKr = selector({
 export const scaleState = selector({
     key: "scaleState",
     get: ({ get }) => {
-        const area = get(areaState);
         const density = get(densityState);
         const buildingType = get(buildingTypeState);
-        const greenArea = get(greenAreaState);
-        const avgGreenArea = buildingType === INDUSTRY ? 0.125 : 0.156;
-        const devArea = area * (1 - (greenArea / area ) - avgGreenArea);
+        const devArea = get(devAreaState);
         let scale = 0;
         if (buildingType === INDUSTRY) {
             if (density > 0.085) {
@@ -104,4 +101,43 @@ export const greenAreaState = selector({
         const green = get(inputAtom.row14col1State);
         return Number(parkArea) + Number(green);
     }
- });
+});
+
+// 개발면적조정
+export const devAreaState = selector({
+    key: "devArea",
+    get: ({ get }) => {
+        const area = get(areaState);
+        const greenArea = get(greenAreaState);
+        const buildingType = get(buildingTypeState);
+        const avgGreenArea = buildingType === INDUSTRY ? 0.125 : 0.156;
+        const devArea = area * (1 - (greenArea / area ) - avgGreenArea);
+        return devArea;
+    }
+});
+
+// 공동주택조정
+export const commonAdjState = selector({
+    key: "commonAdj",
+    get: ({ get }) => {
+        const area = get(areaState);
+        const commonResidentArea = get(commonResidentAreaState);
+        const buildingType = get(buildingTypeState);
+        const commonBuildingAvg = buildingType === INDUSTRY ? 0.005 : 0.296;
+        const buildingAvg = commonResidentArea / area;
+        return buildingAvg > commonBuildingAvg ? 1 - buildingAvg * 0.1 : 1;
+    }
+});
+
+// 단독주택조정
+export const singleAdjState = selector({
+    key: "singleAdj",
+    get: ({ get }) => {
+        const area = get(areaState);
+        const singleResidentArea = get(singleResidentAreaState);
+        const buildingType = get(buildingTypeState);
+        const singleBuildingAvg = buildingType === INDUSTRY ? 0.001 : 0.041;
+        const buildingAvg = singleResidentArea / area;
+        return buildingAvg > singleBuildingAvg ? 1 + buildingAvg * 0.3 : 1;
+    }
+});

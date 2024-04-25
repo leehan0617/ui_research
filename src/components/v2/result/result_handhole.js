@@ -29,27 +29,27 @@ export default function ResultHandhole() {
                         <td className="border border-slate-600">{hb4hb2?.companyUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{hb4hb2?.customerUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{hb4hb2?.count?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{hb4hb2?.companyPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{hb4hb2?.customerPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{hb4hb2?.price?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(hb4hb2?.companyPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(hb4hb2?.customerPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(hb4hb2?.price)?.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-600">HSC</td>
                         <td className="border border-slate-600">{hsc?.companyUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{hsc?.customerUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{hsc?.count?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{hsc?.companyPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{hsc?.customerPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{hsc?.price?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(hsc?.companyPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(hsc?.customerPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(hsc?.price)?.toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600">{total?.count?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{total?.companyPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{total?.customerPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{total?.price?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.companyPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.customerPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(total?.price)?.toLocaleString()}</td>
                     </tr>
                 </tbody>
             </table>

@@ -28,18 +28,18 @@ export default function ResultGroundSwitch() {
                         <td className="border border-slate-600">{groundSwitch?.companyUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{groundSwitch?.customerUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{groundSwitch?.count?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitch?.companyPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitch?.customerPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitch?.price?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.companyPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.customerPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.price)?.toLocaleString()}</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-600">계</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600">{groundSwitch?.count?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitch?.companyPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitch?.customerPrice?.toLocaleString()}</td>
-                        <td className="border border-slate-600">{groundSwitch?.price?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.companyPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.customerPrice)?.toLocaleString()}</td>
+                        <td className="border border-slate-600">{Math.round(groundSwitch?.price)?.toLocaleString()}</td>
                     </tr>
                 </tbody>
             </table>

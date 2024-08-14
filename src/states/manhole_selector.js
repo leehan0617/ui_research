@@ -9,6 +9,7 @@ const manholeState = selector({
         const area = get(areaState);
         const density = get(densityState);
         const devArea = get(devAreaState);
+        // 공동주택조정 상수
         const commonAdj = get(commonAdjState);
         const currentScale = get(scaleConstantState);
         const { manhole, densityAvg } = currentScale;
@@ -16,7 +17,7 @@ const manholeState = selector({
         const ma4 = manhole?.ma4;
         const me6 = manhole?.me6;
         const ma6 = manhole?.ma6;
-        const densityConstant = densityAvg > density ? 1 - (densityAvg - density) / densityAvg : 1; 
+        const densityConstant = densityAvg > density ? (1 - (densityAvg - density)) / densityAvg : 1; 
         return { area, unitCount, ma4, me6, ma6, densityConstant, devArea, commonAdj };
     }
 });

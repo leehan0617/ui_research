@@ -9,7 +9,7 @@ export const densityState = selector({
     get: ({ get }) => {
         const area = get(areaState);
         const power = get(powerState);
-        const density = area > 0 ? power/area : 0;
+        const density = area > 0 ? Math.round(power/area * 1000) / 1000 : 0;
         return density;
     }
 });

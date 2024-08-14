@@ -10,6 +10,7 @@ import ReferenceTab from "@/components/v2/reference/reference_tab";
 import ReportV2Tab from "@/components/v2/report/report_tab";
 import InvoiceV2Tab from "@/components/v2/invoice/invoice_tab";
 import InputAreaTab from "@/components/v2/input/input_area_tab";
+import PrintTab from "@/components/v2/report/print_tab";
 
 export default function Home() {
   return (
@@ -39,6 +40,9 @@ export default function Home() {
           </Tab>
           <Tab key="report_tab" title="보고서">
             <ReportV2Tab />
+          </Tab>
+          <Tab key="print_tab" title="인쇄용">
+            <PrintTab />
           </Tab>
           {/* <Tab key="invoice_tab" title="설계용역비 산출 내역">
             <InvoiceTab />

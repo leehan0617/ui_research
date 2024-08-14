@@ -1,10 +1,9 @@
 import { useRecoilValue } from "recoil";
-import { cable240State, cable120State, cable70State, lowCableTotalState } from "@/states/low_cable_selector";
+import { cable240State, cable120State, lowCableTotalState } from "@/states/low_cable_selector";
 
 export default function ResultLowCable() {
     const cable240 = useRecoilValue(cable240State);
     const cable120 = useRecoilValue(cable120State);
-    const cable70 = useRecoilValue(cable70State);
     const total = useRecoilValue(lowCableTotalState);
 
     return <>

@@ -1,0 +1,18 @@
+.report {
+    break-after: page;
+}
+
+.report * .report {
+    margin-top: 20px;
+}
+
+@page {
+    size: A4;
+    margin: 20mm;
+}
+
+@media print {
+    .report * .report {
+        margin: 0;
+    }
+}

@@ -123,8 +123,9 @@ export const commonAdjState = selector({
         const commonResidentArea = get(commonResidentAreaState);
         const buildingType = get(buildingTypeState);
         const commonBuildingAvg = buildingType === INDUSTRY ? 0.005 : 0.296;
-        const buildingAvg = commonResidentArea / area;
-        return buildingAvg > commonBuildingAvg ? 1 - buildingAvg * 0.1 : 1;
+        // const buildingAvg = commonResidentArea / area;
+        // return buildingAvg > commonBuildingAvg ? 1 - buildingAvg * 0.1 : 1;
+        return commonBuildingAvg;
     }
 });
 
@@ -136,7 +137,8 @@ export const singleAdjState = selector({
         const singleResidentArea = get(singleResidentAreaState);
         const buildingType = get(buildingTypeState);
         const singleBuildingAvg = buildingType === INDUSTRY ? 0.001 : 0.041;
-        const buildingAvg = singleResidentArea / area;
-        return buildingAvg > singleBuildingAvg ? 1 + buildingAvg * 0.3 : 1;
+        // const buildingAvg = singleResidentArea / area;
+        // return buildingAvg > singleBuildingAvg ? 1 + buildingAvg * 0.3 : 1;
+        return singleBuildingAvg;
     }
 });

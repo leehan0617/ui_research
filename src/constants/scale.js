@@ -234,7 +234,7 @@ const scale3 = {
         },
         handhole: {
             unitCount: 0.058,
-            hb4hb2: 0.1,
+            hb4hb2: 1,
             hsc: 0
         },
         pipeline: {

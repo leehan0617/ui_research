@@ -1,6 +1,6 @@
 import { selector } from "recoil";
 import { areaState } from "./atom";
-import { scaleConstantState, densityState, devAreaState, singleAdjState } from "./input_selector";
+import { scaleConstantState, densityState, devAreaState, singleAdjState, commonAdjState } from "./input_selector";
 import { jblPrice, jbsPrice } from "@/constants/price";
 
 const lowConnectorState = selector({
@@ -11,20 +11,23 @@ const lowConnectorState = selector({
         const density = get(densityState);
         const devArea = get(devAreaState);
         const singleAdj = get(singleAdjState);
+        const commonAdj = get(commonAdjState);
         const { lowConnector, densityAvg } = currentScale;
         const { unitCount, jbl, jbs } = lowConnector;
         const densityConstant = densityAvg > density ? 1 - (densityAvg - density) / densityAvg : 1;
-        return { area, unitCount, jbl, jbs, devArea, singleAdj, densityConstant };
+        return { area, unitCount, jbl, jbs, devArea, singleAdj, densityConstant, commonAdj };
     }
 });
 
 export const jblState = selector({
     key: "jblState",
     get: ({ get }) => {
-        const { area, unitCount, jbl, devArea, singleAdj, densityConstant } = get(lowConnectorState);
+        const { area, unitCount, jbl, devArea, singleAdj, densityConstant, commonAdj } = get(lowConnectorState);
         const scale = Math.round(unitCount * jbl * 1000) / 1000;
         // const count = Math.round(scale * area / 1000);
-        const count = Math.round(devArea * unitCount * jbl * singleAdj * densityConstant / 1000 * 1000) / 1000;
+        const adj = (1+(singleAdj*commonAdj)) * densityConstant;
+        const count = Math.round(area * scale / 1000 * adj)
+        // const count = Math.round(devArea * unitCount * jbl * singleAdj * densityConstant / 1000 * 1000) / 1000;
         const companyUnitPrice = jblPrice?.company;
         const customerUnitPrice = jblPrice?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -37,10 +40,12 @@ export const jblState = selector({
 export const jbsState = selector({
     key: "jbsState",
     get: ({ get }) => {
-        const { area, unitCount, jbs, devArea, singleAdj, densityConstant } = get(lowConnectorState);
+        const { area, unitCount, jbs, devArea, singleAdj, densityConstant, commonAdj } = get(lowConnectorState);
         const scale = Math.round(unitCount * jbs * 1000) / 1000;
+        const adj = (1+(singleAdj*commonAdj)) * densityConstant;
         // const count = Math.round(scale * area / 1000);
-        const count = Math.round(devArea * unitCount * jbs * singleAdj * densityConstant / 1000 * 1000) / 1000;
+        // const count = Math.round(devArea * unitCount * jbs * singleAdj * densityConstant / 1000 * 1000) / 1000;
+        const count = Math.round(area * scale / 1000 * adj);
         const companyUnitPrice = jbsPrice?.company;
         const customerUnitPrice = jbsPrice?.customer;
         const companyPrice = count * companyUnitPrice;

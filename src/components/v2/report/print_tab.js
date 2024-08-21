@@ -7,7 +7,8 @@ import { projectState, companyState, powerState, areaState, userState, dateState
 import { densityState, scaleState, singleResidentAreaState, commonResidentAreaState, greenAreaState } from "@/states/input_selector";
 import { buildingKr } from "@/states/input_selector";
 import { reportState } from "@/states/report_selector";
-
+import { optionState } from "@/states/invoice_selector";
+import { indexTableList, findTable, findNextTable } from "@/util/table";
 
 export default function PrintTab() {
     const [content, setContent] = useState("");
@@ -27,6 +28,24 @@ export default function PrintTab() {
     const greenArea = useRecoilValue(greenAreaState);
     const singleResidentArea = useRecoilValue(singleResidentAreaState);
     const commonResidentArea = useRecoilValue(commonResidentAreaState);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    // 1. 설계용역비 시트
+    const optionType = useRecoilValue(optionState);
+    // 설계 용역비
+    const [serviceFee, setServiceFee] = useState(0);
+    // 손해배상 보험료
+    const [insuranceCost, setInsuranceCost] = useState(0);
+    const [table, setTable] = useState({
+        "start": 0, "end": 0, "index": 0, "basic": 0, "real": 0, "management": 0, "total": 0
+    });
+    const [nextTable, setNextTable] = useState({
+        "start": 0, "end": 0, "index": 0, "basic": 0, "real": 0, "management": 0, "total": 0
+    });
+    // 기본설계 적용요율
+    const [basicRate, setBasicRate] = useState(0);
+    // 실시설계 적용요율
+    const [realRate, setRealRate] = useState(0);
 
     // 주거용지
     const row1col1 = useRecoilValue(inputAtom.row1col1State);
@@ -187,6 +206,65 @@ export default function PrintTab() {
     useEffect(() => {
         setSumCol4(Number(subSum1Col4) + Number(subSum2Col4) + Number(row20col4) + Number(row21col4));
     }, [subSum1Col4, subSum2Col4, row20col4, row21col4]);
+
+    useEffect(() => {
+        const price = report.totalPrice;
+        setTotalPrice(Math.round(price) * 1000);
+    }, [report]);
+
+    useEffect(() => {
+        // 테이블 요율 찾기
+        const currentTable = findTable(totalPrice/100000000);
+        const { index } = currentTable;
+        const currentNextTable = findNextTable(index);
+        setTable(currentTable);
+        setNextTable(currentNextTable);
+
+        // 적용요율 계산
+        if (totalPrice <= 20000000) {
+            setBasicRate(currentNextTable.basic);
+            setRealRate(currentNextTable.real);
+        } else {
+            const e13 = currentTable.basic;
+            const e10 = totalPrice;
+            const e12 = currentTable.start * 100000000;
+            const e14 = currentNextTable.basic;
+            const e11 = currentNextTable.start * 100000000;
+            const basicRateResult = e13 - (((e10-e12)*(e13-e14))/(e11-e12));
+            setBasicRate(Math.round(basicRateResult * 100) / 100);
+            const f13 = currentTable.real;
+            const f10 = totalPrice;
+            const f12 = e12;
+            const f14 = currentNextTable.real;
+            const f11 = currentNextTable.start * 100000000;
+            const realRateResult = f13 - (((f10-f12)*(f13-f14))/(f11-f12));
+            setRealRate(Math.round(realRateResult * 100) / 100);
+        }
+    }, [totalPrice]);
+
+    useEffect(() => {
+        const rate = optionType === "basic" ? basicRate : realRate;
+        const coefficient = optionType === "all" ? 1.3 : 1;
+        const copyRate = optionType === "all" ? 73.35 : optionType === "basic" ? 46.5 : 82.3
+        setServiceFee(Math.round(totalPrice*rate/100*coefficient*(1-(copyRate/100))));
+
+        // 손해배상보험료 계산
+        let insuranceRate = 0;
+        if (totalPrice < 500000000) {
+            insuranceRate = optionType === "basic" ? 0.348 : 0.511;
+        } else if (totalPrice <= 1000000000) {
+            insuranceRate = optionType === "basic" ? 0.338 : 0.495;
+        } else if (totalPrice <= 2000000000) {
+            insuranceRate = optionType === "basic" ? 0.328 : 0.479;
+        } else if (totalPrice <= 3000000000) {
+            insuranceRate = optionType === "basic" ? 0.317 : 0.464;
+        } else if (totalPrice <= 5000000000) {
+            insuranceRate = optionType === "basic" ? 0.308 : 0.449;
+        } else {
+            insuranceRate = optionType === "basic" ? 0.308 : 0.449;
+        }
+        setInsuranceCost(Math.round(totalPrice * insuranceRate / 100 / 100));
+    }, [optionType, basicRate, realRate]);
 
     return (
         <>
@@ -473,7 +551,7 @@ export default function PrintTab() {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="col-span-8 col-start-1 mt-3">
+                        <div className="col-span-8 col-start-1 mt-3 mb-3">
                             <p className="p-4 font-bold text-rose-600 bg-lime-100 border border-slate-200">
                                 (조건) 개발단지내에 전체 신설의 경우에 한함(기설설비 활용시 적용불가)
                             </p>
@@ -481,7 +559,104 @@ export default function PrintTab() {
                     </div>
                 </div>
                 <div className="report">
-                    설계용역비 산출
+                    <div className="grid grid-cols-8 gap-2">
+                        <div className="col-span-8 text-center text-3xl font-bold bg-slate-300 p-3 mb-8">
+                            배전공사 설계용역비 산출 내역서
+                        </div>
+                        <div className="col-span-8 mb-8">
+                            {/* <b>1. 배전공사 총공사비(VAT제외): { (Math.round(report?.totalPrice) * 1000)?.toLocaleString() }원</b> */}
+                            <b>1. 배전공사 총공사비(VAT제외): { Math.round(totalPrice).toLocaleString() }원</b>
+                            <span className="float-right text-red-600 bg-yellow-300 p-1"><b>용역대상: { optionType === "all" ? "기본+실시설계용역" : optionType === "basic" ? "기본설계용역" : "실시설계용역"}</b></span>
+                        </div>
+                        <div className="col-span-8 mb-8">
+                            <b>2. 적용요율</b> <span>[직선보간법에 의한 요율산정]</span>
+                        </div>
+                        <div className="col-span-5 mb-8">
+                            <table className="w-full text-sm text-center">
+                                <thead>
+                                    <tr>
+                                        <th className="bg-lime-50 p-3 border border-slate-400">구분</th>
+                                        <th className="bg-lime-400 p-3 border border-slate-400">기본설계</th>
+                                        <th className="bg-sky-200 p-3 border border-slate-400">실시설계</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">당해금액(총공사비)</td>
+                                        <td className="p-3 border border-slate-400">{ totalPrice.toLocaleString() }</td>
+                                        <td className="p-3 border border-slate-400">{ totalPrice.toLocaleString() }</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">요율표상 큰 금액</td>
+                                        <td className="p-3 border border-slate-400">{ (nextTable.start * 100000000).toLocaleString() }</td>
+                                        <td className="p-3 border border-slate-400">{ (nextTable.start * 100000000).toLocaleString() }</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">요율표상 작은금액</td>
+                                        <td className="p-3 border border-slate-400">{ (table.start * 100000000).toLocaleString() }</td>
+                                        <td className="p-3 border border-slate-400">{ (table.start * 100000000).toLocaleString() }</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">작은금액 요율(%)</td>
+                                        <td className="p-3 border border-slate-400">{ table.basic }</td>
+                                        <td className="p-3 border border-slate-400">{ table.real }</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">큰금액 요율(%)</td>
+                                        <td className="p-3 border border-slate-400">{ nextTable.basic }</td>
+                                        <td className="p-3 border border-slate-400">{ nextTable.real }</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">적용요율(%)</td>
+                                        <td className="p-3 border border-slate-400">{ basicRate }</td>
+                                        <td className="p-3 border border-slate-400">{ realRate }</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="col-span-3 mb-8">
+                            <table className="w-full text-sm text-center">
+                                <tbody>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">총공사비</td>
+                                        <td className="p-3 border border-slate-400">{ (totalPrice / 100000000).toLocaleString() }(억원)</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">작은금액 인덱스</td>
+                                        <td className="p-3 border border-slate-400">{ table.index }</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">큰 금액 인덱스</td>
+                                        <td className="p-3 border border-slate-400">{ nextTable.index }</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">작은 금액</td>
+                                        <td className="p-3 border border-slate-400">{ table.start }</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 border border-slate-400">큰 금액</td>
+                                        <td className="p-3 border border-slate-400">{ nextTable.start }</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="col-span-8 mb-8">
+                            <span>3. 복제 절감률: { optionType === "all" ? 73.35 : optionType === "basic" ? 46.5 : 82.3 } %</span>
+                        </div>
+                        <div className="col-span-8 mb-8">
+                            <span>4. 기본/실시설계 발주시 적용 계수: { optionType === "all" ? 1.3 : 1 }</span>
+                        </div>
+                        <div className="col-span-8 mb-8">
+                            <span>5. 설계 용역비: {serviceFee.toLocaleString()} 원</span>
+                        </div>
+                        <div className="col-span-8 mb-8">
+                            <span>6. 손해배상보험료 (순계약금액 X 기본요율) = {insuranceCost.toLocaleString()}원</span>
+                            <span className="text-red-500 ml-3"><small>* 용역기간 2년 이내 산출기준으로 2년초과시 가산요율 적용 필요</small></span>
+                        </div>
+                        <div className="col-span-8 mb-8">
+                            <span>7. 총 용역비: {(serviceFee+insuranceCost).toLocaleString()}원</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="report">
                     개략공사비 산출

@@ -1,15 +1,16 @@
 import { Card, CardBody, Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure, ModalFooter } from "@nextui-org/react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useState, useEffect } from "react";
 import { indexTableList, findTable, findNextTable } from "@/util/table";
 import { reportState } from "@/states/report_selector";
+import { optionState } from "@/states/invoice_selector";
 
 export default function InvoiceV2Tab() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const report = useRecoilValue(reportState);
     // 총공사비
     const [constructionCost, setConstructCost] = useState(0);
-    const [optionType, setOptionType] = useState("all");
+    const [optionType, setOptionType] = useRecoilState(optionState);
     // 설계 용역비
     const [serviceFee, setServiceFee] = useState(0);
     // 손해배상 보험료
@@ -21,13 +22,9 @@ export default function InvoiceV2Tab() {
         "start": 0, "end": 0, "index": 0, "basic": 0, "real": 0, "management": 0, "total": 0
     });
     // 기본설계 적용요율
-    const [basicRate, setBasicRate] = useState(0);
+    const [basicRate, setBasicRate] = useState();
     // 실시설계 적용요율
     const [realRate, setRealRate] = useState(0);
-    // 복제 절감율
-    const [copyRate, setCopyRate] = useState(0);
-    // 계수
-    const [coefficient, setCoefficient] = useState(0);
 
     useEffect(() => {
         const { totalPrice } = report;
@@ -41,7 +38,6 @@ export default function InvoiceV2Tab() {
         const currentNextTable = findNextTable(index);
         setTable(currentTable);
         setNextTable(currentNextTable);
-
         // 적용요율 계산
         if (constructionCost <= 20000000) {
             setBasicRate(currentNextTable.basic);
@@ -65,14 +61,9 @@ export default function InvoiceV2Tab() {
     }, [constructionCost]);
 
     useEffect(() => {
-        // 복제 절감률 & 계수
-        setCopyRate(optionType === "all" ? 73.35 : optionType === "basic" ? 46.5 : 82.3);
-        setCoefficient(optionType === "all" ? 1.3 : 1);
-    }, [optionType]);
-
-    useEffect(() => {
-        // 설계용역비 계산
         const rate = optionType === "basic" ? basicRate : realRate;
+        const coefficient = optionType === "all" ? 1.3 : 1;
+        const copyRate = optionType === "all" ? 73.35 : optionType === "basic" ? 46.5 : 82.3
         setServiceFee(Math.round(constructionCost*rate/100*coefficient*(1-(copyRate/100))));
 
         // 손해배상보험료 계산
@@ -91,7 +82,7 @@ export default function InvoiceV2Tab() {
             insuranceRate = optionType === "basic" ? 0.308 : 0.449;
         }
         setInsuranceCost(Math.round(constructionCost * insuranceRate / 100 / 100));
-    }, [constructionCost, optionType, copyRate, coefficient]);
+    }, [optionType, basicRate, realRate]);
 
     // 단순히 모달 상단 테이블 빗금치기용 css
     const tableLine = {
@@ -192,10 +183,11 @@ export default function InvoiceV2Tab() {
                             </div>
                         </div>
                     </div>
-                    <p>3. 복제 절감률: { copyRate }%</p>
-                    <p>4. 기본/실시설계 발주시 적용 계수: { coefficient } (기본+실시 통합설계 발주)</p>
+                    <p>3. 복제 절감률: { optionType === "all" ? 73.35 : optionType === "basic" ? 46.5 : 82.3 }%</p>
+                    <p>4. 기본/실시설계 발주시 적용 계수: { optionType === "all" ? 1.3 : 1 } (기본+실시 통합설계 발주)</p>
                     <p>5. 설계 용역비: {serviceFee.toLocaleString()}원</p>
                     <p>6. 손해배상보험료(순계약금액 X 기본요율) = {insuranceCost.toLocaleString()}원</p>
+                    <p>7. 총 용역비 (5 + 6): { (serviceFee + insuranceCost).toLocaleString()}원</p>
                 </CardBody>
             </Card>
             <Modal size="4xl" isOpen={isOpen} onOpenChange={onOpenChange}>

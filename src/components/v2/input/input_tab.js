@@ -43,15 +43,9 @@ export default function InputTab() {
                                         <td className="p-4 border border-slate-400">kW</td>
                                     </tr>
                                     <tr>
-                                        <td className="p-4 border border-slate-400">3-1.</td>
-                                        <td className="p-4 border border-slate-400">대지면적 / 조정면적</td>
+                                        <td className="p-4 border border-slate-400">3</td>
+                                        <td className="p-4 border border-slate-400">대지면적</td>
                                         <td className="p-4 border border-slate-400 bg-yellow-200">{area.toLocaleString()}</td>
-                                        <td className="p-4 border border-slate-400">㎡</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="p-4 border border-slate-400">3-2.</td>
-                                        <td className="p-4 border border-slate-400">조정면적</td>
-                                        <td className="p-4 border border-slate-400 bg-yellow-200">{devArea.toLocaleString()}</td>
                                         <td className="p-4 border border-slate-400">㎡</td>
                                     </tr>
                                     <tr>

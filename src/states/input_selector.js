@@ -9,7 +9,8 @@ export const densityState = selector({
     get: ({ get }) => {
         const area = get(areaState);
         const power = get(powerState);
-        const density = area > 0 ? Math.round(power/area * 1000) / 1000 : 0;
+        const devArea = get(devAreaState);
+        const density = devArea > 0 ? Math.round(power/devArea * 1000) / 1000 : 0;
         return density;
     }
 });
@@ -111,7 +112,7 @@ export const devAreaState = selector({
         const greenArea = get(greenAreaState);
         const buildingType = get(buildingTypeState);
         const avgGreenArea = buildingType === INDUSTRY ? 0.125 : 0.156;
-        return area === 0 ? 0 : area * (1 - (greenArea / area ) - avgGreenArea);
+        return area === 0 ? 0 : Math.floor(area * (1 - (greenArea / area - avgGreenArea )));
     }
 });
 

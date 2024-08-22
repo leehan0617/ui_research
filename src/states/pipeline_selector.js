@@ -1,6 +1,6 @@
 import { selector } from "recoil";
 import { areaState } from "./atom";
-import { commonAdjState, densityState, devAreaState, scaleConstantState } from "./input_selector";
+import { commonAdjState, densityState, devAreaState, scaleConstantState, singleAdjState } from "./input_selector";
 import { pipeline9Price, pipeline6Price, pipeline4Price, pipeline2Price } from "@/constants/price";
 
 const pipelineState = selector({
@@ -11,6 +11,7 @@ const pipelineState = selector({
         const devArea = get(devAreaState);
         const commonAdj = get(commonAdjState);
         const currentScale = get(scaleConstantState);
+        const singleAdj = get(singleAdjState);
         const { pipeline, densityAvg } = currentScale;
         const { unitCount, p175, p150, p100 } = pipeline;
         const { p175x9, p175x6, p175x4, p175x2 } = pipeline;
@@ -18,12 +19,13 @@ const pipelineState = selector({
         const { p100x9, p100x6, p100x4, p100x2 } = pipeline;
         let densityConstant = densityAvg > density ? 1 - (densityAvg - density) / densityAvg : 1; 
         densityConstant = densityConstant * (1-0.1*commonAdj);
+        let lowDensityConstant = densityConstant;
         return {
             area, unitCount, p175, p150, p100,
             p175x9, p175x6, p175x4, p175x2,
             p150x9, p150x6, p150x4, p150x2,
             p100x9, p100x6, p100x4, p100x2,
-            devArea, commonAdj, densityConstant
+            devArea, commonAdj, densityConstant, lowDensityConstant
         }
     }
 });
@@ -32,13 +34,13 @@ export const p175State = selector({
     key: "p175State",
     get: ({ get }) => {
         const pipeline = get(pipelineState);
-        const { area, unitCount, p175, p175x9, p175x6, p175x4, p175x2, devArea, commonAdj, densityConstant } = pipeline;
+        const { lowDensityConstant, area, unitCount, p175, p175x9, p175x6, p175x4, p175x2, devArea, commonAdj, densityConstant } = pipeline;
         // const scale = Math.round(unitCount * p175 * 1000) / 1000;
         const scale = Math.round(unitCount * p175 * densityConstant * 1000) / 1000;
-        const count9 = Math.round(scale * p175x9 * area / 1000 * 100) / 100;
-        const count6 = Math.round(scale * p175x6 * area / 1000 * 100) / 100;
-        const count4 = Math.round(scale * p175x4 * area / 1000 * 100) / 100;
-        const count2 = Math.round(scale * p175x2 * area / 1000 * 100) / 100;
+        const count9 = Math.round(scale * p175x9 * devArea / 1000 * 100) / 100;
+        const count6 = Math.round(scale * p175x6 * devArea / 1000 * 100) / 100;
+        const count4 = Math.round(scale * p175x4 * devArea / 1000 * 100) / 100;
+        const count2 = Math.round(lowDensityConstant * scale * p175x2 * devArea / 1000 * 100) / 100;
         return { scale, count9, count6, count4, count2 }
     }
 });
@@ -47,12 +49,12 @@ export const p150State = selector({
     key: "p150State",
     get: ({ get }) => {
         const pipeline = get(pipelineState);
-        const { area, unitCount, p150, p150x9, p150x6, p150x4, p150x2, devArea, commonAdj, densityConstant } = pipeline;
+        const { lowDensityConstant, area, unitCount, p150, p150x9, p150x6, p150x4, p150x2, devArea, commonAdj, densityConstant } = pipeline;
         const scale = Math.round(unitCount * p150 * densityConstant * 1000) / 1000;
-        const count9 = Math.round(scale * p150x9 * area / 1000 * 100) / 100;
-        const count6 = Math.round(scale * p150x6 * area / 1000 * 100) / 100;
-        const count4 = Math.round(scale * p150x4 * area / 1000 * 100) / 100;
-        const count2 = Math.round(scale * p150x2 * area / 1000 * 100) / 100;
+        const count9 = Math.round(scale * p150x9 * devArea / 1000 * 100) / 100;
+        const count6 = Math.round(scale * p150x6 * devArea / 1000 * 100) / 100;
+        const count4 = Math.round(scale * p150x4 * devArea / 1000 * 100) / 100;
+        const count2 = Math.round(lowDensityConstant * scale * p150x2 * devArea / 1000 * 100) / 100;
         return { scale, count9, count6, count4, count2 }
     }
 });
@@ -61,12 +63,12 @@ export const p100State = selector({
     key: "p100State",
     get: ({ get }) => {
         const pipeline = get(pipelineState);
-        const { area, unitCount, p100, p100x9, p100x6, p100x4, p100x2, devArea, commonAdj, densityConstant } = pipeline;
+        const { lowDensityConstant, area, unitCount, p100, p100x9, p100x6, p100x4, p100x2, devArea, commonAdj, densityConstant } = pipeline;
         const scale = Math.round(unitCount * p100 * densityConstant * 1000) / 1000;
-        const count9 = Math.round(scale * p100x9 * area / 1000 * 100) / 100;
-        const count6 = Math.round(scale * p100x6 * area / 1000 * 100) / 100;
-        const count4 = Math.round(scale * p100x4 * area / 1000 * 100) / 100;
-        const count2 = Math.round(scale * p100x2 * area / 1000 * 100) / 100;
+        const count9 = Math.round(scale * p100x9 * devArea / 1000 * 100) / 100;
+        const count6 = Math.round(scale * p100x6 * devArea / 1000 * 100) / 100;
+        const count4 = Math.round(scale * p100x4 * devArea / 1000 * 100) / 100;
+        const count2 = Math.round(lowDensityConstant * scale * p100x2 * devArea / 1000 * 100) / 100;
         return { scale, count9, count6, count4, count2 }
     }
 });

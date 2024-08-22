@@ -2,13 +2,13 @@ import { atom } from "recoil";
 
 // 주거용지
 // export const row1col1State = atom({ key: "row1col1", default: 0 });
-export const row1col1State = atom({ key: "row1col1", default: 318183 });
+export const row1col1State = atom({ key: "row1col1", default: 25761 });
 export const row1col2State = atom({ key: "row1col2", default: 0 });
 export const row1col3State = atom({ key: "row1col3", default: 0 });
 // export const row1col4State = atom({ key: "row1col4", default: 0 });
-export const row1col4State = atom({ key: "row1col4", default: 42125 });
+export const row1col4State = atom({ key: "row1col4", default: 6287 });
 // export const row2col1State = atom({ key: "row2col1", default: 0 });
-export const row2col1State = atom({ key: "row2col1", default: 389912 });
+export const row2col1State = atom({ key: "row2col1", default: 232262 });
 export const row2col2State = atom({ key: "row2col2", default: 0 });
 export const row2col3State = atom({ key: "row2col3", default: 0 });
 export const row2col4State = atom({ key: "row2col4", default: 0 });
@@ -22,7 +22,7 @@ export const row4col3State = atom({ key: "row4col3", default: 0 });
 export const row4col4State = atom({ key: "row4col4", default: 0 });
 // 주거외 용지
 // export const row5col1State = atom({ key: "row5col1", default: 0 });
-export const row5col1State = atom({ key: "row5col1", default: 1335472 });
+export const row5col1State = atom({ key: "row5col1", default: 176543 });
 export const row5col2State = atom({ key: "row5col2", default: 0 });
 export const row5col3State = atom({ key: "row5col3", default: 0 });
 export const row5col4State = atom({ key: "row5col4", default: 0 });
@@ -54,7 +54,7 @@ export const row12col1State = atom({ key: "row12col1", default: 0 });
 export const row12col3State = atom({ key: "row12col3", default: 0 });
 export const row12col2State = atom({ key: "row12col2", default: 0 });
 export const row12col4State = atom({ key: "row12col4", default: 0 });
-export const row13col1State = atom({ key: "row13col1", default: 0 });
+export const row13col1State = atom({ key: "row13col1", default: 95392 });
 export const row13col3State = atom({ key: "row13col3", default: 0 });
 export const row13col2State = atom({ key: "row13col2", default: 0 });
 export const row13col4State = atom({ key: "row13col4", default: 0 });

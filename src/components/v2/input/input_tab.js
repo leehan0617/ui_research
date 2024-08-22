@@ -1,11 +1,12 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Card, CardBody } from "@nextui-org/react";
 import { powerState, areaState, buildingTypeState } from "@/states/atom";
-import { densityState, scaleState, buildingKr, singleResidentAreaState, commonResidentAreaState, greenAreaState } from "@/states/input_selector";
+import { densityState, scaleState, buildingKr, singleResidentAreaState, commonResidentAreaState, greenAreaState, devAreaState } from "@/states/input_selector";
 
 export default function InputTab() {
     const power = useRecoilValue(powerState);
     const area = useRecoilValue(areaState);
+    const devArea = useRecoilValue(devAreaState);
     const buildingType = useRecoilValue(buildingKr);
     const density = useRecoilValue(densityState);
     const scale = useRecoilValue(scaleState);
@@ -42,9 +43,15 @@ export default function InputTab() {
                                         <td className="p-4 border border-slate-400">kW</td>
                                     </tr>
                                     <tr>
-                                        <td className="p-4 border border-slate-400">3</td>
-                                        <td className="p-4 border border-slate-400">대지면적</td>
+                                        <td className="p-4 border border-slate-400">3-1.</td>
+                                        <td className="p-4 border border-slate-400">대지면적 / 조정면적</td>
                                         <td className="p-4 border border-slate-400 bg-yellow-200">{area.toLocaleString()}</td>
+                                        <td className="p-4 border border-slate-400">㎡</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-4 border border-slate-400">3-2.</td>
+                                        <td className="p-4 border border-slate-400">조정면적</td>
+                                        <td className="p-4 border border-slate-400 bg-yellow-200">{devArea.toLocaleString()}</td>
                                         <td className="p-4 border border-slate-400">㎡</td>
                                     </tr>
                                     <tr>

@@ -38,10 +38,10 @@ export default function Home() {
           <Tab key="reference_tab" title="기준단가">
             <ReferenceTab />
           </Tab>
-          <Tab key="report_tab" title="보고서">
+          {/* <Tab key="report_tab" title="보고서">
             <ReportV2Tab />
-          </Tab>
-          <Tab key="print_tab" title="인쇄용">
+          </Tab> */}
+          <Tab key="print_tab" title="보고서">
             <PrintTab />
           </Tab>
           {/* <Tab key="invoice_tab" title="설계용역비 산출 내역">

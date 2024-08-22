@@ -39,8 +39,8 @@ export const pipeline4Price = {
 };
 
 export const pipeline2Price = {
-    company: 20502,
-    customer: 89647
+    company: 6698,
+    customer: 33910
 };
 
 export const highCable325Price = {

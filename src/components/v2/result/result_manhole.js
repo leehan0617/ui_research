@@ -62,7 +62,8 @@ export default function ResultManhole() {
                             <input type="number"
                                 className="ring-2 text-right"
                                 style={{ width: 60 + '%' }} 
-                                placeholder={ma4?.count} 
+                                placeholder={ma4?.count}
+                                min={0}
                                 onChange={(e) => setTempMa4(e.target.value) }/>
                             <button type="button" className="bg-rose-600 text-slate-100" style={{ width: 40 + '%' }} onClick={changeMa4}>적용</button>
                         </td>
@@ -78,8 +79,9 @@ export default function ResultManhole() {
                         <td className="border border-slate-600" style={{ display: "inline-flex" }}>
                             <input type="number"
                                 className="ring-2 text-right"
-                                style={{ width: 60 + '%' }} 
-                                placeholder={me6?.count} 
+                                style={{ width: 60 + '%' }}
+                                placeholder={me6?.count}
+                                min={0}
                                 onChange={(e) => setTempMe6(e.target.value) }/>
                             <button type="button" className="bg-rose-600 text-slate-100" style={{ width: 40 + '%' }} onClick={changeMe6}>적용</button>
                         </td>
@@ -96,7 +98,8 @@ export default function ResultManhole() {
                             <input type="number"
                                 className="ring-2 text-right"
                                 style={{ width: 60 + '%' }} 
-                                placeholder={ma6?.count} 
+                                placeholder={ma6?.count}
+                                min={0}
                                 onChange={(e) => setTempMa6(e.target.value) }/>
                             <button type="button" className="bg-rose-600 text-slate-100" style={{ width: 40 + '%' }} onClick={changeMa6}>적용</button>
                         </td>

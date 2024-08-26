@@ -25,6 +25,8 @@ const manholeState = selector({
 export const directMa4State = atom({
     key: "ma4DirectState",
     default: '',
+    effects: [
+    ]
 });
 
 export const directMe6State = atom({

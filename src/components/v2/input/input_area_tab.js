@@ -1,10 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Card, CardBody } from "@nextui-org/react";
 import { buildingTypeState, projectState, companyState, powerState, areaState, userState, dateState } from "@/states/atom";
 import * as inputAtom from "@/states/input_atom";
+import { directMa4State, directMa6State, directMe6State } from "@/states/manhole_selector";
 
 export default function InputAreaTab() {
     const [projectName, setProjectName] = useRecoilState(projectState);
@@ -181,6 +182,16 @@ export default function InputAreaTab() {
     useEffect(() => {
         setArea(sumCol1);
     }, [sumCol1]);
+
+    // 입력(면적,부하)정보가 바뀌면 확정수량 초기화
+    const setDirectMa4 = useSetRecoilState(directMa4State);
+    const setDirectMe6 = useSetRecoilState(directMe6State);
+    const setDirectMa6 = useSetRecoilState(directMa6State);
+    useEffect(() => {
+        setDirectMa4('');
+        setDirectMe6('');
+        setDirectMa6('');
+    }, [buildingType, sumCol1, sumCol2, sumCol3, sumCol4]);
 
     return (
         <>

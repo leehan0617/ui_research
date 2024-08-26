@@ -22,13 +22,29 @@ const manholeState = selector({
     }
 });
 
+export const directMa4State = atom({
+    key: "ma4DirectState",
+    default: '',
+});
+
+export const directMe6State = atom({
+    key: "me6DirectState",
+    default: '',
+});
+
+export const directMa6State = atom({
+    key: "ma6DirectState",
+    default: '',
+});
+
 export const ma4State = selector({
     key: "ma4State",
     get: ({ get }) => {
         const manhole = get(manholeState);
+        const directMa4 = get(directMa4State);
         const { area, unitCount, ma4, devArea, commonAdj, densityConstant } = manhole;
         const scale = Math.round(unitCount * ma4 * 1000) / 1000;
-        const count = Math.round(devArea * scale * densityConstant / 1000);
+        const count = directMa4 || Math.round(devArea * scale * densityConstant / 1000);
         const companyUnitPrice = ma4Price?.company;
         const customerUnitPrice = ma4Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -42,10 +58,10 @@ export const me6State = selector({
     key: "me6State",
     get: ({ get }) => {
         const manhole = get(manholeState);
+        const directMe6 = get(directMe6State);
         const { area, unitCount, me6, devArea, commonAdj, densityConstant } = manhole;
         const scale = Math.round(unitCount * me6 * 1000) / 1000;
-        // const count = Math.round(scale * area / 1000);
-        const count = Math.round(devArea * scale * densityConstant / 1000);
+        const count = directMe6 || Math.round(devArea * scale * densityConstant / 1000);
         const companyUnitPrice = me6Price?.company;
         const customerUnitPrice = me6Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -59,9 +75,10 @@ export const ma6State = selector({
     key: "ma6State",
     get: ({ get }) => {
         const manhole = get(manholeState);
+        const directMa6 = get(directMa6State);
         const { area, unitCount, ma6, devArea, commonAdj, densityConstant } = manhole;
         const scale = Math.round(unitCount * ma6 * 1000) / 1000;
-        const count = Math.round(devArea * scale * densityConstant / 1000);
+        const count = directMa6 || Math.round(devArea * scale * densityConstant / 1000);
         const companyUnitPrice = ma6Price?.company;
         const customerUnitPrice = ma6Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -82,7 +99,7 @@ export const manholeSumState = selector({
         const { scale: ma6Scale, count: ma6Count, companyUnitPrice: ma6CompanyUnitPrice, customerUnitPrice: ma6CustomerUnitPrice, companyPrice: ma6CompanyPrice, customerPrice: ma6CustomerPrice, price: ma6Price } = ma6;
         return {
             scale: Math.round((ma4Scale + me6Scale + ma6Scale) * 1000) / 1000,
-            count: ma4Count + me6Count + ma6Count,
+            count: Number(ma4Count) + Number(me6Count) + Number(ma6Count),
             companyUnitPrice: ma4CompanyUnitPrice + me6CompanyUnitPrice + ma6CompanyUnitPrice,
             companyPrice: ma4CompanyPrice + me6CompanyPrice + ma6CompanyPrice,
             customerUnitPrice: ma4CustomerUnitPrice + me6CustomerUnitPrice + ma6CustomerUnitPrice,
@@ -90,9 +107,4 @@ export const manholeSumState = selector({
             price: ma4Price + me6Price + ma6Price
         }
     }
-});
-
-export const directMa4State = atom({
-    key: "ma4DirectState",
-    default: 0,
 });

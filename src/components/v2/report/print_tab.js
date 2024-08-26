@@ -788,8 +788,8 @@ export default function PrintTab() {
                             <span>5. 설계 용역비: {serviceFee.toLocaleString()} 원</span>
                         </div>
                         <div className="col-span-8 mb-8">
-                            <span>6. 손해배상보험료 (순계약금액 X 기본요율) = {insuranceCost.toLocaleString()}원</span>
-                            <span className="text-red-500 ml-3"><small>* 용역기간 2년 이내 산출기준으로 2년초과시 가산요율 적용 필요</small></span>
+                            <p>6. 손해배상보험료 (순계약금액 X 기본요율) = {insuranceCost.toLocaleString()}원</p>
+                            <p className="text-red-500 ml-3"><small>* 용역기간 2년 이내 산출기준으로 2년초과시 가산요율 적용 필요</small></p>
                         </div>
                         <div className="col-span-8 mb-8">
                             <span>7. 총 용역비: {(serviceFee+insuranceCost).toLocaleString()}원</span>

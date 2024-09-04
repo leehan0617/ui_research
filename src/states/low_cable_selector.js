@@ -1,4 +1,4 @@
-import { selector } from "recoil";
+import { atom, selector } from "recoil";
 import { areaState } from "./atom";
 import { densityState, devAreaState, scaleConstantState, singleAdjState, commonAdjState } from "./input_selector";
 import { lowCablePrice } from "@/constants/price";
@@ -19,16 +19,27 @@ const lowCableState = selector({
     }
 });
 
+export const directCable240State = atom({
+    key: "directCable240State",
+    default: ""
+});
+
+export const directCable120State = atom({
+    key: "directCable120",
+    default: "",
+});
+
 export const cable240State = selector({
     key: "cable240State",
     get: ({ get }) => {
         const lowCable = get(lowCableState);
+        const directCable240 = get(directCable240State);
         const { area, unitCount, cable240, devArea, singleAdj, densityConstant, commonAdj } = lowCable;
         const scale = Math.round(unitCount * cable240 * 1000) / 1000;
         // const count = Math.round(scale * area / 1000 * 100) / 100;
         // const count = Math.round(devArea * unitCount * cable240 * singleAdj * densityConstant / 1000 / 3 * 1000) / 1000;
         const adj = (1+(singleAdj*commonAdj)) * densityConstant;
-        const count = Math.round(devArea * scale / 1000 * adj * 100) / 100;
+        const count = directCable240 || Math.round(devArea * scale / 1000 * adj * 100) / 100;
         const companyPrice = lowCablePrice?.company;
         const customerPrice = lowCablePrice?.customer;
         return { scale, count, companyPrice, customerPrice };
@@ -39,12 +50,13 @@ export const cable120State = selector({
     key: "cable120State",
     get: ({ get }) => {
         const lowCable = get(lowCableState);
+        const directCable120 = get(directCable120State);
         const { area, unitCount, cable120, devArea, singleAdj, densityConstant, commonAdj } = lowCable;
         const scale = Math.round(unitCount * cable120 * 1000) / 1000;
         // const count = Math.round(scale * area / 1000 * 100) / 100;
         // const count = Math.round(devArea * unitCount * cable120 * singleAdj * densityConstant / 1000 / 3 * 1000) / 1000;
         const adj = (1+(singleAdj*commonAdj)) * densityConstant;
-        const count = Math.round(devArea * scale / 1000 / 3 * adj * 100) / 100;
+        const count = directCable120 || Math.round(devArea * scale / 1000 / 3 * adj * 100) / 100;
         return { scale, count };
     }
 });

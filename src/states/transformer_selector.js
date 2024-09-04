@@ -1,4 +1,4 @@
-import { selector } from "recoil";
+import { atom, selector } from "recoil";
 import { areaState } from "./atom";
 import { densityState, devAreaState, scaleConstantState, singleAdjState, commonAdjState } from "./input_selector";
 import { transformer75Price, transformer150Price, transformer300Price } from "@/constants/price";
@@ -19,15 +19,31 @@ const transformerState = selector({
     }
 });
 
+export const directKva75State = atom({
+    key: "directKva75State",
+    default: "",
+});
+
+export const directKva150State = atom({
+    key: "directKva150State",
+    default: "",
+});
+
+export const directKva300State = atom({
+    key: "directKva300State",
+    default: "",
+});
+
 export const kva75State = selector({
     key: "kva75State",
     get: ({ get }) => {
         const transformer = get(transformerState);
+        const directKva75 = get(directKva75State);
         const { area, unitCount, kva75, devArea, singleAdj, commonAdj, densityConstant } = transformer;
         const scale = Math.round(unitCount * kva75 * 1000) / 1000;
         // const count = Math.round(scale * area / 1000);
         const adj = (1+(singleAdj*commonAdj)) * densityConstant;
-        const count = Math.round(devArea * scale / 1000 * adj);
+        const count = directKva75 || Math.round(devArea * scale / 1000 * adj);
         // const count = Math.round(devArea * unitCount * kva75 * singleAdj * densityConstant / 1000 * 1000) / 1000;
         const companyUnitPrice = transformer75Price?.company;
         const customerUnitPrice = transformer75Price?.customer;
@@ -42,6 +58,7 @@ export const kva150State = selector({
     key: "kva150State",
     get: ({ get }) => {
         const transformer = get(transformerState);
+        const directKva150 = get(directKva150State);
         const { area, unitCount, kva150, devArea, singleAdj, commonAdj, densityConstant } = transformer;
         const scale = Math.round(unitCount * kva150 * 1000) / 1000;
         const adj = (1+(singleAdj*commonAdj)) * densityConstant;
@@ -49,6 +66,8 @@ export const kva150State = selector({
         // const count = Math.round(devArea * unitCount * kva150 * singleAdj * densityConstant / 1000 * 1000) / 1000;
         let count = Math.round(devArea * scale / 1000);
         count = Math.round(count * adj);
+
+        count = directKva150 || count;
         // const count = Math.round(area * scale / 1000 * adj);
         const companyUnitPrice = transformer150Price?.company;
         const customerUnitPrice = transformer150Price?.customer;
@@ -63,12 +82,14 @@ export const kva300State = selector({
     key: "kva300State",
     get: ({ get }) => {
         const transformer = get(transformerState);
+        const directKva300 = get(directKva300State);
         const { area, unitCount, kva300, devArea, singleAdj, commonAdj, densityConstant } = transformer;
         const scale = Math.round(unitCount * kva300 * 1000) / 1000;
         const adj = (1+(singleAdj*commonAdj)) * densityConstant;
         // const count = Math.round(devArea * unitCount * kva300 * singleAdj * densityConstant / 1000 * 1000) / 1000;
         let count = Math.round(devArea * scale / 1000);
         count = Math.round(count * adj);
+        count = directKva300 || count;
         // const count = area * scale / 1000 * adj
         const companyUnitPrice = transformer300Price?.company;
         const customerUnitPrice = transformer300Price?.customer;

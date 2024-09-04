@@ -6,6 +6,13 @@ import { Card, CardBody } from "@nextui-org/react";
 import { buildingTypeState, projectState, companyState, powerState, areaState, userState, dateState } from "@/states/atom";
 import * as inputAtom from "@/states/input_atom";
 import { directMa4State, directMa6State, directMe6State } from "@/states/manhole_selector";
+import { directHb4hb2State, directHscState } from "@/states/handhole_selector";
+import { directCable325State, directCable400State, directCable95State } from "@/states/high_cable_selector";
+import { directCable120State, directCable240State } from "@/states/low_cable_selector";
+import { directJblState, directJbsState } from "@/states/low_connector_selector";
+import { directGroundSwitchState } from "@/states/ground_switch_selector";
+import { directKva150State, directKva300State, directKva75State } from "@/states/transformer_selector";
+import { direct100x2State, direct100x4State, direct100x6State, direct100x9State, direct150x2State, direct150x4State, direct150x6State, direct150x9State, direct175x2State, direct175x4State, direct175x6State, direct175x9State } from "@/states/pipeline_selector";
 
 export default function InputAreaTab() {
     const [projectName, setProjectName] = useRecoilState(projectState);
@@ -187,11 +194,31 @@ export default function InputAreaTab() {
     const setDirectMa4 = useSetRecoilState(directMa4State);
     const setDirectMe6 = useSetRecoilState(directMe6State);
     const setDirectMa6 = useSetRecoilState(directMa6State);
-    useEffect(() => {
-        setDirectMa4('');
-        setDirectMe6('');
-        setDirectMa6('');
-    }, [buildingType, sumCol1, sumCol2, sumCol3, sumCol4]);
+    const setDirectHb4hb2 = useSetRecoilState(directHb4hb2State);
+    const setDirectHsc = useSetRecoilState(directHscState);
+    const setDirectCable95 = useSetRecoilState(directCable95State);
+    const setDirectCable325 = useSetRecoilState(directCable325State);
+    const setDirectCable400 = useSetRecoilState(directCable400State);
+    const setDirectCable240 = useSetRecoilState(directCable240State);
+    const setDirectCable120 = useSetRecoilState(directCable120State);
+    const setDirectJbl = useSetRecoilState(directJblState);
+    const setDirectJbs = useSetRecoilState(directJbsState);
+    const setDirectGroundSwitch = useSetRecoilState(directGroundSwitchState);
+    const setDirectKva75 = useSetRecoilState(directKva75State);
+    const setDirectKva150 = useSetRecoilState(directKva150State);
+    const setDirectKva300 = useSetRecoilState(directKva300State);
+    const setDirect175x9 = useSetRecoilState(direct175x9State);
+    const setDirect175x6 = useSetRecoilState(direct175x6State);
+    const setDirect175x4 = useSetRecoilState(direct175x4State);
+    const setDirect175x2 = useSetRecoilState(direct175x2State);
+    const setDirect150x9 = useSetRecoilState(direct150x9State);
+    const setDirect150x6 = useSetRecoilState(direct150x6State);
+    const setDirect150x4 = useSetRecoilState(direct150x4State);
+    const setDirect150x2 = useSetRecoilState(direct150x2State);
+    const setDirect100x9 = useSetRecoilState(direct100x9State);
+    const setDirect100x6 = useSetRecoilState(direct100x6State);
+    const setDirect100x4 = useSetRecoilState(direct100x4State);
+    const setDirect100x2 = useSetRecoilState(direct100x2State);
 
     return (
         <>

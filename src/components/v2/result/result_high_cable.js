@@ -1,11 +1,38 @@
-import { useRecoilValue } from "recoil";
-import { cable95State, cable325State, cable400State, highCableSumState } from "@/states/high_cable_selector";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { cable95State, cable325State, cable400State, highCableSumState, directCable95State, directCable325State, directCable400State } from "@/states/high_cable_selector";
+import { useState } from "react";
 
 export default function ResultHighCable() {
     const cable95 = useRecoilValue(cable95State);
     const cable325 = useRecoilValue(cable325State);
     const cable400 = useRecoilValue(cable400State);
     const total = useRecoilValue(highCableSumState);
+
+    const [tempCable95, setTempCable95] = useState("");
+    const [tempCable325, setTempCable325] = useState("");
+    const [tempCable400, setTempCable400] = useState("");
+
+    const setDirectCable95 = useSetRecoilState(directCable95State);
+    const setDirectCable325 = useSetRecoilState(directCable325State);
+    const setDirectCable400 = useSetRecoilState(directCable400State);
+
+    const changeCable95 = e => {
+        if (tempCable95 !== '') {
+            setDirectCable95(Number(tempCable95));
+        }
+    }
+
+    const changeCable325 = e => {
+        if (tempCable325 !== '') {
+            setDirectCable325(Number(tempCable325));
+        }
+    }
+
+    const changeCable400 = e => {
+        if (tempCable400 !== "") {
+            setDirectCable400(Number(tempCable400));
+        }
+    }
 
     return <>
         <div className="col-span-12 mt-3">
@@ -14,13 +41,15 @@ export default function ResultHighCable() {
                     <tr>
                     <th rowSpan={2} className="w-1/5 bg-sky-50 border border-slate-600">고압케이블</th>
                         <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비 단가</th>
-                        <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
+                        <th colSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
                         <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비</th>
                         <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">개략공사비</th>
                     </tr>
                     <tr>
                         <th className="bg-green-100 border border-slate-600">회사분</th>
                         <th className="bg-green-100 border border-slate-600">도급분</th>
+                        <th style={{width: 10 + '%' }} className="bg-green-100 border border-slate-600">산출수량</th>
+                        <th style={{width: 10 + '%' }} className="bg-green-100 border border-slate-600">확정수량</th>
                         <th className="bg-green-100 border border-slate-600">회사분</th>
                         <th className="bg-green-100 border border-slate-600">도급분</th>
                     </tr>
@@ -31,6 +60,15 @@ export default function ResultHighCable() {
                         <td className="border border-slate-600">{cable325?.companyUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{cable325?.customerUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{cable325?.count?.toLocaleString()}</td>
+                        <td className="border border-slate-600" style={{ display: "inline-flex" }}>
+                            <input type="number"
+                                className="ring-2 text-right"
+                                style={{ width: 60 + '%' }} 
+                                placeholder={cable325?.count}
+                                min={0}
+                                onChange={(e) => setTempCable325(e.target.value) }/>
+                            <button type="button" className="bg-rose-600 text-slate-100" style={{ width: 40 + '%' }} onClick={changeCable325}>적용</button>
+                        </td>
                         <td className="border border-slate-600">{Math.round(cable325?.companyPrice)?.toLocaleString()}</td>
                         <td className="border border-slate-600">{Math.round(cable325?.customerPrice)?.toLocaleString()}</td>
                         <td className="border border-slate-600">{Math.round(cable325?.price)?.toLocaleString()}</td>
@@ -40,6 +78,15 @@ export default function ResultHighCable() {
                         <td className="border border-slate-600">{cable400?.companyUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{cable400?.customerUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{cable400?.count?.toLocaleString()}</td>
+                        <td className="border border-slate-600" style={{ display: "inline-flex" }}>
+                            <input type="number"
+                                className="ring-2 text-right"
+                                style={{ width: 60 + '%' }} 
+                                placeholder={cable400?.count}
+                                min={0}
+                                onChange={(e) => setTempCable400(e.target.value) }/>
+                            <button type="button" className="bg-rose-600 text-slate-100" style={{ width: 40 + '%' }} onClick={changeCable400}>적용</button>
+                        </td>
                         <td className="border border-slate-600">{Math.round(cable400?.companyPrice)?.toLocaleString()}</td>
                         <td className="border border-slate-600">{Math.round(cable400?.customerPrice)?.toLocaleString()}</td>
                         <td className="border border-slate-600">{Math.round(cable400?.price)?.toLocaleString()}</td>
@@ -49,6 +96,15 @@ export default function ResultHighCable() {
                         <td className="border border-slate-600">{cable95?.companyUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{cable95?.customerUnitPrice?.toLocaleString()}</td>
                         <td className="border border-slate-600">{cable95?.count?.toLocaleString()}</td>
+                        <td className="border border-slate-600" style={{ display: "inline-flex" }}>
+                            <input type="number"
+                                className="ring-2 text-right"
+                                style={{ width: 60 + '%' }} 
+                                placeholder={cable95?.count}
+                                min={0}
+                                onChange={(e) => setTempCable95(e.target.value) }/>
+                            <button type="button" className="bg-rose-600 text-slate-100" style={{ width: 40 + '%' }} onClick={changeCable95}>적용</button>
+                        </td>
                         <td className="border border-slate-600">{Math.round(cable95?.companyPrice)?.toLocaleString()}</td>
                         <td className="border border-slate-600">{Math.round(cable95?.customerPrice)?.toLocaleString()}</td>
                         <td className="border border-slate-600">{Math.round(cable95?.price)?.toLocaleString()}</td>
@@ -57,6 +113,7 @@ export default function ResultHighCable() {
                         <td className="border border-slate-600">계</td>
                         <td className="border border-slate-600"></td>
                         <td className="border border-slate-600"></td>
+                        <td className="border border-slate-600">{total?.count?.toLocaleString()}</td>
                         <td className="border border-slate-600">{total?.count?.toLocaleString()}</td>
                         <td className="border border-slate-600">{Math.round(total?.companyPrice)?.toLocaleString()}</td>
                         <td className="border border-slate-600">{Math.round(total?.customerPrice)?.toLocaleString()}</td>

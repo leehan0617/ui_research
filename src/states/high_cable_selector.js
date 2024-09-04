@@ -1,4 +1,4 @@
-import { selector } from "recoil";
+import { atom, selector } from "recoil";
 import { areaState } from "./atom";
 import { commonAdjState, densityState, devAreaState, scaleConstantState } from "./input_selector";
 import { highCable325Price, highCable400Price, highCable95Price } from "@/constants/price";
@@ -18,14 +18,31 @@ const highCableState = selector({
     }
 });
 
+export const directCable95State = atom({
+    key: "directCable95State",
+    default: '',
+});
+
+export const directCable325State = atom({
+    key: "directCable325State",
+    default: "",
+});
+
+export const directCable400State = atom({
+    key: "directCable400State",
+    default: "",
+});
+
+
 export const cable95State = selector({
     key: "cable95State",
     get: ({ get }) => {
         const highCable = get(highCableState);
+        const directCable95 = get(directCable95State);
         const { area, unitCount, cable95, devArea, commonAdj, densityConstant } = highCable;
         const scale = Math.round(unitCount * cable95 * 1000) / 1000;
         const unit = Math.round(unitCount * cable95 * 1000) / 1000;
-        const count = Math.round(devArea * unit * densityConstant / 1000 / 3 * (1-0.1*commonAdj) * 10) / 10;
+        const count = directCable95 || Math.round(devArea * unit * densityConstant / 1000 / 3 * (1-0.1*commonAdj) * 10) / 10;
         const companyUnitPrice = highCable95Price?.company;
         const customerUnitPrice = highCable95Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -39,16 +56,11 @@ export const cable325State = selector({
     key: "cable325State",
     get: ({ get }) => {
         const highCable = get(highCableState);
+        const directCable325 = get(directCable325State);
         const { area, unitCount, cable325, devArea, commonAdj, densityConstant } = highCable;
         const scale = Math.round(unitCount * cable325 * 1000) / 1000;
         const unit = Math.round(unitCount * cable325 * 1000) / 1000;
-        // const count = Math.round(area * unit * densityConstant / 1000 / 3 * 10) / 10;
-        // d22 = commonAdj
-        // d24 = 0.1
-        // d27 = densityConstant
-        // const count = ((area * unit / 1000) / 3) * (1-0.1*commonAdj) * densityConstant 
-        const count = Math.round(devArea * unit * densityConstant / 1000 / 3 * (1-0.1*commonAdj) * 10) / 10;
-        // const count = Math.round(devArea * unitCount * cable325 * commonAdj * densityConstant / 1000 / 3 * 1000) / 1000;
+        const count = directCable325 || Math.round(devArea * unit * densityConstant / 1000 / 3 * (1-0.1*commonAdj) * 10) / 10;
         const companyUnitPrice = highCable325Price?.company;
         const customerUnitPrice = highCable325Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -62,10 +74,11 @@ export const cable400State = selector({
     key: "cable400State",
     get: ({ get }) => {
         const highCable = get(highCableState);
+        const directCable400 = get(directCable400State);
         const { area, unitCount, cable400, devArea, commonAdj, densityConstant } = highCable;
         const scale = Math.round(unitCount * cable400 * 1000) / 1000;
         const unit = Math.round(unitCount * cable400 * 1000) / 1000;
-        const count = Math.round(devArea * unit * densityConstant / 1000 / 3 * (1-0.1*commonAdj) * 10) / 10;
+        const count = directCable400 || Math.round(devArea * unit * densityConstant / 1000 / 3 * (1-0.1*commonAdj) * 10) / 10;
         // const count = Math.round(devArea * unitCount * cable400 * commonAdj * densityConstant / 1000 / 3 * 1000) / 1000;
         const companyUnitPrice = highCable400Price?.company;
         const customerUnitPrice = highCable400Price?.customer;

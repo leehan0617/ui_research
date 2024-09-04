@@ -1,4 +1,4 @@
-import { selector } from "recoil";
+import { atom, selector } from "recoil";
 import { areaState } from "./atom";
 import { commonAdjState, densityState, devAreaState, scaleConstantState } from "./input_selector";
 import { hb4hb2Price, hscPrice } from "@/constants/price";
@@ -20,16 +20,27 @@ const handholeState = selector({
     }
 });
 
+export const directHb4hb2State = atom({
+    key: "hb4hb2DirectState",
+    default: ""
+});
+
+export const directHscState = atom({
+    key: "hscDirectState",
+    default: "",
+});
+
 export const hb4hb2State = selector({
     key: "hb4hb2State",
     get: ({ get }) => {
         const handhole = get(handholeState);
+        const directHb4hb2 = get(directHb4hb2State);
         const { area, unitCount, hb4hb2, devArea, commonAdj, densityConstant } = handhole;
         const scale = Math.round(unitCount * hb4hb2 * 1000) / 1000;
         // const count = Math.round(scale * area / 1000);
         // const count = Math.round(devArea * unitCount * hb4hb2 * commonAdj * densityConstant / 1000 * 1000) / 1000;
         const unit = Math.round(unitCount * hb4hb2 * 1000) / 1000;
-        const count = Math.round(devArea * unit * densityConstant / 1000);
+        const count = directHb4hb2 || Math.round(devArea * unit * densityConstant / 1000);
         const companyUnitPrice = hb4hb2Price?.company;
         const customerUnitPrice = hb4hb2Price?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -43,11 +54,12 @@ export const hscState = selector({
     key: "hscState",
     get: ({ get }) => {
         const handhole = get(handholeState);
+        const directHsc = get(directHscState);
         const { area, unitCount, hsc, devArea, commonAdj, densityConstant } = handhole;
         const scale = Math.round(unitCount * hsc * 1000) / 1000;
         // const count = Math.round(scale * area / 1000);
         // const count = Math.round(devArea * unitCount * hsc * commonAdj * densityConstant / 1000 * 1000) / 1000;
-        const count = Math.round(devArea * scale * hsc * densityConstant / 1000);
+        const count = directHsc || Math.round(devArea * scale * hsc * densityConstant / 1000);
         const companyUnitPrice = hscPrice?.company;
         const customerUnitPrice = hscPrice?.customer;
         const companyPrice = count * companyUnitPrice;

@@ -9,6 +9,14 @@ import { buildingKr } from "@/states/input_selector";
 import { reportState } from "@/states/report_selector";
 import { optionState } from "@/states/invoice_selector";
 import { indexTableList, findTable, findNextTable } from "@/util/table";
+import { ma4State, ma6State, manholeSumState, me6State } from "@/states/manhole_selector";
+import { handholeSumState, hb4hb2State, hscState } from "@/states/handhole_selector";
+import { cable325State, cable400State, cable95State, highCableSumState } from "@/states/high_cable_selector";
+import { cable120State, cable240State, lowCableTotalState } from "@/states/low_cable_selector";
+import { jblState, jbsState, lowConnectorTotalState } from "@/states/low_connector_selector";
+import { groundSwitchState } from "@/states/ground_switch_selector";
+import { kva150State, kva300State, kva75State, transformerTotalState } from "@/states/transformer_selector";
+import { p100State, p150State, p175State, p2PriceState, p4PriceState, p6PriceState, p9PriceState, pipelineSumState } from "@/states/pipeline_selector";
 
 export default function PrintTab() {
     const [content, setContent] = useState("");
@@ -265,6 +273,38 @@ export default function PrintTab() {
         }
         setInsuranceCost(Math.round(totalPrice * insuranceRate / 100 / 100));
     }, [optionType, basicRate, realRate]);
+
+    // 개략공사비 산출 페이지
+    const ma4 = useRecoilValue(ma4State);
+    const ma6 = useRecoilValue(ma6State);
+    const me6 = useRecoilValue(me6State);
+    const manholeTotal = useRecoilValue(manholeSumState);
+    const hb4hb2 = useRecoilValue(hb4hb2State);
+    const hsc = useRecoilValue(hscState);
+    const handholeTotal = useRecoilValue(handholeSumState);
+    const cable95 = useRecoilValue(cable95State);
+    const cable325 = useRecoilValue(cable325State);
+    const cable400 = useRecoilValue(cable400State);
+    const highCableTotal = useRecoilValue(highCableSumState);
+    const cable240 = useRecoilValue(cable240State);
+    const cable120 = useRecoilValue(cable120State);
+    const lowCableTotal = useRecoilValue(lowCableTotalState);
+    const jbl = useRecoilValue(jblState);
+    const jbs = useRecoilValue(jbsState);
+    const lowConnectorTotal = useRecoilValue(lowConnectorTotalState);
+    const groundSwitch = useRecoilValue(groundSwitchState);
+    const kva75 = useRecoilValue(kva75State);
+    const kva150 = useRecoilValue(kva150State);
+    const kva300 = useRecoilValue(kva300State);
+    const kvaTotal = useRecoilValue(transformerTotalState);
+    const p175 = useRecoilValue(p175State);
+    const p150 = useRecoilValue(p150State);
+    const p100 = useRecoilValue(p100State);
+    const p9Price = useRecoilValue(p9PriceState);
+    const p6Price = useRecoilValue(p6PriceState);
+    const p4Price = useRecoilValue(p4PriceState);
+    const p2Price = useRecoilValue(p2PriceState);
+    const pipelineTotal = useRecoilValue(pipelineSumState);
 
     return (
         <>
@@ -797,7 +837,427 @@ export default function PrintTab() {
                     </div>
                 </div>
                 <div className="report">
-                    개략공사비 산출
+                    <table className="w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2} className="w-1/5 bg-sky-50 border border-slate-600">맨홀</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비 단가</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">개략공사비</th>
+                            </tr>
+                            <tr>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">MA4</td>
+                                <td className="border border-slate-600">{ma4?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{ma4?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{ma4?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(ma4?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(ma4?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(ma4?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">ME6</td>
+                                <td className="border border-slate-600">{me6?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{me6?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{me6?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(me6?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(me6?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(me6?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">MA6</td>
+                                <td className="border border-slate-600">{ma6?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{ma6?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{ma6?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(ma6?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(ma6?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(ma6?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600">{manholeTotal?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(manholeTotal?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(manholeTotal?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(manholeTotal?.price)?.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2} className="w-1/5 bg-sky-50 border border-slate-600">핸드홀</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비 단가</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">개략공사비</th>
+                            </tr>
+                            <tr>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">HB4 + HB2</td>
+                                <td className="border border-slate-600">{hb4hb2?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{hb4hb2?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{hb4hb2?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(hb4hb2?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(hb4hb2?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(hb4hb2?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">HSC</td>
+                                <td className="border border-slate-600">{hsc?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{hsc?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{hsc?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(hsc?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(hsc?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(hsc?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600">{handholeTotal?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(handholeTotal?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(handholeTotal?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(handholeTotal?.price)?.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2} className="w-1/5 bg-sky-50 border border-slate-600">고압케이블</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비 단가</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">개략공사비</th>
+                            </tr>
+                            <tr>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">325mm</td>
+                                <td className="border border-slate-600">{cable325?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{cable325?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{cable325?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable325?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable325?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable325?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">400mm</td>
+                                <td className="border border-slate-600">{cable400?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{cable400?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{cable400?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable400?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable400?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable400?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">95mm</td>
+                                <td className="border border-slate-600">{cable95?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{cable95?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{cable95?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable95?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable95?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(cable95?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600">{highCableTotal?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(highCableTotal?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(highCableTotal?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(highCableTotal?.price)?.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2} className="w-1/5 bg-sky-50 border border-slate-600">저압케이블</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비 단가</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">개략공사비</th>
+                            </tr>
+                            <tr>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">240mm x 3</td>
+                                <td rowSpan={3} className="border border-slate-600">{cable240?.companyPrice.toLocaleString()}</td>
+                                <td rowSpan={3} className="border border-slate-600">{cable240?.customerPrice.toLocaleString()}</td>
+                                <td className="border border-slate-600">{cable240?.count.toLocaleString()}</td>
+                                <td rowSpan={3} className="border border-slate-600">{Math.round(lowCableTotal?.companyPrice).toLocaleString()}</td>
+                                <td rowSpan={3} className="border border-slate-600">{Math.round(lowCableTotal?.customerPrice).toLocaleString()}</td>
+                                <td rowSpan={3} className="border border-slate-600">{Math.round(lowCableTotal?.price).toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">120mm x 1</td>
+                                <td className="border border-slate-600">{cable120?.count.toLocaleString()}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600">{(Math.round(lowCableTotal?.count * 1000) / 1000).toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>      
+                    <table className="w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2} className="w-1/5 bg-sky-50 border border-slate-600">저압접속함</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비 단가</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">개략공사비</th>
+                            </tr>
+                            <tr>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">JBL</td>
+                                <td className="border border-slate-600">{jbl?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{jbl?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{jbl?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(jbl?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(jbl?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(jbl?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">JBS</td>
+                                <td className="border border-slate-600">{jbs?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{jbs?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{jbs?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(jbs?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(jbs?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(jbs?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600">{lowConnectorTotal?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(lowConnectorTotal?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(lowConnectorTotal?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(lowConnectorTotal?.price)?.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2} className="w-1/5 bg-sky-50 border border-slate-600">개폐기</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비 단가</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">개략공사비</th>
+                            </tr>
+                            <tr>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">개폐기</td>
+                                <td className="border border-slate-600">{groundSwitch?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{groundSwitch?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{groundSwitch?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(groundSwitch?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(groundSwitch?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(groundSwitch?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600">{groundSwitch?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(groundSwitch?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(groundSwitch?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(groundSwitch?.price)?.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2} className="w-1/5 bg-sky-50 border border-slate-600">변압기</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비 단가</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">설계수량</th>
+                                <th colSpan={2} className="w-1/5 bg-green-100 border border-slate-600">공사비</th>
+                                <th rowSpan={2} className="w-1/5 bg-blue-500 text-white border border-slate-600">개략공사비</th>
+                            </tr>
+                            <tr>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                                <th className="bg-green-100 border border-slate-600">회사분</th>
+                                <th className="bg-green-100 border border-slate-600">도급분</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">75kVA</td>
+                                <td className="border border-slate-600">{kva75?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{kva75?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{kva75?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva75?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva75?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva75?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">150kVA</td>
+                                <td className="border border-slate-600">{kva150?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{kva150?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{kva150?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva150?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva150?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva150?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">300kVA</td>
+                                <td className="border border-slate-600">{kva300?.companyUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{kva300?.customerUnitPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{kva300?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva300?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva300?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kva300?.price)?.toLocaleString()}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600"></td>
+                                <td className="border border-slate-600">{kvaTotal?.count?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kvaTotal?.companyPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kvaTotal?.customerPrice)?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{Math.round(kvaTotal?.price)?.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div className="report">
+                    <table className="w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2} className="bg-sky-50 border border-slate-600">관로</th>
+                                <th colSpan={4} className="bg-blue-500 text-white border border-slate-600">설계수량</th>
+                            </tr>
+                            <tr>
+                                <th className="bg-blue-500 text-white border border-slate-600">9공</th>
+                                <th className="bg-blue-500 text-white border border-slate-600">6공</th>
+                                <th className="bg-blue-500 text-white border border-slate-600">4공</th>
+                                <th className="bg-blue-500 text-white border border-slate-600">2공</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">175mm</td>
+                                <td className="border border-slate-600">{p175?.count9}</td>
+                                <td className="border border-slate-600">{p175?.count6}</td>
+                                <td className="border border-slate-600">{p175?.count4}</td>
+                                <td className="border border-slate-600">{p175?.count2}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">150mm</td>
+                                <td className="border border-slate-600">{p150?.count9}</td>
+                                <td className="border border-slate-600">{p150?.count6}</td>
+                                <td className="border border-slate-600">{p150?.count4}</td>
+                                <td className="border border-slate-600">{p150?.count2}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">100mm</td>
+                                <td className="border border-slate-600">{p100?.count9}</td>
+                                <td className="border border-slate-600">{p100?.count6}</td>
+                                <td className="border border-slate-600">{p100?.count4}</td>
+                                <td className="border border-slate-600">{p100?.count2}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600">{pipelineTotal?.count9?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{pipelineTotal?.count6?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{pipelineTotal?.count4?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{pipelineTotal?.count2?.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table className="w-full text-sm text-center">
+                        <thead className="bg-green-100">
+                            <tr>
+                                <th rowSpan={2} className="w-1/4 border border-slate-600">관로</th>
+                                <th colSpan={2} className="w-2/4 border border-slate-600">공사비</th>
+                                <th rowSpan={2} className="w-1/4 border bg-blue-500 text-white border-slate-600">개략공사비</th>
+                            </tr>
+                            <tr>
+                                <th className="border border-slate-600">회사분</th>
+                                <th className="border border-slate-600">도급분</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-slate-600">9공</td>
+                                <td className="border border-slate-600">{p9Price?.companyPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{p9Price?.customerPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{p9Price?.price?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">6공</td>
+                                <td className="border border-slate-600">{p6Price?.companyPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{p6Price?.customerPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{p6Price?.price?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">4공</td>
+                                <td className="border border-slate-600">{p4Price?.companyPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{p4Price?.customerPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{p4Price?.price?.toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-slate-600">2공</td>
+                                <td className="border border-slate-600">{p2Price?.companyPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{p2Price?.customerPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{p2Price?.price?.toLocaleString()}</td>
+                            </tr>
+                            <tr className="bg-gray-100">
+                                <td className="border border-slate-600">계</td>
+                                <td className="border border-slate-600">{pipelineTotal?.companyPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{pipelineTotal?.customerPrice?.toLocaleString()}</td>
+                                <td className="border border-slate-600">{pipelineTotal?.price?.toLocaleString()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </>

@@ -569,9 +569,9 @@ const scale7 = {
         densityAvg: 0.105,
         manhole: {
             unitCount: 0.067,
-            ma4: 0.56,
-            me6: 0.28,
-            ma6: 0.16
+            ma4: 0.35,
+            me6: 0.43,
+            ma6: 0.22
         },
         handhole: {
             unitCount: 0.02,
@@ -581,8 +581,8 @@ const scale7 = {
         pipeline: {
             unitCount: 0.07,
             p175: 0.44,
-            p150: 0.35,
-            p100: 0.21,
+            p150: 0.31,
+            p100: 0.25,
             ...residentPipelineCount
         },
         highCable: {

@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 import { areaState } from "./atom";
-import { scaleConstantState, densityState, devAreaState, singleAdjState, commonAdjState } from "./input_selector";
+import { scaleConstantState, densityState, devAreaState, singleAdjState, commonAdjState, singleRateState } from "./input_selector";
 import { jblPrice, jbsPrice } from "@/constants/price";
 
 const lowConnectorState = selector({
@@ -12,10 +12,11 @@ const lowConnectorState = selector({
         const devArea = get(devAreaState);
         const singleAdj = get(singleAdjState);
         const commonAdj = get(commonAdjState);
+        const singleRate = get(singleRateState);
         const { lowConnector, densityAvg } = currentScale;
         const { unitCount, jbl, jbs } = lowConnector;
         const densityConstant = densityAvg > density ? 1 - (densityAvg - density) / densityAvg : 1;
-        return { area, unitCount, jbl, jbs, devArea, singleAdj, densityConstant, commonAdj };
+        return { area, unitCount, jbl, jbs, devArea, singleAdj, densityConstant, commonAdj, singleRate };
     }
 });
 
@@ -32,13 +33,13 @@ export const directJbsState = atom({
 export const jblState = selector({
     key: "jblState",
     get: ({ get }) => {
-        const { area, unitCount, jbl, devArea, singleAdj, densityConstant, commonAdj } = get(lowConnectorState);
+        const { area, unitCount, jbl, devArea, singleAdj, densityConstant, commonAdj, singleRate } = get(lowConnectorState);
         const directJbl = get(directJblState);
         const scale = Math.round(unitCount * jbl * 1000) / 1000;
-        // const count = Math.round(scale * area / 1000);
-        const adj = (1+(singleAdj*commonAdj)) * densityConstant;
-        const count = directJbl || Math.round(devArea * scale / 1000 * adj)
-        // const count = Math.round(devArea * unitCount * jbl * singleAdj * densityConstant / 1000 * 1000) / 1000;
+        const beforeCount = Math.round(scale * devArea / 1000);
+        const adj = (1+(singleAdj*0.3)) * densityConstant;
+        const afterCount = singleRate > singleAdj ? Math.round(beforeCount * adj) : beforeCount;
+        const count = directJbl || afterCount;
         const companyUnitPrice = jblPrice?.company;
         const customerUnitPrice = jblPrice?.customer;
         const companyPrice = count * companyUnitPrice;
@@ -51,13 +52,13 @@ export const jblState = selector({
 export const jbsState = selector({
     key: "jbsState",
     get: ({ get }) => {
-        const { area, unitCount, jbs, devArea, singleAdj, densityConstant, commonAdj } = get(lowConnectorState);
+        const { area, unitCount, jbs, devArea, singleAdj, densityConstant, commonAdj, singleRate } = get(lowConnectorState);
         const directJbs = get(directJbsState);
         const scale = Math.round(unitCount * jbs * 1000) / 1000;
-        const adj = (1+(singleAdj*commonAdj)) * densityConstant;
-        // const count = Math.round(scale * area / 1000);
-        // const count = Math.round(devArea * unitCount * jbs * singleAdj * densityConstant / 1000 * 1000) / 1000;
-        const count = directJbs || Math.round(devArea * scale / 1000 * adj);
+        const beforeCount = Math.round(scale * devArea / 1000);
+        const adj = (1+(singleAdj*0.3)) * densityConstant;
+        const afterCount = singleRate > singleAdj ? Math.round(beforeCount * adj) : beforeCount;
+        const count = directJbs || afterCount;
         const companyUnitPrice = jbsPrice?.company;
         const customerUnitPrice = jbsPrice?.customer;
         const companyPrice = count * companyUnitPrice;

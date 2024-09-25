@@ -97,9 +97,9 @@ export default function ResultTab() {
                     <div className="col-span-10 mt-3">
                         <InputViewer props={{ power, area, buildingType, density, scale }} />
                     </div>
-                    <div className="col-span-2 mt-3 bg-rose-600 text-slate-100 align-middle text-center cursor-pointer hover:bg-cyan-600 rounded-lg" onClick={resetCount}>
+                    <div className="col-span-2 mt-3 text-slate-100 align-middle text-center cursor-pointer hover:bg-cyan-600 rounded-lg">
                         <div className="mt-4">
-                            <b>확정수량 초기화</b>
+                            <button className="bg-slate-600 text-slate-50 w-full rounded-lg p-2" onClick={resetCount}>확정수량 초기화</button>
                         </div>
                     </div>
                     <ResultManhole />

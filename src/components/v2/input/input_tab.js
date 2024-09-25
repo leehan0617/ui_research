@@ -75,7 +75,7 @@ export default function InputTab() {
                                     <tr>
                                         <td className="p-4 border border-slate-400">8</td>
                                         <td className="p-4 border border-slate-400">규모선정</td>
-                                        <td className="p-4 border border-slate-400">규모{scale}</td>
+                                        <td className="p-4 border border-slate-400">그룹{scale}</td>
                                         <td className="p-4 border border-slate-400"></td>
                                     </tr>
                                 </tbody>

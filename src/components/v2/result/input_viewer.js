@@ -26,7 +26,7 @@ export default function InputViewer({ props }) {
                         </tr>
                         <tr>
                             <td className="bg-sky-50 p-1 border border-slate-600">개발단지 규모</td>
-                            <td className="p-1 border border-slate-600">규모{scale}</td>
+                            <td className="p-1 border border-slate-600">그룹{scale}</td>
                         </tr>
                     </tbody>
                 </table>

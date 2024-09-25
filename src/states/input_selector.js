@@ -32,7 +32,8 @@ export const scaleState = selector({
         let scale = 0;
         if (buildingType === INDUSTRY) {
             if (density > 0.085) {
-                scale = devArea <= 750000 ? 5 : 4;
+                // scale = devArea <= 750000 ? 5 : 4;
+                scale = 5;
             } else if (density <= 0.049) {
                 scale = devArea <= 750000 ? 1 : 2;
             } else {
@@ -43,7 +44,8 @@ export const scaleState = selector({
                 if (devArea <= 500000) {
                     scale = 7;
                 } else if (devArea > 1000000) {
-                    scale = 6;
+                    // scale = 6;
+                    scale = 8;
                 } else {
                     scale = 8;
                 }
@@ -111,7 +113,7 @@ export const devAreaState = selector({
         const area = get(areaState);
         const greenArea = get(greenAreaState);
         const buildingType = get(buildingTypeState);
-        const avgGreenArea = buildingType === INDUSTRY ? 0.125 : 0.156;
+        const avgGreenArea = buildingType === INDUSTRY ? 0.233 : 0.199;
         return area === 0 ? 0 : Math.floor(area * (1 - (greenArea / area - avgGreenArea )));
     }
 });
@@ -123,7 +125,7 @@ export const commonAdjState = selector({
         const area = get(areaState);
         const commonResidentArea = get(commonResidentAreaState);
         const buildingType = get(buildingTypeState);
-        const commonBuildingAvg = buildingType === INDUSTRY ? 0.005 : 0.296;
+        const commonBuildingAvg = buildingType === INDUSTRY ? 0.067 : 0.34;
         // const buildingAvg = commonResidentArea / area;
         // return buildingAvg > commonBuildingAvg ? 1 - buildingAvg * 0.1 : 1;
         return commonBuildingAvg;
@@ -137,9 +139,31 @@ export const singleAdjState = selector({
         const area = get(areaState);
         const singleResidentArea = get(singleResidentAreaState);
         const buildingType = get(buildingTypeState);
-        const singleBuildingAvg = buildingType === INDUSTRY ? 0.001 : 0.041;
+        const singleBuildingAvg = buildingType === INDUSTRY ? 0.017 : 0.08;
         // const buildingAvg = singleResidentArea / area;
         // return buildingAvg > singleBuildingAvg ? 1 + buildingAvg * 0.3 : 1;
         return singleBuildingAvg;
+    }
+});
+
+// 공통주택비중
+export const commonRateState = selector({
+    key: "commonRate",
+    get: ({ get }) => {
+        const area = get(areaState);
+        const commonArea = get(commonResidentAreaState);
+        const rate = Math.round(commonArea/ area * 100 * 10) / 10;
+        return rate / 100;
+    }
+});
+
+// 단독주택비중
+export const singleRateState = selector({
+    key: "singleRate",
+    get: ({ get }) => {
+        const area = get(areaState);
+        const singleArea = get(singleResidentAreaState);
+        const rate = Math.round(singleArea / area * 100 * 10) / 10;
+        return rate / 100;
     }
 });

@@ -308,7 +308,7 @@ export default function PrintTab() {
 
     return (
         <>
-            <ReactToPrint trigger={() => <button className="bg-sky-100 cursor-pointer rounded-lg p-1 m-1">여기누르면 인쇄</button>}
+            <ReactToPrint trigger={() => <button className="bg-slate-500 text-slate-50 cursor-pointer rounded-lg p-1 m-1">인쇄 시 클릭</button>}
                 content={() => ref.current}
             />
             <div ref={ref} content={content} className="mt-3">
@@ -723,7 +723,7 @@ export default function PrintTab() {
                                     <tr>
                                         <td className="p-4 border border-slate-400">8</td>
                                         <td className="p-4 border border-slate-400">규모선정</td>
-                                        <td className="p-4 border border-slate-400">규모{scale}</td>
+                                        <td className="p-4 border border-slate-400">그룹{scale}</td>
                                         <td className="p-4 border border-slate-400"></td>
                                     </tr>
                                 </tbody>

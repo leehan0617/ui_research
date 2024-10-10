@@ -17,9 +17,14 @@ const pipelineState = selector({
         const { p175x9, p175x6, p175x4, p175x2 } = pipeline;
         const { p150x9, p150x6, p150x4, p150x2 } = pipeline;
         const { p100x9, p100x6, p100x4, p100x2 } = pipeline;
-        let densityConstant = densityAvg > density ? Math.round((1 - (densityAvg - density) / densityAvg) * 10) / 10 : 1; 
+        let densityConstant = densityAvg > density ? Math.round((1 - (densityAvg - density) / densityAvg) * 10) / 10 : 1;
+        
+        const unitCount175 = Math.round(unitCount * p175 * 1000) / 1000;
+        const unitCount150 = Math.round(unitCount * p150 * 1000) / 1000;
+        const unitCount100 = Math.round(unitCount * p100 * 1000) / 1000;
         return {
-            area, unitCount, p175, p150, p100,
+            area, unitCount: unitCount175 + unitCount150 + unitCount100, p175, p150, p100,
+            unitCount175, unitCount150, unitCount100,
             p175x9, p175x6, p175x4, p175x2,
             p150x9, p150x6, p150x4, p150x2,
             p100x9, p100x6, p100x4, p100x2,
@@ -99,7 +104,6 @@ export const p175State = selector({
         const direct175x4 = get(direct175x4State);
         const direct175x2 = get(direct175x2State);
         const { area, unitCount, p175, p175x9, p175x6, p175x4, p175x2, devArea, commonAdj, densityConstant } = pipeline;
-        // const scale = Math.round(unitCount * p175 * 1000) / 1000;
         const scale = Math.round(unitCount * p175 * densityConstant * 1000) / 1000;
         const count9 = direct175x9 || Math.round(scale * p175x9 * devArea / 1000 * 100) / 100;
         const count6 = direct175x6 || Math.round(scale * p175x6 * devArea / 1000 * 100) / 100;

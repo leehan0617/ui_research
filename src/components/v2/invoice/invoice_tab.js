@@ -196,7 +196,7 @@ export default function InvoiceV2Tab() {
                         <>
                             <ModalHeader className="flex flex-col gap-1 text-center">
                                 <span className="underline">전력시설물공사 설계 및 설계감리 요율</span>
-                                <small className="text-left">※ 기준개정일: '25.1.1</small>
+                                <small className="text-left">※ 기준개정일: &apos;25.1.1</small>
                             </ModalHeader>
                             <ModalBody>
                                 <table className="w-full text-sm text-center">

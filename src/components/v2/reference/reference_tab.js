@@ -1,7 +1,7 @@
 export default function ReferenceTab() {
     return <>
         <div className="col-span-12 text-center text-2xl bg-yellow-100 p-2">
-            <b>2024년 배전건설공사 기준단가(지중)</b>
+            <b>2025년 배전건설공사 기준단가(지중)</b>
         </div>
         <div className="col-span-12 mt-3">
             <table className="w-full text-sm text-center">
@@ -33,47 +33,47 @@ export default function ReferenceTab() {
                         <td className="border border-slate-400">325mm 1회선</td>
                         <td className="border border-slate-400">MCM(100호)</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">176,401</td>
-                        <td className="border border-slate-400">181</td>
-                        <td className="border border-slate-400">176,582</td>
-                        <td className="border border-slate-400">60,657</td>
-                        <td className="border border-slate-400">237,239</td>
-                        <td className="border border-slate-400">176,401</td>
-                        <td className="border border-slate-400">181</td>
-                        <td className="border border-slate-400">176,582</td>
-                        <td className="border border-slate-400">60,657</td>
-                        <td className="border border-slate-400">237,239</td>
+                        <td className="border border-slate-400">191,535</td>
+                        <td className="border border-slate-400">186</td>
+                        <td className="border border-slate-400">191,721</td>
+                        <td className="border border-slate-400">62,286</td>
+                        <td className="border border-slate-400">254,007</td>
+                        <td className="border border-slate-400">191,535</td>
+                        <td className="border border-slate-400">186</td>
+                        <td className="border border-slate-400">191,721</td>
+                        <td className="border border-slate-400">62,286</td>
+                        <td className="border border-slate-400">254,007</td>
                     </tr>
                     <tr>
                         <td rowSpan={2} className="border border-slate-400">TRCNCE-WAL</td>
                         <td className="border border-slate-400">400mm 1회선</td>
                         <td className="border border-slate-400">MCM(100호)</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">73,136</td>
-                        <td className="border border-slate-400">180</td>
-                        <td className="border border-slate-400">73,316</td>
-                        <td className="border border-slate-400">60,534</td>
-                        <td className="border border-slate-400">133,850</td>
-                        <td className="border border-slate-400">73,136</td>
-                        <td className="border border-slate-400">180</td>
-                        <td className="border border-slate-400">73,136</td>
-                        <td className="border border-slate-400">60,534</td>
-                        <td className="border border-slate-400">133,850</td>
+                        <td className="border border-slate-400">80,652</td>
+                        <td className="border border-slate-400">188</td>
+                        <td className="border border-slate-400">80,840</td>
+                        <td className="border border-slate-400">63,153</td>
+                        <td className="border border-slate-400">143,993</td>
+                        <td className="border border-slate-400">80,652</td>
+                        <td className="border border-slate-400">188</td>
+                        <td className="border border-slate-400">80,840</td>
+                        <td className="border border-slate-400">63,153</td>
+                        <td className="border border-slate-400">143,993</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-400">95mm 1회선</td>
                         <td className="border border-slate-400">MCM(100호)</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">24,204</td>
-                        <td className="border border-slate-400">67</td>
-                        <td className="border border-slate-400">24,271</td>
-                        <td className="border border-slate-400">22,516</td>
-                        <td className="border border-slate-400">46,787</td>
-                        <td className="border border-slate-400">24,204</td>
-                        <td className="border border-slate-400">67</td>
-                        <td className="border border-slate-400">24,271</td>
-                        <td className="border border-slate-400">22,516</td>
-                        <td className="border border-slate-400">46,787</td>
+                        <td className="border border-slate-400">26,538</td>
+                        <td className="border border-slate-400">68</td>
+                        <td className="border border-slate-400">26,606</td>
+                        <td className="border border-slate-400">22,701</td>
+                        <td className="border border-slate-400">49,307</td>
+                        <td className="border border-slate-400">26,538</td>
+                        <td className="border border-slate-400">68</td>
+                        <td className="border border-slate-400">26,606</td>
+                        <td className="border border-slate-400">22,701</td>
+                        <td className="border border-slate-400">49,307</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td rowSpan={2} className="border border-slate-400">저압케이블</td>
@@ -82,31 +82,31 @@ export default function ReferenceTab() {
                         <td className="border border-slate-400">120mm x 3<br/>70mm x 1</td>
                         <td className="border border-slate-400">인력</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">50,639</td>
+                        <td className="border border-slate-400">51,680</td>
                         <td className="border border-slate-400">57</td>
-                        <td className="border border-slate-400">50,696</td>
-                        <td className="border border-slate-400">28,294</td>
-                        <td className="border border-slate-400">78,990</td>
-                        <td className="border border-slate-400">50,639</td>
+                        <td className="border border-slate-400">51,737</td>
+                        <td className="border border-slate-400">28,303</td>
+                        <td className="border border-slate-400">80,040</td>
+                        <td className="border border-slate-400">51,680</td>
                         <td className="border border-slate-400">57</td>
-                        <td className="border border-slate-400">50,696</td>
-                        <td className="border border-slate-400">28,294</td>
-                        <td className="border border-slate-400">78,990</td>
+                        <td className="border border-slate-400">51,737</td>
+                        <td className="border border-slate-400">28,303</td>
+                        <td className="border border-slate-400">80,040</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-400">240mm x 3<br/>120mm x 1</td>
                         <td className="border border-slate-400">인력</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">97,152</td>
-                        <td className="border border-slate-400">88</td>
-                        <td className="border border-slate-400">97,240</td>
-                        <td className="border border-slate-400">43,767</td>
-                        <td className="border border-slate-400">141,007</td>
-                        <td className="border border-slate-400">97,152</td>
-                        <td className="border border-slate-400">88</td>
-                        <td className="border border-slate-400">97,240</td>
-                        <td className="border border-slate-400">43,767</td>
-                        <td className="border border-slate-400">141,007</td>
+                        <td className="border border-slate-400">100,440</td>
+                        <td className="border border-slate-400">90</td>
+                        <td className="border border-slate-400">100,530</td>
+                        <td className="border border-slate-400">45,230</td>
+                        <td className="border border-slate-400">145,760</td>
+                        <td className="border border-slate-400">100,440</td>
+                        <td className="border border-slate-400">90</td>
+                        <td className="border border-slate-400">100,530</td>
+                        <td className="border border-slate-400">45,230</td>
+                        <td className="border border-slate-400">145,760</td>
                     </tr>
                     <tr>
                         <td rowSpan={2} className="border border-slate-400">지상개폐기</td>
@@ -114,32 +114,32 @@ export default function ReferenceTab() {
                         <td colSpan={2} className="border border-slate-400">4W4S<br/>(지능화용)</td>
                         <td className="border border-slate-400">애폭시절연</td>
                         <td className="border border-slate-400">대</td>
-                        <td className="border border-slate-400">24,119</td>
+                        <td className="border border-slate-400">24,354</td>
                         <td className="border border-slate-400">3</td>
-                        <td className="border border-slate-400">24,122</td>
-                        <td className="border border-slate-400">1,286</td>
-                        <td className="border border-slate-400">25,408</td>
-                        <td className="border border-slate-400">24,119</td>
+                        <td className="border border-slate-400">24,357</td>
+                        <td className="border border-slate-400">1,296</td>
+                        <td className="border border-slate-400">25,653</td>
+                        <td className="border border-slate-400">24,354</td>
                         <td className="border border-slate-400">3</td>
-                        <td className="border border-slate-400">24,122</td>
-                        <td className="border border-slate-400">1,286</td>
-                        <td className="border border-slate-400">25,408</td>
+                        <td className="border border-slate-400">24,357</td>
+                        <td className="border border-slate-400">1,296</td>
+                        <td className="border border-slate-400">25,653</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-400">개폐기<br/>기초대</td>
                         <td colSpan={2} className="border border-slate-400">SW4</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">대</td>
-                        <td className="border border-slate-400">572</td>
-                        <td className="border border-slate-400">2</td>
-                        <td className="border border-slate-400">574</td>
-                        <td className="border border-slate-400">1,214</td>
-                        <td className="border border-slate-400">1,788</td>
-                        <td className="border border-slate-400">572</td>
-                        <td className="border border-slate-400">2</td>
-                        <td className="border border-slate-400">574</td>
-                        <td className="border border-slate-400">1,214</td>
-                        <td className="border border-slate-400">1,788</td>
+                        <td className="border border-slate-400">382</td>
+                        <td className="border border-slate-400">3</td>
+                        <td className="border border-slate-400">385</td>
+                        <td className="border border-slate-400">1,252</td>
+                        <td className="border border-slate-400">1,637</td>
+                        <td className="border border-slate-400">382</td>
+                        <td className="border border-slate-400">3</td>
+                        <td className="border border-slate-400">385</td>
+                        <td className="border border-slate-400">1,252</td>
+                        <td className="border border-slate-400">1,637</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td rowSpan={4} className="border border-slate-400">지상변압기</td>
@@ -148,62 +148,62 @@ export default function ReferenceTab() {
                         <td className="border border-slate-400">75kVA</td>
                         <td className="border border-slate-400">compact</td>
                         <td className="border border-slate-400">대</td>
-                        <td className="border border-slate-400">7,650</td>
-                        <td className="border border-slate-400">2</td>
-                        <td className="border border-slate-400">7,652</td>
-                        <td className="border border-slate-400">1,240</td>
-                        <td className="border border-slate-400">8,892</td>
-                        <td className="border border-slate-400">7,650</td>
-                        <td className="border border-slate-400">2</td>
-                        <td className="border border-slate-400">7,652</td>
-                        <td className="border border-slate-400">1,240</td>
-                        <td className="border border-slate-400">8,892</td>
+                        <td className="border border-slate-400">8,002</td>
+                        <td className="border border-slate-400">3</td>
+                        <td className="border border-slate-400">8,005</td>
+                        <td className="border border-slate-400">1,361</td>
+                        <td className="border border-slate-400">9,366</td>
+                        <td className="border border-slate-400">8,002</td>
+                        <td className="border border-slate-400">3</td>
+                        <td className="border border-slate-400">8,005</td>
+                        <td className="border border-slate-400">1,361</td>
+                        <td className="border border-slate-400">9,366</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-400">150kVA</td>
                         <td className="border border-slate-400">compact</td>
                         <td className="border border-slate-400">대</td>
-                        <td className="border border-slate-400">8,933</td>
+                        <td className="border border-slate-400">9,312</td>
                         <td className="border border-slate-400">3</td>
-                        <td className="border border-slate-400">8,936</td>
-                        <td className="border border-slate-400">1,418</td>
-                        <td className="border border-slate-400">10,354</td>
-                        <td className="border border-slate-400">8,933</td>
+                        <td className="border border-slate-400">9,315</td>
+                        <td className="border border-slate-400">1,429</td>
+                        <td className="border border-slate-400">10,744</td>
+                        <td className="border border-slate-400">9,312</td>
                         <td className="border border-slate-400">3</td>
-                        <td className="border border-slate-400">8,936</td>
-                        <td className="border border-slate-400">1,418</td>
-                        <td className="border border-slate-400">10,354</td>
+                        <td className="border border-slate-400">9,315</td>
+                        <td className="border border-slate-400">1,429</td>
+                        <td className="border border-slate-400">10,744</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-400">300kVA</td>
                         <td className="border border-slate-400">compact</td>
                         <td className="border border-slate-400">대</td>
-                        <td className="border border-slate-400">10,648</td>
+                        <td className="border border-slate-400">11,022</td>
                         <td className="border border-slate-400">3</td>
-                        <td className="border border-slate-400">10,651</td>
-                        <td className="border border-slate-400">1,451</td>
-                        <td className="border border-slate-400">12,102</td>
-                        <td className="border border-slate-400">10,648</td>
+                        <td className="border border-slate-400">11,025</td>
+                        <td className="border border-slate-400">1,462</td>
+                        <td className="border border-slate-400">12,487</td>
+                        <td className="border border-slate-400">11,022</td>
                         <td className="border border-slate-400">3</td>
-                        <td className="border border-slate-400">10,651</td>
-                        <td className="border border-slate-400">1,451</td>
-                        <td className="border border-slate-400">12,102</td>
+                        <td className="border border-slate-400">11,025</td>
+                        <td className="border border-slate-400">1,462</td>
+                        <td className="border border-slate-400">12,487</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-400">변압기<br/>기초대</td>
                         <td colSpan={2} className="border border-slate-400">T3L</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">대</td>
-                        <td className="border border-slate-400">672</td>
-                        <td className="border border-slate-400">2</td>
-                        <td className="border border-slate-400">674</td>
-                        <td className="border border-slate-400">1,234</td>
-                        <td className="border border-slate-400">1,908</td>
-                        <td className="border border-slate-400">672</td>
-                        <td className="border border-slate-400">2</td>
-                        <td className="border border-slate-400">674</td>
-                        <td className="border border-slate-400">1,234</td>
-                        <td className="border border-slate-400">1,908</td>
+                        <td className="border border-slate-400">455</td>
+                        <td className="border border-slate-400">3</td>
+                        <td className="border border-slate-400">458</td>
+                        <td className="border border-slate-400">1,270</td>
+                        <td className="border border-slate-400">1,728</td>
+                        <td className="border border-slate-400">455</td>
+                        <td className="border border-slate-400">3</td>
+                        <td className="border border-slate-400">458</td>
+                        <td className="border border-slate-400">1,270</td>
+                        <td className="border border-slate-400">1,728</td>
                     </tr>
                     <tr>
                         <td rowSpan={3} className="border border-slate-400">고압관로공사</td>
@@ -211,46 +211,46 @@ export default function ReferenceTab() {
                         <td className="border border-slate-400">4공</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">39,886</td>
-                        <td className="border border-slate-400">294</td>
-                        <td className="border border-slate-400">40,180</td>
-                        <td className="border border-slate-400">146,947</td>
-                        <td className="border border-slate-400">187,127</td>
-                        <td className="border border-slate-400">31,261</td>
-                        <td className="border border-slate-400">230</td>
-                        <td className="border border-slate-400">31,491</td>
-                        <td className="border border-slate-400">97,867</td>
-                        <td className="border border-slate-400">129,358</td>
+                        <td className="border border-slate-400">33,167</td>
+                        <td className="border border-slate-400">295</td>
+                        <td className="border border-slate-400">33,462</td>
+                        <td className="border border-slate-400">147,714</td>
+                        <td className="border border-slate-400">181,176</td>
+                        <td className="border border-slate-400">25,995</td>
+                        <td className="border border-slate-400">231</td>
+                        <td className="border border-slate-400">26,226</td>
+                        <td className="border border-slate-400">122,972</td>
+                        <td className="border border-slate-400">149,198</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-400">6공</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">56,771</td>
+                        <td className="border border-slate-400">48,267</td>
                         <td className="border border-slate-400">368</td>
-                        <td className="border border-slate-400">57,139</td>
-                        <td className="border border-slate-400">193,769</td>
-                        <td className="border border-slate-400">250,908</td>
-                        <td className="border border-slate-400">45,843</td>
+                        <td className="border border-slate-400">48,635</td>
+                        <td className="border border-slate-400">184,086</td>
+                        <td className="border border-slate-400">232,721</td>
+                        <td className="border border-slate-400">38,976</td>
                         <td className="border border-slate-400">297</td>
-                        <td className="border border-slate-400">46,140</td>
-                        <td className="border border-slate-400">133,313</td>
-                        <td className="border border-slate-400">179,453</td>
+                        <td className="border border-slate-400">39,273</td>
+                        <td className="border border-slate-400">119,369</td>
+                        <td className="border border-slate-400">158,641</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-400">9공</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">79,187</td>
-                        <td className="border border-slate-400">485</td>
-                        <td className="border border-slate-400">79,672</td>
-                        <td className="border border-slate-400">242,671</td>
-                        <td className="border border-slate-400">322,343</td>
-                        <td className="border border-slate-400">67,705</td>
-                        <td className="border border-slate-400">415</td>
-                        <td className="border border-slate-400">68,120</td>
-                        <td className="border border-slate-400">176,017</td>
-                        <td className="border border-slate-400">244,137</td>
+                        <td className="border border-slate-400">66,284</td>
+                        <td className="border border-slate-400">486</td>
+                        <td className="border border-slate-400">66,770</td>
+                        <td className="border border-slate-400">243,079</td>
+                        <td className="border border-slate-400">309,849</td>
+                        <td className="border border-slate-400">56,673</td>
+                        <td className="border border-slate-400">416</td>
+                        <td className="border border-slate-400">57,088</td>
+                        <td className="border border-slate-400">166,175</td>
+                        <td className="border border-slate-400">223,264</td>
                     </tr>
                     <tr className="bg-gray-100">
                         <td className="border border-slate-400">저압관로공사</td>
@@ -258,16 +258,16 @@ export default function ReferenceTab() {
                         <td className="border border-slate-400">2공</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">km</td>
-                        <td className="border border-slate-400">6,965</td>
-                        <td className="border border-slate-400">103</td>
-                        <td className="border border-slate-400">7,068</td>
-                        <td className="border border-slate-400">43,729</td>
-                        <td className="border border-slate-400">50,797</td>
-                        <td className="border border-slate-400">6,617</td>
-                        <td className="border border-slate-400">98</td>
-                        <td className="border border-slate-400">6,715</td>
-                        <td className="border border-slate-400">34,983</td>
-                        <td className="border border-slate-400">41,698</td>
+                        <td className="border border-slate-400">5,274</td>
+                        <td className="border border-slate-400">88</td>
+                        <td className="border border-slate-400">5,362</td>
+                        <td className="border border-slate-400">44,089</td>
+                        <td className="border border-slate-400">49,451</td>
+                        <td className="border border-slate-400">5,010</td>
+                        <td className="border border-slate-400">84</td>
+                        <td className="border border-slate-400">5,094</td>
+                        <td className="border border-slate-400">35,271</td>
+                        <td className="border border-slate-400">40,365</td>
                     </tr>
                     <tr>
                         <td rowSpan={4} className="border border-slate-400">고압구조물</td>
@@ -276,48 +276,48 @@ export default function ReferenceTab() {
                         <td className="border border-slate-400">조립식</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">개소</td>
-                        <td className="border border-slate-400">5,846</td>
-                        <td className="border border-slate-400">9</td>
-                        <td className="border border-slate-400">5,855</td>
-                        <td className="border border-slate-400">4,463</td>
-                        <td className="border border-slate-400">10,318</td>
-                        <td className="border border-slate-400">5,846</td>
-                        <td className="border border-slate-400">9</td>
-                        <td className="border border-slate-400">5,855</td>
-                        <td className="border border-slate-400">4,463</td>
-                        <td className="border border-slate-400">10,318</td>
+                        <td className="border border-slate-400">4,090</td>
+                        <td className="border border-slate-400">10</td>
+                        <td className="border border-slate-400">4,100</td>
+                        <td className="border border-slate-400">4,905</td>
+                        <td className="border border-slate-400">9,005</td>
+                        <td className="border border-slate-400">4,090</td>
+                        <td className="border border-slate-400">10</td>
+                        <td className="border border-slate-400">4,100</td>
+                        <td className="border border-slate-400">4,905</td>
+                        <td className="border border-slate-400">9,005</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-400">MA6</td>
                         <td className="border border-slate-400">조립식</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">개소</td>
-                        <td className="border border-slate-400">6,006</td>
-                        <td className="border border-slate-400">9</td>
-                        <td className="border border-slate-400">6,015</td>
-                        <td className="border border-slate-400">4,718</td>
-                        <td className="border border-slate-400">10,733</td>
-                        <td className="border border-slate-400">6,006</td>
-                        <td className="border border-slate-400">9</td>
-                        <td className="border border-slate-400">6,015</td>
-                        <td className="border border-slate-400">4,718</td>
-                        <td className="border border-slate-400">10,733</td>
+                        <td className="border border-slate-400">4,516</td>
+                        <td className="border border-slate-400">10</td>
+                        <td className="border border-slate-400">4,526</td>
+                        <td className="border border-slate-400">5,072</td>
+                        <td className="border border-slate-400">9,598</td>
+                        <td className="border border-slate-400">4,516</td>
+                        <td className="border border-slate-400">10</td>
+                        <td className="border border-slate-400">4,526</td>
+                        <td className="border border-slate-400">5,072</td>
+                        <td className="border border-slate-400">9,598</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-400">ME6</td>
                         <td className="border border-slate-400">조립식</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">개소</td>
-                        <td className="border border-slate-400">10,727</td>
-                        <td className="border border-slate-400">15</td>
-                        <td className="border border-slate-400">10,742</td>
-                        <td className="border border-slate-400">7,603</td>
-                        <td className="border border-slate-400">18,345</td>
-                        <td className="border border-slate-400">10,727</td>
-                        <td className="border border-slate-400">15</td>
-                        <td className="border border-slate-400">10,742</td>
-                        <td className="border border-slate-400">7,603</td>
-                        <td className="border border-slate-400">18,345</td>
+                        <td className="border border-slate-400">10,679</td>
+                        <td className="border border-slate-400">16</td>
+                        <td className="border border-slate-400">10,695</td>
+                        <td className="border border-slate-400">7,820</td>
+                        <td className="border border-slate-400">18,515</td>
+                        <td className="border border-slate-400">10,679</td>
+                        <td className="border border-slate-400">16</td>
+                        <td className="border border-slate-400">10,695</td>
+                        <td className="border border-slate-400">7,820</td>
+                        <td className="border border-slate-400">18,515</td>
                     </tr>
                     <tr>
                         <td className="border border-slate-400">핸드홀</td>
@@ -325,16 +325,16 @@ export default function ReferenceTab() {
                         <td className="border border-slate-400">조립식</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">개소</td>
-                        <td className="border border-slate-400">4,003</td>
+                        <td className="border border-slate-400">2,617</td>
                         <td className="border border-slate-400">6</td>
-                        <td className="border border-slate-400">4,009</td>
-                        <td className="border border-slate-400">2,884</td>
-                        <td className="border border-slate-400">6,893</td>
-                        <td className="border border-slate-400">4,003</td>
+                        <td className="border border-slate-400">2,623</td>
+                        <td className="border border-slate-400">2,967</td>
+                        <td className="border border-slate-400">5,590</td>
+                        <td className="border border-slate-400">2,617</td>
                         <td className="border border-slate-400">6</td>
-                        <td className="border border-slate-400">4,009</td>
-                        <td className="border border-slate-400">2,884</td>
-                        <td className="border border-slate-400">6,893</td>
+                        <td className="border border-slate-400">2,623</td>
+                        <td className="border border-slate-400">2,967</td>
+                        <td className="border border-slate-400">5,590</td>
                     </tr>
                     <tr className="bg-gray-100"> 
                         <td className="border border-slate-400">저압구조물</td>
@@ -343,16 +343,16 @@ export default function ReferenceTab() {
                         <td className="border border-slate-400">조립식</td>
                         <td className="border border-slate-400">사리도</td>
                         <td className="border border-slate-400">개소</td>
-                        <td className="border border-slate-400">318</td>
+                        <td className="border border-slate-400">342</td>
                         <td className="border border-slate-400">2</td>
-                        <td className="border border-slate-400">320</td>
-                        <td className="border border-slate-400">880</td>
-                        <td className="border border-slate-400">1,200</td>
-                        <td className="border border-slate-400">318</td>
+                        <td className="border border-slate-400">344</td>
+                        <td className="border border-slate-400">999</td>
+                        <td className="border border-slate-400">1,343</td>
+                        <td className="border border-slate-400">342</td>
                         <td className="border border-slate-400">2</td>
-                        <td className="border border-slate-400">320</td>
-                        <td className="border border-slate-400">880</td>
-                        <td className="border border-slate-400">1,200</td>
+                        <td className="border border-slate-400">344</td>
+                        <td className="border border-slate-400">999</td>
+                        <td className="border border-slate-400">1,343</td>
                     </tr>
                 </tbody>
             </table>

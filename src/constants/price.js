@@ -1,16 +1,16 @@
 export const ma4Price = {
-    company: 5701,
-    customer: 3785
+    company: 4100,
+    customer: 4905
 };
 
 export const me6Price = {
-    company: 11187,
-    customer: 6257
+    company: 10695,
+    customer: 7820
 };
 
 export const ma6Price = {
-    company: 6072,
-    customer: 3978
+    company: 4526,
+    customer: 5072
 };
 
 export const hb4hb2Price = {
@@ -24,71 +24,71 @@ export const hscPrice = {
 };
 
 export const pipeline9Price = {
-    company: 79276,
-    customer: 191435
+    company: 66770,
+    customer: 243079
 };
 
 export const pipeline6Price = {
-    company: 50295,
-    customer: 136653
+    company: 48635,
+    customer: 184086
 };
 
 export const pipeline4Price = {
-    company: 32754,
-    customer: 105458
+    company: 33462,
+    customer: 147714
 };
 
 export const pipeline2Price = {
-    company: 6698,
-    customer: 33910
+    company: 5362,
+    customer: 44089
 };
 
 export const highCable325Price = {
-    company: 176164,
-    customer: 58810
+    company: 191721,
+    customer: 62286
 };
 
 export const highCable400Price = {
-    company: 73669,
-    customer: 58660
+    company: 80840,
+    customer: 63153
 };
 
 export const highCable95Price = {
-    company: 24758,
-    customer: 20802
+    company: 26606,
+    customer: 22701
 };
 
 export const lowCablePrice = {
-    company: 97088,
-    customer: 42740
+    company: 100530,
+    customer: 45230
 };
 
 export const jblPrice = {
-    company: 337,
-    customer: 717
+    company: 344,
+    customer: 999
 };
 
 export const jbsPrice = {
-    company: 202,
-    customer: 571
+    company: 234,
+    customer: 830
 };
 
 export const groundSwitchPrice = {
-    company: 23479,
-    customer: 1230
+    company: 24357,
+    customer: 1296
 };
 
 export const transformer75Price = {
-    company: 7573,
-    customer: 1169
+    company: 8005,
+    customer: 1361
 };
 
 export const transformer150Price = {
-    company: 8755,
-    customer: 1336
+    company: 9315,
+    customer: 1429
 };
 
 export const transformer300Price = {
-    company: 10635,
-    customer: 1360
+    company: 11025,
+    customer: 1462
 };

@@ -63,25 +63,27 @@ export default function InvoiceV2Tab() {
     useEffect(() => {
         const rate = optionType === "basic" ? basicRate : realRate;
         const coefficient = optionType === "all" ? 1.3 : 1;
-        const copyRate = optionType === "all" ? 73.35 : optionType === "basic" ? 46.5 : 82.3
-        setServiceFee(Math.round(constructionCost*rate/100*coefficient*(1-(copyRate/100))));
+        const copyRate = optionType === "all" ? 73.35 : optionType === "basic" ? 46.5 : 82.3;
+        const serviceResult = Math.round(constructionCost*rate/100*coefficient*(1-(copyRate/100)));
+        setServiceFee(serviceResult);
 
         // 손해배상보험료 계산
         let insuranceRate = 0;
-        if (constructionCost < 500000000) {
+        if (serviceResult < 500000000) {
             insuranceRate = optionType === "basic" ? 0.348 : 0.511;
-        } else if (constructionCost <= 1000000000) {
+        } else if (serviceResult <= 1000000000) {
             insuranceRate = optionType === "basic" ? 0.338 : 0.495;
-        } else if (constructionCost <= 2000000000) {
+        } else if (serviceResult <= 2000000000) {
             insuranceRate = optionType === "basic" ? 0.328 : 0.479;
-        } else if (constructionCost <= 3000000000) {
+        } else if (serviceResult <= 3000000000) {
             insuranceRate = optionType === "basic" ? 0.317 : 0.464;
-        } else if (constructionCost <= 5000000000) {
+        } else if (serviceResult <= 5000000000) {
             insuranceRate = optionType === "basic" ? 0.308 : 0.449;
         } else {
             insuranceRate = optionType === "basic" ? 0.308 : 0.449;
         }
-        setInsuranceCost(Math.round(constructionCost * insuranceRate / 100 / 100));
+        console.log(insuranceRate);
+        setInsuranceCost(Math.round(serviceResult * insuranceRate / 100));
     }, [optionType, basicRate, realRate]);
 
     // 단순히 모달 상단 테이블 빗금치기용 css

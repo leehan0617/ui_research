@@ -14,7 +14,7 @@
 //     { "start": 50, "end": 100, "index": 11, "basic": 1.02, "real": 3.06, "management": 0.51, "total": 4.59 },
 //     { "start": 100, "end": 200, "index": 12, "basic": 0.99, "real": 2.98, "management": 0.49, "total": 4.46 },
 //     { "start": 200, "end": 300, "index": 13, "basic": 0.96, "real": 2.89, "management": 0.48, "total": 4.33 },
-//     { "start": 300, "end": 500, "index": 14, "basic": 0.95, "real": 2.87, "management": 0.47, "total": 4.29 },
+//     { "start": 300, "end": 5000, "index": 14, "basic": 0.95, "real": 2.87, "management": 0.47, "total": 4.29 },
 //     { "start": 5000, "end": 1000, "index": 15, "basic": 0.94, "real": 2.81, "management": 0.46, "total": 4.21 },
 //     { "start": 1000, "end": 2000, "index": 16, "basic": 0.92, "real": 2.77, "management": 0.45, "total": 4.14 },
 //     { "start": 2000, "end": 3000, "index": 17, "basic": 0.91, "real": 2.72, "management": 0.44, "total": 4.07 },
@@ -38,8 +38,13 @@ export const indexTableList = [
     { "start": 50, "end": 100, "index": 11, "basic": 1.21, "real": 3.63, "management": 0.60, "total": 5.44 },
     { "start": 100, "end": 200, "index": 12, "basic": 1.17, "real": 3.53, "management": 0.58, "total": 5.28 },
     { "start": 200, "end": 300, "index": 13, "basic": 1.14, "real": 3.42, "management": 0.57, "total": 5.13 },
+<<<<<<< HEAD
     { "start": 300, "end": 5000, "index": 14, "basic": 1.13, "real": 3.40, "management": 0.56, "total": 5.08 },
     { "start": 5000, "end": 1000, "index": 15, "basic": 1.11, "real": 3.33, "management": 0.55, "total": 4.99 },
+=======
+    { "start": 300, "end": 500, "index": 14, "basic": 1.13, "real": 3.40, "management": 0.56, "total": 5.08 },
+    { "start": 500, "end": 1000, "index": 15, "basic": 1.11, "real": 3.33, "management": 0.55, "total": 4.99 },
+>>>>>>> d544d42d1d0cae04d03b0aeb701facd9820f4084
     { "start": 1000, "end": 2000, "index": 16, "basic": 1.09, "real": 3.28, "management": 0.53, "total": 4.91 },
     { "start": 2000, "end": 3000, "index": 17, "basic": 1.08, "real": 3.22, "management": 0.52, "total": 4.82 },
     { "start": 3000, "end": 5000, "index": 18, "basic": 1.07, "real": 3.16, "management": 0.51, "total": 4.74 },
